@@ -1,0 +1,250 @@
+@import "normalize";
+@import "variables";
+
+.header {
+    height: 5rem;
+    width: 100vw;
+    padding: 10px;
+    border-bottom: 2px solid $slate-200;
+}
+
+.nav {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: space-between;
+
+    &__logo {
+        display: flex;
+        align-items: center;
+        width: fit-content;
+        height: 100%;
+    }
+
+
+    &__list {
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 2vw;
+        display: none;
+
+    }
+
+    &__item {
+        font-size: 1.25rem;
+        font-weight: 500;
+        min-width: 5rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        &:hover {
+            color: $secondary-blue;
+        }
+    }
+
+    &__actions {
+        padding: 5px 0 5px 0;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 1vw;
+        display: none;
+    }
+}
+
+.logo__img {
+    max-width: 10rem;
+    width: 35vw;
+    min-width: 100px
+}
+
+.btn {
+    border-radius: 2rem;
+    padding: 0.5rem;
+    min-width: 11rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    font-weight: 500;
+
+    &--primary {
+        border: 2px solid $primary-green;
+
+        &:hover {
+            background-color: $primary-green;
+            color: $white;
+        }
+    }
+
+    &--secondary {
+        background-color: $primary-blue;
+        color: $white;
+
+        &:hover {
+            background-color: #0051ff;
+        }
+    }
+}
+
+
+.burger {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 3rem;
+    height: 3rem;
+    border: 0;
+    background: transparent;
+    gap: .95rem;
+
+    &__line {
+        background: black;
+        height: 2px;
+        width: 100%;
+        border-radius: 5px;
+        transition: all .5s;
+        transform-origin: left;
+    }
+}
+
+.nav__checkbox {
+
+    // Cuando el checkbox está marcado, afecta a las líneas del hermano .burger
+    &:checked~.burger {
+        .burger__line:first-child {
+            transform: rotate(45deg);
+        }
+
+        .burger__line:nth-child(2) {
+            opacity: 0;
+        }
+
+        .burger__line:last-child {
+            transform: rotate(-45deg);
+        }
+    }
+
+    &:checked~.secondList {
+        // 2. Estado Activo (Vuelve a su posición original)
+        transform: translateX(0);
+    }
+}
+
+.secondList {
+    // 1. Estado inicial (Escondido a la izquierda)
+    position: fixed; // O 'absolute' dependiendo de tu layout
+    top: 80px; // Altura de tu header
+    left: 0;
+    width: 100vw; // Ancho del menú desplegable
+    height: calc(100vh - 70px);
+    background-color: white;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+
+    // El truco de la animación:
+    transform: translateX(-100%); // Se mueve a la izquierda toda su anchura
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+
+    display: flex;
+    flex-direction: column;
+    padding: 2rem;
+    list-style: none;
+    gap: 30px;
+    font-size: 1.5rem;
+    font-weight: 500;
+
+    &__nav {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        gap: 30px;
+    }
+
+    &__item:hover {
+        color: $secondary-blue;
+    }
+}
+
+.btn--secondnav {
+    font-size: 1.5rem;
+    font-weight: 500;
+}
+
+@media (min-width: $nav-breakpoint) {
+    .secondList {
+        display: none;
+    }
+
+    .burger {
+        display: none;
+    }
+
+    .nav__list {
+        display: flex;
+    }
+
+    .nav__actions {
+        display: flex;
+    }
+
+    .nav {
+        justify-content: space-around;
+    }
+}
+
+.main-content {}
+
+.footer {
+    padding: 10px;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 150px;
+    justify-content: center;
+    align-items: center;
+    border-top: 2px solid $slate-200;
+    gap: 20px;
+
+    &__links {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 2rem;
+        justify-content: center;
+    }
+    &__bottom{
+        width: 100%;
+    }
+}
+
+.social{
+    padding: 5px;
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+    justify-content: center;
+    align-items: center;
+    &__icons{
+        display: flex;
+        justify-content: center;
+        border-top: 2px solid $slate-200;
+        display: flex;
+        gap: 25px;
+    }
+    &__img{
+        width: 20px;
+    }
+    
+}
+.links{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    &__text{
+
+    }
+}

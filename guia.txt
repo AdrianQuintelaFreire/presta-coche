@@ -1,0 +1,150 @@
+📂 Explicación de cada carpeta
+📁 app
+
+Aquí va la lógica principal de la aplicación.
+
+app/
+📁 controllers
+
+Controlan las peticiones del usuario.
+
+app/controllers/
+
+Ejemplos:
+
+UserController.php
+ProductController.php
+HomeController.php
+
+Responsabilidades:
+
+recibir la petición
+
+usar modelos
+
+enviar datos a las vistas
+
+📁 models
+
+Aquí va la lógica de base de datos y reglas del negocio.
+
+app/models/
+
+Ejemplos:
+
+User.php
+Product.php
+Order.php
+
+Responsabilidades:
+
+consultas SQL
+
+conexión a MySQL
+
+manipulación de datos
+
+📁 views
+
+Aquí van las páginas HTML.
+
+app/views/
+
+Ejemplo:
+
+views/
+   home/
+      index.php
+   users/
+      login.php
+      register.php
+
+Contienen:
+
+HTML
+
+algo de PHP para mostrar datos
+
+📁 public
+
+Aquí van los archivos accesibles desde el navegador.
+
+public/
+
+Ejemplo:
+
+public/
+   css/
+   js/
+   img/
+   index.php
+index.php
+
+Es el punto de entrada de la aplicación (front controller).
+
+Todas las peticiones pasan por aquí.
+
+📁 config
+
+Configuraciones del proyecto.
+
+config/
+
+Ejemplo:
+
+database.php
+app.php
+
+Aquí defines:
+
+conexión MySQL
+
+constantes
+
+configuración global
+
+📁 core
+
+Contiene el motor del MVC.
+
+core/
+
+Ejemplos:
+
+Controller.php
+Model.php
+Router.php
+Database.php
+
+Esto te permite reutilizar lógica base.
+
+📁 routes
+
+Define las URLs de tu aplicación.
+
+routes/
+   web.php
+
+Ejemplo:
+
+$router->get('/', 'HomeController@index');
+$router->get('/login', 'UserController@login');
+📁 storage
+
+Archivos generados por el sistema.
+
+storage/
+
+Ejemplo:
+
+logs/
+uploads/
+cache/
+📄 .htaccess
+
+Para redirigir todo al public/index.php.
+
+Ejemplo básico:
+
+RewriteEngine On
+RewriteRule ^(.*)$ public/index.php [QSA,L]
