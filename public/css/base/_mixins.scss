@@ -1,0 +1,30 @@
+@mixin center($direction: both) {
+  @if $direction == horizontal {
+    display: flex;
+    justify-content: center;
+  } @else if $direction == vertical {
+    display: flex;
+    align-items: center;
+  } @else if $direction == both {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+@mixin flex($direction: row, $justify: null, $align: null, $gap: null) {
+  display: flex;
+  flex-direction: $direction;
+
+  @if $justify != null {
+    justify-content: $justify;
+  }
+
+  @if $align != null {
+    align-items: $align;
+  }
+
+  @if $gap != null {
+    gap: $gap;
+  }
+}

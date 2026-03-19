@@ -4,134 +4,52 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Alquiler de Coches</title>
+    <title>PrestaAuto - Alquiler de Coches</title>
     <link rel="stylesheet" href="./css/main.css">
 </head>
 
 <body>
     <header class="header">
         <nav class="nav">
-
-            <a href="#" class="nav__logo logo">
-                <img src="./img/logo.png" alt="Nombre de la marca" class="logo__img">
+            <a href="" class="nav__logo">
+                <img src="./img/logo_prestacoche.png" alt="Nombre de la marca" class="nav__img">
             </a>
-
-
-            <ul class="nav__list">
-                <li class="nav__item"><a href="#" class="nav__link">Inicio</a></li>
-                <li class="nav__item"><a href="#" class="nav__link">Vehículos</a></li>
-                <li class="nav__item"><a href="#" class="nav__link">Cómo funciona</a></li>
-                <li class="nav__item"><a href="#" class="nav__link">Contacto</a></li>
-            </ul>
-
-            <div class="nav__actions">
-                <a href="#" class="btn btn--primary">Regístrate o inicia sesión</a>
-                <a href="#" class="btn btn--secondary">Comparte tu coche</a>
-            </div>
-
-            <input type="checkbox" id="menu-toggle" class="nav__checkbox" hidden>
-
-            <label for="menu-toggle" class="nav__burger burger" aria-label="Abrir menú">
-                <span class="burger__line"></span>
-                <span class="burger__line"></span>
-                <span class="burger__line"></span>
+            <input type="checkbox" id="menu-toggle" class="nav__checkbox">
+            <label for="menu-toggle" class="nav__label">
+                <img src="./img/logo_menu.png" alt="Menú" class="nav__img-menu">
             </label>
-            <div class="secondList">
-                <ul class="secondList__nav">
-                    <li class="secondList__item">
-                        <a href="#" class="secondList__link">Inicio</a>
-                    </li>
-                    <li class="secondList__item">
-                        <a href="#" class="secondList__link">Vehículos</a>
-                    </li>
-                    <li class="secondList__item">
-                        <a href="#" class="secondList__link">Cómo funciona</a>
-                    </li>
-                    <li class="secondList__item">
-                        <a href="#" class="secondList__link">Contacto</a>
-                    </li>
+            <div class="nav-secondary">
+                <ul class="menu menu--secondary nav-secondary__menu">
+                    <li class="menu__item"><a href="#" class="menu__link">Inicio</a></li>
+                    <li class="menu__item"><a href="#" class="menu__link">Vehículos</a></li>
+                    <li class="menu__item"><a href="#" class="menu__link">Cómo funciona</a></li>
+                    <li class="menu__item"><a href="#" class="menu__link">Contacto</a></li>
                 </ul>
-                <a href="#" class="btn btn--primary btn--secondnav">Regístrate o inicia sesión</a>
-                <a href="#" class="btn btn--secondary btn--secondnav">Comparte tu coche</a>
+                <div class="nav-secondary__actions">
+                    <a href="" class="btn btn--primary">Regístrate o inicia sesión</a>
+                    <a href="" class="btn btn--secondary">Alquila tu coche</a>
+                </div>
+            </div>
+            <div class="nav-primary">
+                <ul class="menu menu--primary nav-primary__menu">
+                    <li class="menu__item"><a href="#" class="menu__link">Inicio</a></li>
+                    <li class="menu__item"><a href="#" class="menu__link">Vehículos</a></li>
+                    <li class="menu__item"><a href="#" class="menu__link">Cómo funciona</a></li>
+                    <li class="menu__item"><a href="#" class="menu__link">Contacto</a></li>
+                </ul>
+                <div class="nav-primary__actions">
+                    <a href="" class="btn btn--primary">Regístrate o inicia sesión</a>
+                    <a href="" class="btn btn--secondary">Alquila tu coche</a>
+                </div>
             </div>
         </nav>
     </header>
-    <main class="main-content">
-
+    <main class="main-home">
+        <h1>hola</h1>
     </main>
-
-    <!--
-                            
-                        -->
-
-    <!--<div class="nav__actions">
-                        <a href="#" class="btn btn--login">Regístrate o inicia sesión</a>
-                        <a href="#" class="btn btn--rent">Alquila tu coche</a>
-                    </div>
-                </div>
-
-    <main class="hero">
-        <h2 class="hero__title">
-            Alquila a particulares, <span class="hero__title--accent">paga la mitad</span>
-        </h2>
-
-        <a href="#" class="hero__link">Ver todas las ofertas</a>
-
-        <form class="search-form">
-            <div class="search-form__field search-form__field--location">
-                <label class="search-form__label search-form__label--blue">¿Dónde vas?</label>
-                <div class="search-form__input-group">
-                    <span class="search-form__icon">📍</span>
-                    <select name="location" class="search-form__select">
-                        <option value="ourense">Ourense</option>
-                        <option value="pontevedra">Pontevedra</option>
-                    </select>
-                </div>
-            </div>
-
-            <div class="search-form__divider"></div>
-
-            <div class="search-form__field">
-                <label class="search-form__label">Recogida</label>
-                <div class="search-form__input-group">
-                    <input type="date" class="search-form__input">
-                </div>
-            </div>
-
-            <div class="search-form__divider"></div>
-
-            <div class="search-form__field">
-                <label class="search-form__label">Devolución</label>
-                <div class="search-form__input-group">
-                    <input type="date" class="search-form__input">
-                </div>
-            </div>
-
-            <button type="submit" class="search-form__submit">Buscar</button>
-        </form>
-    </main>
--->
     <footer class="footer">
-        <img src="./img/logo.png" alt="Nombre de la marca" class="logo__img">
-        <div class="footer__bottom">
-            © 2026 AutoRent - Todos los derechos reservados
-        </div>
-        <div class="footer__links links">
-            <p class="links__text">Legal</p>
-            <ul class="links__list">
-                <li class="links-list__item"><a href="#" class="links-list__link">Sobre nosotros</a></li>
-                <li class="links-list__item"><a href="#" class="links-list__link">Términos</a></li>
-                <li class="links-list__item"><a href="#" class="links-list__link">Privacidad</a></li>
-            </ul>
-        </div>
-        <div class="social__icons">
-            <a href="#" class="social__link"><img src="./img/instagram.avif" alt="" class="social__img"></a>
-            <a href="#" class="social__link">📘</a>
-            <a href="#" class="social__link">📸</a>
-        </div>
-
-
     </footer>
+
 
 </body>
 

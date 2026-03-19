@@ -1,0 +1,9 @@
+@use '../base/variables';
+
+.menu{
+    transition: all 0.3s ease;
+    &__item:hover{
+        color: variables.$secondary-blue;
+        transform: scale(1.05);
+    }
+}

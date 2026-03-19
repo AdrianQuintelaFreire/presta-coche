@@ -1,0 +1,38 @@
+/* 1. Box sizing universal */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+/* 2. Eliminar márgenes y paddings por defecto */
+* {
+  margin: 0;
+  padding: 0;
+}
+
+/* 3. Evitar que las imágenes desborden y quitar bordes */
+img, picture, video, canvas, svg {
+  display: block;
+  max-width: 100%;
+}
+
+/* 4. Quitar estilos de listas (bolitas/números) */
+ul, ol {
+  list-style: none;
+}
+
+/* 5. Reset de tipografía y herencia en formularios */
+input, button, textarea, select {
+  font: inherit;
+}
+
+/* 6. Quitar subrayado de enlaces por defecto */
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* 7. Mejorar el renderizado de texto */
+body {
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}

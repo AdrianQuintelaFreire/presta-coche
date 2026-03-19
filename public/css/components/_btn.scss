@@ -1,0 +1,42 @@
+@use '../base/variables';
+@use '../base/mixins';
+
+.btn {
+    padding: 15px;
+    border-radius: 50px;
+    transition: all 0.3s ease;
+    @include mixins.center(both);
+
+    &:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    &:active {
+        transform: translateY(-1px);
+    }
+
+    &--primary {
+        border: variables.$primary-green 2px solid;
+&:hover {
+            background-color: variables.$primary-green;
+            color: variables.$white;
+        }
+
+    }
+
+    &--secondary {
+        border: variables.$primary-blue 2px solid;
+        background-color: variables.$primary-blue;
+        color: variables.$white;
+
+        &:hover {
+            background-color: transparent;
+            color: variables.$primary-blue;
+        }
+    }
+
+    @media (min-width: variables.$bp-xl) {
+        width: 200px;
+    }
+}

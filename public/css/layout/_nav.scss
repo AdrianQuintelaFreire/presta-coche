@@ -1,0 +1,102 @@
+@use '../base/variables';
+@use '../base/mixins';
+
+.nav {
+    @include mixins.flex(row, space-between);
+    border-bottom: 2px solid variables.$slate-200;
+    padding: 10px;
+
+    @media (min-width: variables.$bp-lg) {
+        justify-content: space-around;
+    }
+
+    &__img {
+        max-width: 250px;
+        width: 30vw;
+        min-width: 150px;
+    }
+
+    &__checkbox {
+        display: none;
+
+        /* cuando el checkbox está checked, activa el menú */
+        &:checked~.nav-primary {
+            pointer-events: auto;
+            transform: translateX(100%);
+        }
+    }
+
+    &__label {
+        cursor: pointer;
+        @include mixins.center(both);
+
+        @media (min-width: variables.$bp-lg) {
+            display: none;
+        }
+    }
+
+
+    &__img-menu {
+        width: 25px;
+    }
+}
+
+.nav-primary {
+ position: absolute;
+  top: 100%; // justo debajo del header
+  left: -100vw;
+  width: 100vw;
+  background-color: rgba(255,255,255,0.95);
+  transition: transform 0.3s ease;
+
+    &__menu,
+    &__actions {
+        @include mixins.flex(column, null, null, 30px);
+        padding: 20px;
+    }
+
+    &__actions {
+        padding-top: 30px;
+    }
+    
+    @media (min-width: variables.$bp-lg) {
+        display: none;
+        /* desktop muestra nav-secondary, nav-primary permanece oculto */
+        transform: translateX(0);
+        position: static;
+        height: auto;
+        width: auto;
+        background-color: transparent;
+        pointer-events: auto;
+
+        &__menu,
+        &__actions {
+            @include mixins.flex(row, center, center, 20px);
+            padding: 0;
+        }
+    }
+}
+
+.nav-secondary {
+    display: none;
+
+    @media (min-width: variables.$bp-lg) {
+        display: flex;
+        @include mixins.flex(row, center, center, 25px);
+
+        &__menu,
+        &__actions {
+            @include mixins.flex(row, center, center, 20px);
+        }
+    }
+
+    @media (min-width: variables.$bp-xl) {
+        gap: 10vw;
+
+        &__menu,
+        &__actions {
+            gap: 3vw
+        }
+    }
+
+}
