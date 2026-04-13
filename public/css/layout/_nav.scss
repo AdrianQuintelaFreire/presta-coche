@@ -11,7 +11,7 @@
     }
 
     &__img {
-        max-width: 250px;
+        max-width: 200px;
         width: 30vw;
         min-width: 150px;
     }
@@ -24,6 +24,20 @@
             pointer-events: auto;
             transform: translateX(100%);
         }
+
+        &:checked+.nav__label .nav__hamburger {
+            background: transparent; // desaparece la barra del medio
+        }
+
+        &:checked+.nav__label .nav__hamburger::before {
+            top: 0;
+            transform: rotate(45deg);
+        }
+
+        &:checked+.nav__label .nav__hamburger::after {
+            top: 0;
+            transform: rotate(-45deg);
+        }
     }
 
     &__label {
@@ -35,6 +49,34 @@
         }
     }
 
+    &__hamburger {
+        position: relative;
+        width: 30px;
+        height: 3px;
+        background: black;
+        display: block;
+        transition: all 0.3s ease;
+
+        &::before,
+        &::after {
+            content: "";
+            position: absolute;
+            width: 30px;
+            height: 3px;
+            background: black;
+            left: 0;
+            transition: all 0.3s ease;
+        }
+
+        &::before {
+            top: -10px;
+        }
+
+        &::after {
+            top: 10px;
+        }
+    }
+
 
     &__img-menu {
         width: 25px;
@@ -42,23 +84,26 @@
 }
 
 .nav-primary {
- position: absolute;
-  top: 100%; // justo debajo del header
-  left: -100vw;
-  width: 100vw;
-  background-color: rgba(255,255,255,0.95);
-  transition: transform 0.3s ease;
+    position: absolute;
+    top: 100%; // justo debajo del header
+    left: -100vw;
+    width: 100vw;
+    background-color: rgba(255, 255, 255, 0.95);
+    transition: transform 0.3s ease;
+    height: calc(100vh - 100%);
 
-    &__menu,
     &__actions {
-        @include mixins.flex(column, null, null, 30px);
+        @include mixins.flex(column, center, null, 30px);
         padding: 20px;
+        font-size: x-large;
     }
 
     &__actions {
         padding-top: 30px;
+        @include mixins.center(both);
     }
-    
+
+
     @media (min-width: variables.$bp-lg) {
         display: none;
         /* desktop muestra nav-secondary, nav-primary permanece oculto */
@@ -69,7 +114,6 @@
         background-color: transparent;
         pointer-events: auto;
 
-        &__menu,
         &__actions {
             @include mixins.flex(row, center, center, 20px);
             padding: 0;
@@ -84,8 +128,8 @@
         display: flex;
         @include mixins.flex(row, center, center, 25px);
 
-        &__menu,
         &__actions {
+            font-size: medium;
             @include mixins.flex(row, center, center, 20px);
         }
     }
@@ -93,7 +137,6 @@
     @media (min-width: variables.$bp-xl) {
         gap: 10vw;
 
-        &__menu,
         &__actions {
             gap: 3vw
         }

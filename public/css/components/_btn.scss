@@ -5,6 +5,7 @@
     padding: 15px;
     border-radius: 50px;
     transition: all 0.3s ease;
+    width: 280px;
     @include mixins.center(both);
 
     &:hover {
@@ -35,7 +36,11 @@
             color: variables.$primary-blue;
         }
     }
+    
 
+    @media (min-width: variables.$bp-lg) {
+        width: fit-content;
+    }
     @media (min-width: variables.$bp-xl) {
         width: 200px;
     }
