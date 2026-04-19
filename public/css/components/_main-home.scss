@@ -1,0 +1,50 @@
+@use '../base/variables';
+@use '../base/mixins';
+
+.main-home{
+    height: auto;
+    &__title{
+        display: flex;
+        justify-content: center;
+    }
+}
+
+.search {
+    border: 2px solid black;
+    border-radius: 20px;
+    margin: 20px;
+    padding: 20px;
+  &__caption {
+    display: flex;
+    justify-content: center;
+  }
+  &__group {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+  &__label {
+    display: none;
+  }
+  &__input , &__select{
+    margin: 5px;
+  }
+  &__button {
+    display: flex;
+    justify-content: center;
+  }
+}
+
+.button{
+    margin: 10px;
+    padding: 10px;
+    width: 100px;
+    border-radius: 50px;
+    border: variables.$primary-blue 2px solid;
+    background-color: variables.$primary-blue;
+    color: variables.$white;
+
+    &:hover {
+        background-color: transparent;
+        color: variables.$primary-blue;
+    }
+}

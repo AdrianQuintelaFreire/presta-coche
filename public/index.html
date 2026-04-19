@@ -12,7 +12,7 @@
     <header class="header">
         <nav class="nav">
             <a href="" class="nav__logo">
-                <img src="./img/logo_prestacoche.png" alt="Nombre de la marca" class="nav__img">
+                <img src="./img/logo_prestacoche.png" alt="Logotipo de PrestaCoche" class="nav__img">
             </a>
             <input type="checkbox" id="menu-toggle" class="nav__checkbox">
             <label for="menu-toggle" class="nav__label">
@@ -20,10 +20,8 @@
             </label>
             <div class="nav-secondary">
                 <ul class="menu menu--secondary">
-                    <li class="menu__item"><a href="#" class="menu__link">Inicio</a></li>
-                    <li class="menu__item"><a href="#" class="menu__link">Vehículos</a></li>
-                    <li class="menu__item"><a href="#" class="menu__link">Cómo funciona</a></li>
-                    <li class="menu__item"><a href="#" class="menu__link">Contacto</a></li>
+                    <li class="menu__item"><a href="#" class="menu__link">Nuestros coches</a></li>
+                    <li class="menu__item"><a href="#" class="menu__link">¿Cómo funciona?</a></li>
                 </ul>
                 <div class="nav-secondary__actions">
                     <a href="" class="btn btn--primary">Regístrate o inicia sesión</a>
@@ -32,10 +30,8 @@
             </div>
             <div class="nav-primary">
                 <ul class="menu menu--primary">
-                    <li class="menu__item"><a href="#" class="menu__link">Inicio</a></li>
-                    <li class="menu__item"><a href="#" class="menu__link">Vehículos</a></li>
-                    <li class="menu__item"><a href="#" class="menu__link">Cómo funciona</a></li>
-                    <li class="menu__item"><a href="#" class="menu__link">Contacto</a></li>
+                    <li class="menu__item"><a href="#" class="menu__link">Nuestros coches</a></li>
+                    <li class="menu__item"><a href="#" class="menu__link">¿Cómo funciona?</a></li>
                 </ul>
                 <div class="nav-primary__actions">
                     <a href="" class="btn btn--primary">Regístrate o inicia sesión</a>
@@ -45,9 +41,76 @@
         </nav>
     </header>
     <main class="main-home">
-        <h1>hola</h1>
+        <h1 class="main-home__title">
+            Gana con tu coche.<br>Ahorra con el de otros.
+        </h1>
+        
+        <form action="" class="search">
+            <p class="search__caption">Encuentra tu coche</p>
+
+            <div class="search__group">
+                <label for="date-start" class="search__label"></label>
+                <input type="date" id="date-start" class="search__input" required>
+
+                <label for="date-end" class="search__label"></label>
+                <input type="date" id="date-end" class="search__input" required>
+            </div>
+
+            <div class="search__group">
+                <label for="shift" class="search__label"></label>
+                <select name="shift" id="shift" class="search__select" required>
+                    <option value="" disabled selected hidden>Tipo de cambio</option>
+                    <option value="manual">Manual</option>
+                    <option value="automatico">Automático</option>
+                </select>
+
+                <label for="fuel" class="search__label"></label>
+                <select name="fuel" id="fuel" class="search__select" required>
+                    <option value="" disabled selected hidden>Tipo de combustible</option>
+                    <option value="gas">Gasolina</option>
+                    <option value="diesel">Diésel</option>
+                </select>
+            </div>
+            <div class="search__button">
+                <button type="submit" class="button">Buscar</button>
+            </div>
+        </form>
     </main>
     <footer class="footer">
+        <div class="footer__top">
+            <img class="footer__logo" src="/public/img/logo_prestacoche -mini.png" alt="Logotipo de PrestaCoche">
+        </div>
+        <div class="footer__social">
+            <img class="footer__social-icon" src="/public/img/logo_linkedin.png" alt="Icono de Linkedin">
+            <img class="footer__social-icon" src="/public/img/logo_facebook.png" alt="Icono de Facebook">
+            <img class="footer__social-icon" src="/public/img/logo_instagram.png" alt="Icono de Instagram">
+        </div>
+
+        <div class="footer__menus">
+            <div class="footer__menu">
+                <h2 class="footer__title">PrestaCoche</h2>
+                <nav>
+                    <ul class="footer__list">
+                        <li class="footer__item"><a href="">Nuestros Coches</a></li>
+                        <li class="footer__item"><a href="">Cómo funciona</a></li>
+                    </ul>
+                </nav>
+            </div>
+
+            <div class="footer__menu">
+                <h2 class="footer__title">Legal</h2>
+                <nav>
+                    <ul class="footer__list">
+                        <li class="footer__item"><a href="">Política de Cookies</a></li>
+                        <li class="footer__item"><a href="">Política de privacidad</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+
+        <div class="footer__bottom">
+            <p class="footer__copyright">&copy; 2026 PrestaCoche. Todos los derechos reservados</p>
+        </div>
     </footer>
 
 

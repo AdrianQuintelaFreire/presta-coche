@@ -1,0 +1,54 @@
+@use '../base/variables';
+@use '../base/mixins';
+
+.footer{
+    display: grid;
+    grid-template-areas: 
+        "top social"
+        "menus menus"
+        "bottom bottom"
+    ;
+    border-top: variables.$primary-blue 2px solid;
+    @media (min-width: variables.$bp-lg) {
+        grid-template-areas: 
+        "top menus social"
+        "bottom bottom bottom"
+    ;
+    }
+    &__top{
+        grid-area: top;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        @include mixins.center(both);
+        justify-content: space-around;
+    }
+    &__logo{
+        width: 60px;
+        height: auto;
+    }
+    &__social{
+        grid-area: social;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 1rem;
+        &-icon{
+            width: 40px;
+            height: auto;
+        }
+    }
+    &__menus{
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        grid-area: menus;
+    }
+    &__bottom{
+        @include mixins.center(both);
+        grid-area: bottom;
+        border-top: variables.$primary-blue 2px solid;
+    }
+
+}
