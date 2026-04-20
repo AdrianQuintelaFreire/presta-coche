@@ -2,18 +2,33 @@
 @use '../base/mixins';
 
 .footer{
+    background-color: rgb(1, 1, 66);
+    color: white;
+    padding: 1rem 0 1rem 0;
     display: grid;
     grid-template-areas: 
-        "top social"
-        "menus menus"
-        "bottom bottom"
+        "menus"
+        "social"
     ;
-    border-top: variables.$primary-blue 2px solid;
     @media (min-width: variables.$bp-lg) {
         grid-template-areas: 
-        "top menus social"
-        "bottom bottom bottom"
+        "menus social"
+        "bottom bottom"
     ;
+    }
+    &__follow{
+        border-top: 1px solid rgb(146, 146, 177);
+        grid-area: social;
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        @include mixins.center(both);
+        @media (min-width: variables.$bp-lg) {
+            padding-left: 20px;
+            border-top: 0px;
+            border-left: 1px solid rgb(146, 146, 177);
+            align-items: start;
+        }
     }
     &__top{
         grid-area: top;
@@ -28,9 +43,8 @@
         height: auto;
     }
     &__social{
-        grid-area: social;
         display: flex;
-        justify-content: center;
+        justify-content: start;
         align-items: center;
         gap: 1rem;
         &-icon{
@@ -44,11 +58,6 @@
         flex-wrap: wrap;
         justify-content: space-around;
         grid-area: menus;
-    }
-    &__bottom{
-        @include mixins.center(both);
-        grid-area: bottom;
-        border-top: variables.$primary-blue 2px solid;
     }
 
 }

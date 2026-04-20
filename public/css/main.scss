@@ -3,6 +3,8 @@
 @use "base/mixins";
 @use "base/base";
 
+@use "layout/body";
+@use "layout/main";
 @use "layout/header";
 @use "layout/nav";
 @use "layout/footer";

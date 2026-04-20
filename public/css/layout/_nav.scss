@@ -2,8 +2,11 @@
 @use '../base/mixins';
 
 .nav {
+    color: rgb(1, 1, 66);
+    font-weight: 700;
+    font-size: 20px;
     @include mixins.flex(row, space-between);
-    border-bottom: 2px solid variables.$slate-200;
+    border-bottom: 2px solid rgb(1, 1, 66);;
     padding: 10px;
 
     @media (min-width: variables.$bp-lg) {
