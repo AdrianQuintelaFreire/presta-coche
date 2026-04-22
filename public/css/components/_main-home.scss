@@ -16,6 +16,152 @@
     content: "";
     position: absolute;
     inset: 0;
+    z-index: 0;
+  }
+
+  // FADE SOLO SOBRE LA IMAGEN
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+
+    background: linear-gradient(
+      to left,
+      rgba(255, 255, 255, 0) 40%,
+      rgba(255, 255, 255, 1) 60%
+    );
+
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  &__img {
+    height: 220px;
+    width: 100vw;
+    object-fit: cover;
+  }
+
+  &__title{
+    margin: 20px 20px 10px 20px;
+    text-align: center;
+    font-size: 30px;
+    font-weight:bolder;
+    line-height: 1.8rem
+  }
+
+  &__text{
+    margin: 0px 20px 0px 20px;
+    text-align: center;
+  }
+}
+
+.search {
+  max-width: 600px;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+
+  &__label{
+    color: rgb(41, 43, 66)rgb(41, 43, 66);
+    font-weight: 500;
+  }
+
+  &__caption {
+    font-size: 1.5rem;
+    font-weight: 600;
+    text-align: center;
+    color: #1f2937;
+  }
+
+  &__group {
+    display: flex;
+
+    @media (max-width: 500px) {
+      flex-direction: column;
+    }
+  }
+
+  &__input,
+  &__select {
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    flex: 1;
+    padding: 0.75rem 1rem;
+    border: 1px solid #e5e7eb;
+    font-size: 0.95rem;
+    background: #f9fafb;
+    transition: all 0.2s ease;
+
+    &:focus {
+      outline: none;
+      border-color: #3b82f6;
+      background: #ffffff;
+      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+    }
+  }
+
+  &__select {
+    cursor: pointer;
+  }
+
+  &__btn {
+    padding: 0.8rem 2rem;
+    border: none;
+    border-radius: 999px;
+    background: linear-gradient(135deg, #3b82f6, #2563eb);
+    color: white;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.25s ease;
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgb(29, 85, 207);
+    }
+
+    &:active {
+      transform: translateY(0);
+      box-shadow: none;
+    }
+  }
+}
+
+.button{
+    margin-top: 10px;
+    padding: 10px;
+    width: 100%;
+    border-radius: 10px;
+    border: variables.$primary-blue 2px solid;
+    background-color: rgb(29, 85, 207);
+    color: variables.$white;
+
+    &:hover {
+        background-color: transparent;
+        color: variables.$primary-blue;
+    }
+}
+
+
+/*
+@use '../base/variables';
+@use '../base/mixins';
+
+.main-home {
+  position: relative;
+  overflow: hidden;
+
+  // contenido siempre encima
+  & > * {
+    position: relative;
+    z-index: 2;
+  }
+
+  // IMAGEN (solo fondo visual)
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
 
     background: url('../img/fondo_home.png') no-repeat right center / 60%;
     z-index: 0;
@@ -129,3 +275,4 @@
         color: variables.$primary-blue;
     }
 }
+*/

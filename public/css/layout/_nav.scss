@@ -6,7 +6,6 @@
     font-weight: 700;
     font-size: 20px;
     @include mixins.flex(row, space-between);
-    border-bottom: 2px solid rgb(1, 1, 66);;
     padding: 10px;
 
     @media (min-width: variables.$bp-lg) {
@@ -15,7 +14,7 @@
 
     &__img {
         max-width: 200px;
-        width: 30vw;
+        width: 45vw;
         min-width: 150px;
     }
 
@@ -56,7 +55,7 @@
         position: relative;
         width: 30px;
         height: 3px;
-        background: black;
+        background: rgb(41, 43, 66);
         display: block;
         transition: all 0.3s ease;
 
@@ -66,7 +65,7 @@
             position: absolute;
             width: 30px;
             height: 3px;
-            background: black;
+            background: rgb(41, 43, 66);
             left: 0;
             transition: all 0.3s ease;
         }
