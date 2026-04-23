@@ -5,13 +5,12 @@
   position: relative;
   overflow: hidden;
 
-  // contenido siempre encima
   & > * {
     position: relative;
     z-index: 2;
   }
 
-  // IMAGEN (solo fondo visual)
+  // 👉 por defecto (móvil): SIN imagen de fondo
   &::before {
     content: "";
     position: absolute;
@@ -19,7 +18,13 @@
     z-index: 0;
   }
 
-  // FADE SOLO SOBRE LA IMAGEN
+  // 👉 SOLO en desktop aparece la imagen de fondo
+  @media (min-width: variables.$bp-lg) {
+    &::before {
+      background: url('../img/fondo_home.png') no-repeat right center / 100%;
+    }
+  }
+
   &::after {
     content: "";
     position: absolute;
@@ -39,30 +44,73 @@
     height: 220px;
     width: 100vw;
     object-fit: cover;
+
+    // 👉 ocultas la img en desktop
+    @media (min-width: variables.$bp-lg) {
+      display: none;
+    }
   }
 
-  &__title{
+  &__title {
     margin: 20px 20px 10px 20px;
     text-align: center;
     font-size: 30px;
     font-weight:bolder;
-    line-height: 1.8rem
+    line-height: 1.8rem;
+    color: rgb(41, 43, 66);
+    @media (min-width: variables.$bp-lg) {
+      width: 400px;
+      width: fit-content;
+      margin: 0px;
+      margin: 30px 0px 20px 235px;
+      padding: 0px;
+    }
   }
 
   &__text{
     margin: 0px 20px 0px 20px;
     text-align: center;
+    color: rgb(41, 43, 66);
+    @media (min-width: variables.$bp-lg) {
+      width: 400px;
+      margin: 20px 0px 20px 200px;
+      padding: 0px;
+    }
   }
 }
 
 .search {
-  max-width: 600px;
+  max-width: 400px;
+  width: 100%;
+  margin: 20px auto;
   padding: 2rem;
+  display: flex;
+  flex-direction: column;
+      @media (min-width: variables.$bp-lg) {
+        width: 100%;
+        padding: 0px;
+        margin: 0px;
+        margin-left: 200px;
+    }
+
+  background: #ffffff;
+  border-radius: 16px;
+
+  // borde suave tipo input
+  border: 1px solid #e5e7eb;
+
+  // efecto difuminado elegante
+  box-shadow: 
+    0 10px 25px rgba(0, 0, 0, 0.05),
+    0 0 0 1px rgba(255, 255, 255, 0.5) inset;
+
+  backdrop-filter: blur(6px); // opcional (glass effect)
+  padding: 15px;
   display: flex;
   flex-direction: column;
 
   &__label{
-    color: rgb(41, 43, 66)rgb(41, 43, 66);
+    color: #0c2e64;
     font-weight: 500;
   }
 
@@ -70,15 +118,13 @@
     font-size: 1.5rem;
     font-weight: 600;
     text-align: center;
-    color: #1f2937;
+    color: #154fad;
   }
 
   &__group {
     display: flex;
-
-    @media (max-width: 500px) {
-      flex-direction: column;
-    }
+    flex-direction: column;
+    gap: 12px;
   }
 
   &__input,
@@ -132,147 +178,12 @@
     padding: 10px;
     width: 100%;
     border-radius: 10px;
-    border: variables.$primary-blue 2px solid;
-    background-color: rgb(29, 85, 207);
+    border: #154fad 2px solid;
+    background-color: #154fad;
     color: variables.$white;
 
     &:hover {
         background-color: transparent;
-        color: variables.$primary-blue;
+        color: #154fad;
     }
 }
-
-
-/*
-@use '../base/variables';
-@use '../base/mixins';
-
-.main-home {
-  position: relative;
-  overflow: hidden;
-
-  // contenido siempre encima
-  & > * {
-    position: relative;
-    z-index: 2;
-  }
-
-  // IMAGEN (solo fondo visual)
-  &::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-
-    background: url('../img/fondo_home.png') no-repeat right center / 60%;
-    z-index: 0;
-  }
-
-  // FADE SOLO SOBRE LA IMAGEN
-  &::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-
-    background: linear-gradient(
-      to left,
-      rgba(255, 255, 255, 0) 40%,
-      rgba(255, 255, 255, 1) 60%
-    );
-
-    z-index: 1;
-    pointer-events: none;
-  }
-}
-
-.search {
-  max-width: 600px;
-  margin: 2rem auto;
-  padding: 2rem;
-  background: #ffffff;
-  border-radius: 16px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-
-  &__caption {
-    font-size: 1.5rem;
-    font-weight: 600;
-    text-align: center;
-    color: #1f2937;
-  }
-
-  &__group {
-    display: flex;
-    gap: 1rem;
-
-    @media (max-width: 500px) {
-      flex-direction: column;
-    }
-  }
-
-  &__input,
-  &__select {
-    flex: 1;
-    padding: 0.75rem 1rem;
-    border: 1px solid #e5e7eb;
-    border-radius: 10px;
-    font-size: 0.95rem;
-    background: #f9fafb;
-    transition: all 0.2s ease;
-
-    &:focus {
-      outline: none;
-      border-color: #3b82f6;
-      background: #ffffff;
-      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
-    }
-  }
-
-  &__select {
-    cursor: pointer;
-  }
-
-  &__button {
-    display: flex;
-    justify-content: center;
-  }
-
-  &__btn {
-    padding: 0.8rem 2rem;
-    border: none;
-    border-radius: 999px;
-    background: linear-gradient(135deg, #3b82f6, #2563eb);
-    color: white;
-    font-size: 1rem;
-    font-weight: 500;
-    cursor: pointer;
-    transition: all 0.25s ease;
-
-    &:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 20px rgba(37, 99, 235, 0.3);
-    }
-
-    &:active {
-      transform: translateY(0);
-      box-shadow: none;
-    }
-  }
-}
-
-.button{
-    margin: 10px;
-    padding: 10px;
-    width: 100px;
-    border-radius: 50px;
-    border: variables.$primary-blue 2px solid;
-    background-color: variables.$primary-blue;
-    color: variables.$white;
-
-    &:hover {
-        background-color: transparent;
-        color: variables.$primary-blue;
-    }
-}
-*/

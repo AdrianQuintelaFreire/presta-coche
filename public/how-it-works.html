@@ -40,41 +40,51 @@
             </div>
         </nav>
     </header>
-    <main class="main-home">
-        <img class="main-home__img" src="./img/fondo_home.png" alt="Imagen de PrestaCoche">
-        <h1 class="main-home__title">
-            Gana con tu coche.<br>Ahorra con el de otros.
-        </h1>
-        <p class="main-home__text">Comparte tu coche o alquila uno cerca de ti de forma fácil y segura.</p>
-        
-        <form action="" class="search">
-            <div class="search__group search__group--first">
-                <label for="date-start" class="search__label">Fecha de inicio</label>
-                <input type="date" id="date-start" class="search__input" required>
+    <main class="how-it-works">
+        <div class="how-it-works__container">
+            
+            <h2 class="how-it-works__title">Cómo funciona</h2>
 
-                <label for="date-end" class="search__label">Fecha de fin</label>
-                <input type="date" id="date-end" class="search__input" required>
+            <div class="how-it-works__block">
+            <h3 class="how-it-works__subtitle">Si aún no tienes cuenta</h3>
+            <p class="how-it-works__text">
+                Puedes navegar por la plataforma y ver los vehículos disponibles, consultando sus características,
+                ubicación aproximada y fechas disponibles.
+            </p>
+            <p class="how-it-works__text">
+                Para poder reservar un coche o publicar el tuyo, necesitas registrarte e iniciar sesión.
+            </p>
             </div>
 
-            <div class="search__group search__group--second">
-                <label for="shift" class="search__label">Tipo de cambio</label>
-                <select name="shift" id="shift" class="search__select" required>
-                    <option value="" disabled selected hidden>Seleccion una opción</option>
-                    <option value="manual">Manual</option>
-                    <option value="automatico">Automático</option>
-                </select>
+            <div class="how-it-works__block">
+            <h3 class="how-it-works__subtitle">Si ya tienes cuenta</h3>
 
-                <label for="fuel" class="search__label">Tipo de combustible</label>
-                <select name="fuel" id="fuel" class="search__select" required>
-                    <option value="" disabled selected hidden>Seleccion una opción</option>
-                    <option value="gas">Gasolina</option>
-                    <option value="diesel">Diésel</option>
-                </select>
+            <div class="how-it-works__item">
+                <h4 class="how-it-works__item-title">Alquila un coche</h4>
+                <p class="how-it-works__text">
+                Busca vehículos según las fechas que necesites, revisa sus detalles y realiza una reserva de forma sencilla.
+                Después, solo tendrás que acordar con el propietario la recogida y devolución.
+                </p>
             </div>
-            <div class="search__button">
-                <button type="submit" class="button">Comenzar a buscar</button>
+
+            <div class="how-it-works__item">
+                <h4 class="how-it-works__item-title">Publica tu coche</h4>
+                <p class="how-it-works__text">
+                Añade tu vehículo con su información, documentación y disponibilidad.
+                El coche será revisado antes de publicarse para garantizar la seguridad.
+                </p>
             </div>
-        </form>
+
+            <div class="how-it-works__item">
+                <h4 class="how-it-works__item-title">Gestiona tu actividad</h4>
+                <p class="how-it-works__text">
+                Desde tu perfil podrás consultar tus reservas, gestionar tus vehículos y actualizar tus datos personales.
+                </p>
+            </div>
+
+            </div>
+
+        </div>
     </main>
     <footer class="footer">
 

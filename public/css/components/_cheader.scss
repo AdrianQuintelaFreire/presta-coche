@@ -19,8 +19,9 @@
 
     &--primary {
         border: grey 2px solid;
-&:hover {
-            background-color: variables.$primary-green;
+        &:hover {
+            background-color: #154fad;
+            border: #154fad 2px solid;
             color: variables.$white;
         }
 
@@ -49,8 +50,9 @@
     transition: all 0.3s ease;
 
     &__item:hover {
-        color: variables.$secondary-blue;
-        transform: scale(1.05);
+        color: rgb(41, 43, 66);
+        padding-bottom: 3px;
+        border-bottom: 2px solid rgb(41, 43, 66);
     }
 
     &--primary {
