@@ -6,6 +6,7 @@
     border-radius: 10px;
     transition: all 0.3s ease;
     width: 200px;
+    text-align: center;
     @include mixins.center(both);
 
     &:hover {
@@ -48,6 +49,7 @@
 
 .menu {
     transition: all 0.3s ease;
+    text-align: center;
 
     &__item:hover {
         color: rgb(41, 43, 66);

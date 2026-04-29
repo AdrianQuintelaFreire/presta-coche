@@ -1,0 +1,44 @@
+.our-cars{
+    margin: 30px;
+}
+
+.filter {
+  &__toggle {
+    display: none;
+  }
+
+  &__button {
+    cursor: pointer;
+    display: inline-block;
+  }
+
+  &__form {
+    display: none;
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+  }
+
+  // cuando está activado el checkbox
+  &__toggle:checked ~ &__form {
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.filter {
+  &__form {
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+  }
+
+  &__toggle:checked ~ &__form {
+    max-height: 500px;
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

@@ -81,11 +81,12 @@
 
 .search {
   max-width: 400px;
-  width: 100%;
+  width: 90%;
   margin: 20px auto;
   padding: 2rem;
   display: flex;
   flex-direction: column;
+  margin: 10px auto 10px auto;
       @media (min-width: variables.$bp-lg) {
         width: 100%;
         padding: 0px;

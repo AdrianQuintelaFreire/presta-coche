@@ -224,6 +224,7 @@ main {
   border-radius: 10px;
   transition: all 0.3s ease;
   width: 200px;
+  text-align: center;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -265,6 +266,7 @@ main {
 
 .menu {
   transition: all 0.3s ease;
+  text-align: center;
 }
 .menu__item:hover {
   color: rgb(41, 43, 66);
@@ -436,11 +438,12 @@ main {
 
 .search {
   max-width: 400px;
-  width: 100%;
+  width: 90%;
   margin: 20px auto;
   padding: 2rem;
   display: flex;
   flex-direction: column;
+  margin: 10px auto 10px auto;
 }
 @media (min-width: 1024px) {
   .search {
@@ -562,4 +565,40 @@ main {
   font-size: 1rem;
   line-height: 1.6;
   color: #333;
+}
+
+.our-cars {
+  margin: 30px;
+}
+
+.filter__toggle {
+  display: none;
+}
+.filter__button {
+  cursor: pointer;
+  display: inline-block;
+}
+.filter__form {
+  display: none;
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: all 0.3s ease;
+}
+.filter__toggle:checked ~ .filter__form {
+  display: block;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.filter__form {
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: all 0.3s ease;
+}
+.filter__toggle:checked ~ .filter__form {
+  max-height: 500px;
+  opacity: 1;
+  transform: translateY(0);
 }/*# sourceMappingURL=main.css.map */
