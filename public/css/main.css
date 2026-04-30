@@ -525,10 +525,14 @@ main {
   border: #154fad 2px solid;
   background-color: #154fad;
   color: #ffffff;
+  transition: all 0.3s ease;
 }
 .button:hover {
   background-color: transparent;
   color: #154fad;
+}
+.button:focus, .button:active {
+  outline: none;
 }
 
 .how-it-works {
@@ -567,29 +571,18 @@ main {
   color: #333;
 }
 
-.our-cars {
-  margin: 30px;
-}
-
 .filter__toggle {
   display: none;
 }
 .filter__button {
   cursor: pointer;
-  display: inline-block;
 }
-.filter__form {
-  display: none;
-  opacity: 0;
-  transform: translateY(-10px);
-  transition: all 0.3s ease;
+.filter__button:focus {
+  outline: none;
 }
-.filter__toggle:checked ~ .filter__form {
-  display: block;
-  opacity: 1;
-  transform: translateY(0);
+.filter__button:active {
+  outline: none;
 }
-
 .filter__form {
   max-height: 0;
   overflow: hidden;
@@ -601,4 +594,14 @@ main {
   max-height: 500px;
   opacity: 1;
   transform: translateY(0);
+}
+
+.filter__button.button:focus,
+.filter__button.button:active {
+  background-color: inherit; /* o el color original */
+}
+
+.filter__toggle:checked + .filter__button {
+  background-color: transparent;
+  color: #154fad;
 }/*# sourceMappingURL=main.css.map */

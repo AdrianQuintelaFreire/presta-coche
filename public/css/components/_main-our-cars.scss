@@ -1,5 +1,5 @@
-.our-cars{
-    margin: 30px;
+.our-cars {
+  margin: 30px;
 }
 
 .filter {
@@ -9,25 +9,14 @@
 
   &__button {
     cursor: pointer;
-    display: inline-block;
+
+    /* evita estados raros de foco */
+    &:focus {
+      outline: none;
+    }
   }
 
-  &__form {
-    display: none;
-    opacity: 0;
-    transform: translateY(-10px);
-    transition: all 0.3s ease;
-  }
-
-  // cuando está activado el checkbox
-  &__toggle:checked ~ &__form {
-    display: block;
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.filter {
+  /* FORM oculto por defecto */
   &__form {
     max-height: 0;
     overflow: hidden;
@@ -36,9 +25,24 @@
     transition: all 0.3s ease;
   }
 
+  /* FORM visible cuando está activo */
   &__toggle:checked ~ &__form {
     max-height: 500px;
     opacity: 1;
     transform: translateY(0);
   }
+
+  /* BOTÓN cuando está activo (filtro abierto) */
+  &__toggle:checked + &__button.button {
+    background-color: transparent;
+    color: #154fad;
+  }
+
+  /* BOTÓN cuando está inactivo (estado base forzado) */
+  &__toggle:not(:checked) + &__button.button {
+    background-color: #154fad;
+    color: variables.$white;
+  }
 }
+
+

@@ -174,17 +174,23 @@
   }
 }
 
-.button{
-    margin-top: 10px;
-    padding: 10px;
-    width: 100%;
-    border-radius: 10px;
-    border: #154fad 2px solid;
-    background-color: #154fad;
-    color: variables.$white;
+.button {
+  margin-top: 10px;
+  padding: 10px;
+  width: 100%;
+  border-radius: 10px;
+  border: #154fad 2px solid;
+  background-color: #154fad;
+  color: variables.$white;
+  transition: all 0.3s ease;
 
-    &:hover {
-        background-color: transparent;
-        color: #154fad;
-    }
+  &:hover {
+    background-color: transparent;
+    color: #154fad;
+  }
+
+  &:focus,
+  &:active {
+    outline: none;
+  }
 }
