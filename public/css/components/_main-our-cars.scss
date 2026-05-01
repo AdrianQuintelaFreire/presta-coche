@@ -1,8 +1,26 @@
+@use '../base/variables';
+@use '../base/mixins';
+
 .our-cars {
-  margin: 30px;
+  margin: 20px;
+
+  @media (min-width: variables.$bp-lg) {
+    display: grid;
+    grid-template-columns: 320px 1fr;
+    gap: 2rem;
+    align-items: start;
+  }
 }
 
 .filter {
+  @media (min-width: variables.$bp-lg) {
+    grid-column: 1;
+    grid-row: 1;
+    position: sticky;
+    top: 2rem;
+    align-self: start;
+  }
+
   &__toggle {
     display: none;
   }
@@ -10,39 +28,158 @@
   &__button {
     cursor: pointer;
 
-    /* evita estados raros de foco */
     &:focus {
       outline: none;
     }
+
+    @media (min-width: variables.$bp-lg) {
+      display: none;
+    }
   }
 
-  /* FORM oculto por defecto */
   &__form {
+    margin-top: 20px;
     max-height: 0;
     overflow: hidden;
     opacity: 0;
     transform: translateY(-10px);
     transition: all 0.3s ease;
+
+    @media (min-width: variables.$bp-lg) {
+      display: block;
+      max-height: none;
+      opacity: 1;
+      overflow: visible;
+      transform: none;
+      transition: none;
+      margin-top: 0;
+      width: 100%;
+    }
   }
 
-  /* FORM visible cuando está activo */
   &__toggle:checked ~ &__form {
     max-height: 500px;
     opacity: 1;
     transform: translateY(0);
   }
 
-  /* BOTÓN cuando está activo (filtro abierto) */
   &__toggle:checked + &__button.button {
     background-color: transparent;
     color: #154fad;
   }
 
-  /* BOTÓN cuando está inactivo (estado base forzado) */
   &__toggle:not(:checked) + &__button.button {
     background-color: #154fad;
     color: variables.$white;
   }
 }
 
+.container-cars {
+  @media (min-width: variables.$bp-lg) {
+    grid-column: 2;
+    grid-row: 1;
+    min-width: 0; // evita desbordamientos
+  }
+}
 
+.search--our-cars{
+  margin-left: 0px;
+}
+
+.cars {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(0, 350px));
+  justify-content: center;
+  gap: 2rem;
+  align-items: start;
+
+  @media (min-width: variables.$bp-md) {
+    grid-template-columns: repeat(2, 300px);
+  }
+
+  @media (min-width: variables.$bp-xxl) {
+    grid-template-columns: repeat(3, 300px);
+  }
+
+    @media (min-width: variables.$bp-xxxl) {
+    grid-template-columns: repeat(4, 300px);
+  }
+}
+
+.car-card {
+  
+  // borde suave tipo input
+  border: 1px solid #e5e7eb;
+
+  // efecto difuminado elegante
+  box-shadow: 
+    0 10px 25px rgba(0, 0, 0, 0.05),
+    0 0 0 1px rgba(255, 255, 255, 0.5) inset;
+
+  backdrop-filter: blur(6px); // opcional (glass effect)
+  border-radius: 2rem;
+  overflow: hidden;
+  background-color: #fff;
+
+  &__image-wrapper {
+    height: 220px;
+    
+    overflow: hidden;
+  }
+
+  &__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  &__content {
+    padding: 1.5rem;
+    text-align: center;
+  }
+
+  &__price {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 1.2rem;
+  }
+
+  &__details {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem 1.5rem;
+    margin-bottom: 1.5rem;
+    text-align: left;
+  }
+
+  &__detail {
+    margin: 0;
+    font-size: 1rem;
+  }
+
+  &__label {
+    font-weight: 600;
+  }
+
+  &__button {
+    display: inline-block;
+    width: 100%;
+    padding: 0.5rem;
+    border: none;
+    border-radius: 10px;
+    background-color: #3cab35;
+    background-color: white;
+    border: 2px solid #154fad;
+    color: #154fad;
+    font-size: 1.2rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+      background-color: #154fad;
+      color: white;
+    }
+  }
+}
