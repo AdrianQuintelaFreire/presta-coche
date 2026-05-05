@@ -11,17 +11,18 @@
 <body>
     <header class="header">
         <nav class="nav">
-            <a href="../public/index.html" class="nav__logo">
+            <a href="../public/index.php" class="nav__logo">
                 <img src="./img/logo_prestacoche.png" alt="Logotipo de PrestaCoche" class="nav__img">
             </a>
             <input type="checkbox" id="menu-toggle" class="nav__checkbox">
             <label for="menu-toggle" class="nav__label">
                 <span class="nav__hamburger"></span>
+                <span class="nav__hamburger"></span>
             </label>
             <div class="nav-secondary">
                 <ul class="menu menu--secondary">
-                    <li class="menu__item"><a href="../public/our-cars.html" class="menu__link">Nuestros coches</a></li>
-                    <li class="menu__item"><a href="../public/how-it-works.html" class="menu__link">¿Cómo funciona?</a></li>
+                    <li class="menu__item"><a href="../public/our-cars.php" class="menu__link">Nuestros coches</a></li>
+                    <li class="menu__item"><a href="../public/how-it-works.php" class="menu__link">¿Cómo funciona?</a></li>
                 </ul>
                 <div class="nav-secondary__actions">
                     <a href="" class="btn btn--primary">Iniciar Sesión</a>
@@ -30,8 +31,8 @@
             </div>
             <div class="nav-primary">
                 <ul class="menu menu--primary">
-                    <li class="menu__item"><a href="../public/our-cars.html" class="menu__link">Nuestros coches</a></li>
-                    <li class="menu__item"><a href="../public/how-it-works.html" class="menu__link">¿Cómo funciona?</a></li>
+                    <li class="menu__item"><a href="../public/our-cars.php" class="menu__link">Nuestros coches</a></li>
+                    <li class="menu__item"><a href="../public/how-it-works.php" class="menu__link">¿Cómo funciona?</a></li>
                 </ul>
                 <div class="nav-primary__actions">
                     <a href="" class="btn btn--primary">Iniciar Sesión</a>
@@ -91,9 +92,9 @@
         <div class="footer__follow">
             <h2 class="footer__title">Siguenos</h2>
             <div class="footer__social">
-                <img class="footer__social-icon" src="/public/img/logo_linkedin.png" alt="Icono de Linkedin">
-                <img class="footer__social-icon" src="/public/img/logo_facebook.png" alt="Icono de Facebook">
-                <img class="footer__social-icon" src="/public/img/logo_instagram.png" alt="Icono de Instagram">
+                <img class="footer__social-icon" src="../public/img/logo_linkedin.png" alt="Icono de Linkedin">
+                <img class="footer__social-icon" src="../public/img/logo_facebook.png" alt="Icono de Facebook">
+                <img class="footer__social-icon" src="../public/img/logo_instagram.png" alt="Icono de Instagram">
             </div>
             <p class="footer__copyright">&copy; 2026 PrestaCoche. Todos los derechos reservados</p>
         </div>
