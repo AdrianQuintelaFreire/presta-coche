@@ -12,7 +12,7 @@
             <a href="index.php" class="register-form__back">← Volver al inicio</a>
             <h1 class="register-form__title">Crear cuenta</h1>
 
-            <form action="/prestacoche/routes/web.php?action=register" method="POST" class="register-form__form">
+            <form action="/prestacoche/routes/web.php?action=register" method="POST" class="register-form__form" enctype="multipart/form-data">
                 <!-- Nome -->
                 <input type="text" name="nome" class="register-form__input" placeholder="Nombre" required>
 
@@ -23,7 +23,7 @@
                 <input type="email" name="email" class="register-form__input" placeholder="Correo electrónico" required>
 
                 <!-- Contrasinal -->
-                <input type="password" name="contrasinal" class="register-form__input" placeholder="Contraseña" required>
+                <input type="password" name="cocntrasinal" class="register-form__input" placeholder="Contraseña" required>
 
                 <!-- DNI -->
                 <input type="text" name="DNI" class="register-form__input" placeholder="DNI / NIE" required>

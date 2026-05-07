@@ -20,7 +20,7 @@
                 </div>
                 
                 <div class="login-form__field">
-                    <input type="password" name="password" class="login-form__input" placeholder="Contraseña" required>
+                    <input type="password" name="contrasinal" class="login-form__input" placeholder="Contraseña" required>
                 </div>
 
                 <button type="submit" class="login-form__button">Iniciar sesión</button>

@@ -1,3 +1,30 @@
+<?php
+// Importamos la conexión que ya tienes configurada
+require_once __DIR__ . '/../config/conexion.php';
+
+// Lógica de filtrado
+$tipo_cambio = $_GET['shift'] ?? '';
+$combustible = $_GET['fuel'] ?? '';
+
+// Consulta base
+$sql = "SELECT * FROM vehiculos WHERE estado = 'validado'";
+$params = [];
+
+if (!empty($tipo_cambio)) {
+    $sql .= " AND tipo_cambio = :cambio";
+    $params[':cambio'] = $tipo_cambio;
+}
+
+if (!empty($combustible)) {
+    $sql .= " AND combustible = :fuel";
+    $params[':fuel'] = $combustible;
+}
+
+$stmt = $conexion->prepare($sql);
+$stmt->execute($params);
+$vehiculos = $stmt->fetchAll();
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -79,6 +106,8 @@
         </form>
     </aside>
     <section class="cars">
+      <!--
+       Ejemplo de car-card:
         <article class="car-card">
          <div class="car-card__image-wrapper">
            <img src="./img/Fiat.jpg" alt="Foto del coche" class="car-card__image">
@@ -99,226 +128,37 @@
            <button class="car-card__button">Ver detalles</button>
          </div>
        </article>
-        <article class="car-card">
-         <div class="car-card__image-wrapper">
-           <img src="./img/Fiat.jpg" alt="Foto del coche" class="car-card__image">
-         </div>
-     
-         <div class="car-card__content">
-           <p class="car-card__price">12.500 €</p>
-     
-           <div class="car-card__details">
-             <p class="car-card__detail"><span class="car-card__label">Marca:<br></span> Fiat</p>
-             <p class="car-card__detail"><span class="car-card__label">Modelo:<br></span> 500</p>
-             <p class="car-card__detail"><span class="car-card__label">Combustible:<br></span> Gasolina</p>
-             <p class="car-card__detail"><span class="car-card__label">Cambio:<br></span> Manual</p>
-             <p class="car-card__detail"><span class="car-card__label">Kilometraje:<br></span> 75.000 km</p>
-             <p class="car-card__detail"><span class="car-card__label">Año:<br></span> 2021</p>
-           </div>
-     
-           <button class="car-card__button">Ver detalles</button>
-         </div>
-       </article>
-        <article class="car-card">
-         <div class="car-card__image-wrapper">
-           <img src="./img/Fiat.jpg" alt="Foto del coche" class="car-card__image">
-         </div>
-     
-         <div class="car-card__content">
-           <p class="car-card__price">12.500 €</p>
-     
-           <div class="car-card__details">
-             <p class="car-card__detail"><span class="car-card__label">Marca:<br></span> Fiat</p>
-             <p class="car-card__detail"><span class="car-card__label">Modelo:<br></span> 500</p>
-             <p class="car-card__detail"><span class="car-card__label">Combustible:<br></span> Gasolina</p>
-             <p class="car-card__detail"><span class="car-card__label">Cambio:<br></span> Manual</p>
-             <p class="car-card__detail"><span class="car-card__label">Kilometraje:<br></span> 75.000 km</p>
-             <p class="car-card__detail"><span class="car-card__label">Año:<br></span> 2021</p>
-           </div>
-     
-           <button class="car-card__button">Ver detalles</button>
-         </div>
-       </article>
-        <article class="car-card">
-         <div class="car-card__image-wrapper">
-           <img src="./img/Fiat.jpg" alt="Foto del coche" class="car-card__image">
-         </div>
-     
-         <div class="car-card__content">
-           <p class="car-card__price">12.500 €</p>
-     
-           <div class="car-card__details">
-             <p class="car-card__detail"><span class="car-card__label">Marca:<br></span> Fiat</p>
-             <p class="car-card__detail"><span class="car-card__label">Modelo:<br></span> 500</p>
-             <p class="car-card__detail"><span class="car-card__label">Combustible:<br></span> Gasolina</p>
-             <p class="car-card__detail"><span class="car-card__label">Cambio:<br></span> Manual</p>
-             <p class="car-card__detail"><span class="car-card__label">Kilometraje:<br></span> 75.000 km</p>
-             <p class="car-card__detail"><span class="car-card__label">Año:<br></span> 2021</p>
-           </div>
-     
-           <button class="car-card__button">Ver detalles</button>
-         </div>
-       </article>
-        <article class="car-card">
-         <div class="car-card__image-wrapper">
-           <img src="./img/Fiat.jpg" alt="Foto del coche" class="car-card__image">
-         </div>
-     
-         <div class="car-card__content">
-           <p class="car-card__price">12.500 €</p>
-     
-           <div class="car-card__details">
-             <p class="car-card__detail"><span class="car-card__label">Marca:<br></span> Fiat</p>
-             <p class="car-card__detail"><span class="car-card__label">Modelo:<br></span> 500</p>
-             <p class="car-card__detail"><span class="car-card__label">Combustible:<br></span> Gasolina</p>
-             <p class="car-card__detail"><span class="car-card__label">Cambio:<br></span> Manual</p>
-             <p class="car-card__detail"><span class="car-card__label">Kilometraje:<br></span> 75.000 km</p>
-             <p class="car-card__detail"><span class="car-card__label">Año:<br></span> 2021</p>
-           </div>
-     
-           <button class="car-card__button">Ver detalles</button>
-         </div>
-       </article>
-        <article class="car-card">
-         <div class="car-card__image-wrapper">
-           <img src="./img/Fiat.jpg" alt="Foto del coche" class="car-card__image">
-         </div>
-     
-         <div class="car-card__content">
-           <p class="car-card__price">12.500 €</p>
-     
-           <div class="car-card__details">
-             <p class="car-card__detail"><span class="car-card__label">Marca:<br></span> Fiat</p>
-             <p class="car-card__detail"><span class="car-card__label">Modelo:<br></span> 500</p>
-             <p class="car-card__detail"><span class="car-card__label">Combustible:<br></span> Gasolina</p>
-             <p class="car-card__detail"><span class="car-card__label">Cambio:<br></span> Manual</p>
-             <p class="car-card__detail"><span class="car-card__label">Kilometraje:<br></span> 75.000 km</p>
-             <p class="car-card__detail"><span class="car-card__label">Año:<br></span> 2021</p>
-           </div>
-     
-           <button class="car-card__button">Ver detalles</button>
-         </div>
-       </article>
-        <article class="car-card">
-         <div class="car-card__image-wrapper">
-           <img src="./img/Fiat.jpg" alt="Foto del coche" class="car-card__image">
-         </div>
-     
-         <div class="car-card__content">
-           <p class="car-card__price">12.500 €</p>
-     
-           <div class="car-card__details">
-             <p class="car-card__detail"><span class="car-card__label">Marca:<br></span> Fiat</p>
-             <p class="car-card__detail"><span class="car-card__label">Modelo:<br></span> 500</p>
-             <p class="car-card__detail"><span class="car-card__label">Combustible:<br></span> Gasolina</p>
-             <p class="car-card__detail"><span class="car-card__label">Cambio:<br></span> Manual</p>
-             <p class="car-card__detail"><span class="car-card__label">Kilometraje:<br></span> 75.000 km</p>
-             <p class="car-card__detail"><span class="car-card__label">Año:<br></span> 2021</p>
-           </div>
-     
-           <button class="car-card__button">Ver detalles</button>
-         </div>
-       </article>
-        <article class="car-card">
-         <div class="car-card__image-wrapper">
-           <img src="./img/Fiat.jpg" alt="Foto del coche" class="car-card__image">
-         </div>
-     
-         <div class="car-card__content">
-           <p class="car-card__price">12.500 €</p>
-     
-           <div class="car-card__details">
-             <p class="car-card__detail"><span class="car-card__label">Marca:<br></span> Fiat</p>
-             <p class="car-card__detail"><span class="car-card__label">Modelo:<br></span> 500</p>
-             <p class="car-card__detail"><span class="car-card__label">Combustible:<br></span> Gasolina</p>
-             <p class="car-card__detail"><span class="car-card__label">Cambio:<br></span> Manual</p>
-             <p class="car-card__detail"><span class="car-card__label">Kilometraje:<br></span> 75.000 km</p>
-             <p class="car-card__detail"><span class="car-card__label">Año:<br></span> 2021</p>
-           </div>
-     
-           <button class="car-card__button">Ver detalles</button>
-         </div>
-       </article>
-        <article class="car-card">
-         <div class="car-card__image-wrapper">
-           <img src="./img/Fiat.jpg" alt="Foto del coche" class="car-card__image">
-         </div>
-     
-         <div class="car-card__content">
-           <p class="car-card__price">12.500 €</p>
-     
-           <div class="car-card__details">
-             <p class="car-card__detail"><span class="car-card__label">Marca:<br></span> Fiat</p>
-             <p class="car-card__detail"><span class="car-card__label">Modelo:<br></span> 500</p>
-             <p class="car-card__detail"><span class="car-card__label">Combustible:<br></span> Gasolina</p>
-             <p class="car-card__detail"><span class="car-card__label">Cambio:<br></span> Manual</p>
-             <p class="car-card__detail"><span class="car-card__label">Kilometraje:<br></span> 75.000 km</p>
-             <p class="car-card__detail"><span class="car-card__label">Año:<br></span> 2021</p>
-           </div>
-     
-           <button class="car-card__button">Ver detalles</button>
-         </div>
-       </article>
-        <article class="car-card">
-         <div class="car-card__image-wrapper">
-           <img src="./img/Fiat.jpg" alt="Foto del coche" class="car-card__image">
-         </div>
-     
-         <div class="car-card__content">
-           <p class="car-card__price">12.500 €</p>
-     
-           <div class="car-card__details">
-             <p class="car-card__detail"><span class="car-card__label">Marca:<br></span> Fiat</p>
-             <p class="car-card__detail"><span class="car-card__label">Modelo:<br></span> 500</p>
-             <p class="car-card__detail"><span class="car-card__label">Combustible:<br></span> Gasolina</p>
-             <p class="car-card__detail"><span class="car-card__label">Cambio:<br></span> Manual</p>
-             <p class="car-card__detail"><span class="car-card__label">Kilometraje:<br></span> 75.000 km</p>
-             <p class="car-card__detail"><span class="car-card__label">Año:<br></span> 2021</p>
-           </div>
-     
-           <button class="car-card__button">Ver detalles</button>
-         </div>
-       </article>
-        <article class="car-card">
-         <div class="car-card__image-wrapper">
-           <img src="./img/Fiat.jpg" alt="Foto del coche" class="car-card__image">
-         </div>
-     
-         <div class="car-card__content">
-           <p class="car-card__price">12.500 €</p>
-     
-           <div class="car-card__details">
-             <p class="car-card__detail"><span class="car-card__label">Marca:<br></span> Fiat</p>
-             <p class="car-card__detail"><span class="car-card__label">Modelo:<br></span> 500</p>
-             <p class="car-card__detail"><span class="car-card__label">Combustible:<br></span> Gasolina</p>
-             <p class="car-card__detail"><span class="car-card__label">Cambio:<br></span> Manual</p>
-             <p class="car-card__detail"><span class="car-card__label">Kilometraje:<br></span> 75.000 km</p>
-             <p class="car-card__detail"><span class="car-card__label">Año:<br></span> 2021</p>
-           </div>
-     
-           <button class="car-card__button">Ver detalles</button>
-         </div>
-       </article>
-        <article class="car-card">
-         <div class="car-card__image-wrapper">
-           <img src="./img/Fiat.jpg" alt="Foto del coche" class="car-card__image">
-         </div>
-     
-         <div class="car-card__content">
-           <p class="car-card__price">12.500 €</p>
-     
-           <div class="car-card__details">
-             <p class="car-card__detail"><span class="car-card__label">Marca:<br></span> Fiat</p>
-             <p class="car-card__detail"><span class="car-card__label">Modelo:<br></span> 500</p>
-             <p class="car-card__detail"><span class="car-card__label">Combustible:<br></span> Gasolina</p>
-             <p class="car-card__detail"><span class="car-card__label">Cambio:<br></span> Manual</p>
-             <p class="car-card__detail"><span class="car-card__label">Kilometraje:<br></span> 75.000 km</p>
-             <p class="car-card__detail"><span class="car-card__label">Año:<br></span> 2021</p>
-           </div>
-     
-           <button class="car-card__button">Ver detalles</button>
-         </div>
-       </article>
+        -->
+       <?php if ($vehiculos): ?>
+                <?php foreach ($vehiculos as $v): ?>
+                    <article class="car-card">
+                      <div class="car-card__image-wrapper">
+                          <img src="./img/cars/default.jpg" alt="Vehículo <?= htmlspecialchars($v['matricula']) ?>" class="car-card__image">
+                      </div>
+
+                      <div class="car-card__content">
+                          <!-- Añadimos el símbolo € y formateamos el precio si es necesario -->
+                          <p class="car-card__price"><?= htmlspecialchars($v['precio_dia']) ?> €/día</p>
+
+                          <div class="car-card__details">
+                              <p class="car-card__detail"><span class="car-card__label">Marca:<br></span> <?= htmlspecialchars($v['marca']) ?></p>
+                              <p class="car-card__detail"><span class="car-card__label">Modelo:<br></span> <?= htmlspecialchars($v['modelo']) ?></p>
+                              <p class="car-card__detail"><span class="car-card__label">Combustible:<br></span> <?= ucfirst($v['combustible']) ?></p>
+                              <p class="car-card__detail"><span class="car-card__label">Cambio:<br></span> <?= ucfirst($v['tipo_cambio']) ?></p>
+                              <p class="car-card__detail"><span class="car-card__label">Kilometraje:<br></span> <?= number_format($v['kilometraxe'], 0, ',', '.') ?> km</p>
+                              <p class="car-card__detail"><span class="car-card__label">Año:<br></span> <?= $v['año'] ?></p>
+                          </div>
+
+                          <!-- ENLACE CON MATRÍCULA -->
+                          <a href="../public/vehicle.php?matricula=<?= urlencode($v['matricula']) ?>" class="car-card__button">
+                              Ver detalles
+                          </a>
+                      </div>
+                  </article>
+                <?php endforeach; ?>
+            <?php else: ?>
+                <p style="grid-column: 1 / -1; text-align: center; padding: 2rem;">No se han encontrado vehículos que coincidan con tu búsqueda.</p>
+            <?php endif; ?>
     </section>
     </main>
     <footer class="footer">
@@ -355,7 +195,12 @@
             </div>
         </div>
     </footer>
-
+  <script>
+        // Pequeña validación para las fechas
+        document.getElementById('date-start').addEventListener('change', function() {
+            document.getElementById('date-end').min = this.value;
+        });
+    </script>
 
 </body>
 

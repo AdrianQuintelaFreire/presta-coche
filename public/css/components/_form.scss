@@ -34,7 +34,7 @@ $primary-hover: #2980b9;
     box-sizing: border-box;
     position: relative; // Por si quieres posicionarlo de forma absoluta luego
 
-    @media (min-width: variables.$bp-lg) {
+    @media (min-width: variables.$bp-sm) {
         max-width: 600px;
         margin: 30px
     }
@@ -46,7 +46,7 @@ $primary-hover: #2980b9;
         margin-bottom: -5px; // Acerca el label al input para que se vea que van juntos
         font-size: 24px;     // Tamaño para móviles/tablet
 
-        @media (min-width: variables.$bp-lg) {
+        @media (min-width: variables.$bp-sm) {
             font-size: 16px; // Tamaño para escritorio
         }
     }
@@ -59,7 +59,7 @@ $primary-hover: #2980b9;
         margin-bottom: 20px;
         transition: color 0.2s;
 
-        @media (min-width: variables.$bp-lg) {
+        @media (min-width: variables.$bp-sm) {
             font-size: 16px;
         }
 
@@ -72,8 +72,8 @@ $primary-hover: #2980b9;
         text-align: center;
         margin-bottom: 30px;
         margin-top: 0;
-        color: #333;
-        @media (min-width: variables.$bp-lg) {
+        color: #ff0000;
+        @media (min-width: variables.$bp-sm) {
             font-size: 25px;
         }
     }
@@ -98,7 +98,7 @@ $primary-hover: #2980b9;
             cursor: pointer;
         }
 
-        @media (min-width: variables.$bp-lg) {
+        @media (min-width: variables.$bp-sm) {
             font-size: 16px;
         }
 
@@ -118,7 +118,7 @@ $primary-hover: #2980b9;
         cursor: pointer;
         font-size: 30px;
 
-        @media (min-width: variables.$bp-lg) {
+        @media (min-width: variables.$bp-sm) {
             font-size: 16px;
         }
 
@@ -137,7 +137,7 @@ $primary-hover: #2980b9;
         text-decoration: none;
         font-size: 30px;
 
-        @media (min-width: variables.$bp-lg) {
+        @media (min-width: variables.$bp-sm) {
             font-size: 16px;
         }
         

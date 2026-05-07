@@ -763,7 +763,7 @@ main {
   box-sizing: border-box;
   position: relative;
 }
-@media (min-width: 1024px) {
+@media (min-width: 576px) {
   .login-form, .register-form {
     max-width: 600px;
     margin: 30px;
@@ -776,7 +776,7 @@ main {
   margin-bottom: -5px;
   font-size: 24px;
 }
-@media (min-width: 1024px) {
+@media (min-width: 576px) {
   .login-form__label, .register-form__label {
     font-size: 16px;
   }
@@ -789,7 +789,7 @@ main {
   margin-bottom: 20px;
   transition: color 0.2s;
 }
-@media (min-width: 1024px) {
+@media (min-width: 576px) {
   .login-form__back, .register-form__back {
     font-size: 16px;
   }
@@ -802,9 +802,9 @@ main {
   text-align: center;
   margin-bottom: 30px;
   margin-top: 0;
-  color: #333;
+  color: #ff0000;
 }
-@media (min-width: 1024px) {
+@media (min-width: 576px) {
   .login-form__title, .register-form__title {
     font-size: 25px;
   }
@@ -828,7 +828,7 @@ main {
   background-color: #fafafa;
   cursor: pointer;
 }
-@media (min-width: 1024px) {
+@media (min-width: 576px) {
   .login-form__input, .register-form__input {
     font-size: 16px;
   }
@@ -847,7 +847,7 @@ main {
   cursor: pointer;
   font-size: 30px;
 }
-@media (min-width: 1024px) {
+@media (min-width: 576px) {
   .login-form__button, .register-form__button {
     font-size: 16px;
   }
@@ -864,7 +864,7 @@ main {
   text-decoration: none;
   font-size: 30px;
 }
-@media (min-width: 1024px) {
+@media (min-width: 576px) {
   .login-form__link, .register-form__link {
     font-size: 16px;
   }
