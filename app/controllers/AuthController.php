@@ -11,7 +11,7 @@ class AuthController {
         $nome = $_POST['nome'];
         $apelidos = $_POST['apelidos'];
         $email = $_POST['email'];
-        $contrasinal = password_hash($_POST['contrasinal'], PASSWORD_DEFAULT);
+        $contrasinal = $_POST['contrasinal'];
         $dni = $_POST['DNI'];
         $telefono = $_POST['telefono'];
         $direccion = $_POST['direccion'];
@@ -49,6 +49,7 @@ class AuthController {
     }
 
     public function login() {
+
         session_start();
         global $conexion;
 
@@ -58,30 +59,34 @@ class AuthController {
         $sql = "SELECT * FROM usuarios WHERE email = ?";
         $stmt = $conexion->prepare($sql);
         $stmt->execute([$email]);
+
         $user = $stmt->fetch();
 
-        if ($user) {
-            echo "<h3>Debug de Login:</h3>";
-            echo "Contraseña escrita en el form: " . $password . "<br>";
-            echo "Hash recuperado de la BD: " . $user['contrasinal'] . "<br>";
-            echo "Longitud del hash en BD: " . strlen($user['contrasinal']) . " caracteres.<br>";
+        if ($user && $password === $user['contrasinal']) {
 
-            if ($user && password_verify($password, $user['contrasinal'])) {
-                $_SESSION['user_id'] = $user['id'];
-                $_SESSION['rol'] = $user['rol']; // <--- Guardamos el rol (admin o user)
-                
-                // Redirección inteligente
-                if ($_SESSION['rol'] === 'admin') {
-                    header("Location: /prestacoche/public/admin_dashboard.php");
-                } else {
-                    header("Location: /prestacoche/public/index.php");
-                }
-                exit();
+            $_SESSION['user_id'] = $user['id'];
+            $_SESSION['rol'] = $user['rol'];
+            $_SESSION['nome'] = $user['nome'];
+            $_SESSION['email'] = $user['email'];
+
+            if ($_SESSION['rol'] === 'admin') {
+
+                header("Location: /prestacoche/public/admin_dashboard.php");
+
+            } else {
+
+                header("Location: /prestacoche/public/index.php");
+
             }
+
+            exit();
+
         } else {
-            echo "Usuario no encontrado.";
+
+            header("Location: /prestacoche/public/login.php");
+            exit();
+
         }
-        exit(); // Detenemos la ejecución para ver los mensajes
     }
 }
 ?>

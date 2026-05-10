@@ -1,33 +1,6 @@
 <?php
-
 session_start();
-
-// Importamos la conexión que ya tienes configurada
-require_once __DIR__ . '/../config/conexion.php';
-
-// Lógica de filtrado
-$tipo_cambio = $_GET['shift'] ?? '';
-$combustible = $_GET['fuel'] ?? '';
-
-// Consulta base
-$sql = "SELECT * FROM vehiculos WHERE estado = 'validado'";
-$params = [];
-
-if (!empty($tipo_cambio)) {
-    $sql .= " AND tipo_cambio = :cambio";
-    $params[':cambio'] = $tipo_cambio;
-}
-
-if (!empty($combustible)) {
-    $sql .= " AND combustible = :fuel";
-    $params[':fuel'] = $combustible;
-}
-
-$stmt = $conexion->prepare($sql);
-$stmt->execute($params);
-$vehiculos = $stmt->fetchAll();
 ?>
-
 <!DOCTYPE html>
 <HTML lang="es">
 
@@ -144,107 +117,53 @@ $vehiculos = $stmt->fetchAll();
             </div>
         </nav>
     </header>
-    <main class="our-cars">
-        <aside class="filter">
-            <input type="checkbox" id="filter-toggle" class="filter__toggle">
+    <main class="how-it-works">
+        <div class="how-it-works__container">
 
-            <label for="filter-toggle" class="button filter__button">
-                Filtros
-            </label>
+            <h2 class="how-it-works__title">Cómo funciona</h2>
 
-            <form action="" class="filter__form search search--our-cars">
-                <div class="search__group search__group--first">
-                    <label for="date-start" class="search__label">Fecha de inicio</label>
-                    <input type="date" id="date-start" class="search__input" required>
+            <div class="how-it-works__block">
+                <h3 class="how-it-works__subtitle">Si aún no tienes cuenta</h3>
+                <p class="how-it-works__text">
+                    Puedes navegar por la plataforma y ver los vehículos disponibles, consultando sus características,
+                    ubicación aproximada y fechas disponibles.
+                </p>
+                <p class="how-it-works__text">
+                    Para poder reservar un coche o publicar el tuyo, necesitas registrarte e iniciar sesión.
+                </p>
+            </div>
 
-                    <label for="date-end" class="search__label">Fecha de fin</label>
-                    <input type="date" id="date-end" class="search__input" required>
+            <div class="how-it-works__block">
+                <h3 class="how-it-works__subtitle">Si ya tienes cuenta</h3>
+
+                <div class="how-it-works__item">
+                    <h4 class="how-it-works__item-title">Alquila un coche</h4>
+                    <p class="how-it-works__text">
+                        Busca vehículos según las fechas que necesites, revisa sus detalles y realiza una reserva de
+                        forma sencilla.
+                        Después, solo tendrás que acordar con el propietario la recogida y devolución.
+                    </p>
                 </div>
 
-                <div class="search__group search__group--second">
-                    <label for="shift" class="search__label">Tipo de cambio</label>
-                    <select name="shift" id="shift" class="search__select" required>
-                        <option value="" disabled selected hidden>Seleccion una opción</option>
-                        <option value="manual">Manual</option>
-                        <option value="automatico">Automático</option>
-                    </select>
-
-                    <label for="fuel" class="search__label">Tipo de combustible</label>
-                    <select name="fuel" id="fuel" class="search__select" required>
-                        <option value="" disabled selected hidden>Seleccion una opción</option>
-                        <option value="gas">Gasolina</option>
-                        <option value="diesel">Diésel</option>
-                    </select>
+                <div class="how-it-works__item">
+                    <h4 class="how-it-works__item-title">Publica tu coche</h4>
+                    <p class="how-it-works__text">
+                        Añade tu vehículo con su información, documentación y disponibilidad.
+                        El coche será revisado antes de publicarse para garantizar la seguridad.
+                    </p>
                 </div>
 
-                <div class="search__button">
-                    <button type="submit" class="button">Aplicar</button>
+                <div class="how-it-works__item">
+                    <h4 class="how-it-works__item-title">Gestiona tu actividad</h4>
+                    <p class="how-it-works__text">
+                        Desde tu perfil podrás consultar tus reservas, gestionar tus vehículos y actualizar tus datos
+                        personales.
+                    </p>
                 </div>
-            </form>
-        </aside>
-        <section class="cars">
-            <!--
-       Ejemplo de car-card:
-        <article class="car-card">
-         <div class="car-card__image-wrapper">
-           <img src="./img/Fiat.jpg" alt="Foto del coche" class="car-card__image">
-         </div>
-     
-         <div class="car-card__content">
-           <p class="car-card__price">12.500 €</p>
-     
-           <div class="car-card__details">
-             <p class="car-card__detail"><span class="car-card__label">Marca:<br></span> Fiat</p>
-             <p class="car-card__detail"><span class="car-card__label">Modelo:<br></span> 500</p>
-             <p class="car-card__detail"><span class="car-card__label">Combustible:<br></span> Gasolina</p>
-             <p class="car-card__detail"><span class="car-card__label">Cambio:<br></span> Manual</p>
-             <p class="car-card__detail"><span class="car-card__label">Kilometraje:<br></span> 75.000 km</p>
-             <p class="car-card__detail"><span class="car-card__label">Año:<br></span> 2021</p>
-           </div>
-     
-           <button class="car-card__button">Ver detalles</button>
-         </div>
-       </article>
-        -->
-            <?php if ($vehiculos): ?>
-                <?php foreach ($vehiculos as $v): ?>
-                    <article class="car-card">
-                        <div class="car-card__image-wrapper">
-                            <img src="../storage/<?= htmlspecialchars($v['foto']) ?>"
-                                alt="Vehículo <?= htmlspecialchars($v['matricula']) ?>" class="car-card__image">
-                        </div>
 
-                        <div class="car-card__content">
-                            <!-- Añadimos el símbolo € y formateamos el precio si es necesario -->
-                            <p class="car-card__price"><?= htmlspecialchars($v['precio_dia']) ?> €/día</p>
+            </div>
 
-                            <div class="car-card__details">
-                                <p class="car-card__detail"><span class="car-card__label">Marca:<br></span>
-                                    <?= htmlspecialchars($v['marca']) ?></p>
-                                <p class="car-card__detail"><span class="car-card__label">Modelo:<br></span>
-                                    <?= htmlspecialchars($v['modelo']) ?></p>
-                                <p class="car-card__detail"><span class="car-card__label">Combustible:<br></span>
-                                    <?= ucfirst($v['combustible']) ?></p>
-                                <p class="car-card__detail"><span class="car-card__label">Cambio:<br></span>
-                                    <?= ucfirst($v['tipo_cambio']) ?></p>
-                                <p class="car-card__detail"><span class="car-card__label">Kilometraje:<br></span>
-                                    <?= number_format($v['kilometraxe'], 0, ',', '.') ?> km</p>
-                                <p class="car-card__detail"><span class="car-card__label">Año:<br></span> <?= $v['año'] ?></p>
-                            </div>
-
-                            <!-- ENLACE CON MATRÍCULA -->
-                            <a href="../public/vehicle.php?matricula=<?= urlencode($v['matricula']) ?>"
-                                class="car-card__button">
-                                Ver detalles
-                            </a>
-                        </div>
-                    </article>
-                <?php endforeach; ?>
-            <?php else: ?>
-                <p style="grid-column: 1 / -1; text-align: center; padding: 2rem;">No se han encontrado vehículos que
-                    coincidan con tu búsqueda.</p>
-            <?php endif; ?>
-        </section>
+        </div>
     </main>
     <footer class="footer">
 
@@ -280,8 +199,8 @@ $vehiculos = $stmt->fetchAll();
             </div>
         </div>
     </footer>
+
     <script src="./js/main.js"></script>
-    <script src="./js/our-cars.js"></script>
 </body>
 
 </HTML>

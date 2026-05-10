@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<HTML lang="es">
 <head>
     <meta charset="UTF-8">
     <title>Registro - PrestaCoche</title>
@@ -23,7 +23,7 @@
                 <input type="email" name="email" class="register-form__input" placeholder="Correo electrónico" required>
 
                 <!-- Contrasinal -->
-                <input type="password" name="cocntrasinal" class="register-form__input" placeholder="Contraseña" required>
+                <input type="password" name="contrasinal" class="register-form__input" placeholder="Contraseña" required>
 
                 <!-- DNI -->
                 <input type="text" name="DNI" class="register-form__input" placeholder="DNI / NIE" required>
@@ -51,4 +51,4 @@
         </section>
     </main>
 </body>
-</html>
+</HTML>

@@ -2,17 +2,19 @@
 session_start();
 
 // Si no está logueado o si está logueado pero NO es admin, fuera.
-if (!isset($_SESSION['rol']) || $_SESSION['rol'] !== 'admin') {
+if (!isset($_SESSION['user_id'])) {
     header("Location: /prestacoche/public/login.php");
     exit();
 }
 
 // El resto del código de la página de admin va aquí...
 ?>
+<!DOCTYPE html>
+<html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PrestaAuto - Alquiler de Coches</title>
+    <title>Alquilar - PrestaCoche</title>
     <link rel="stylesheet" href="./css/main.css">
 </head>
 
@@ -29,16 +31,41 @@ if (!isset($_SESSION['rol']) || $_SESSION['rol'] !== 'admin') {
             <div class="nav-secondary">
                 <ul class="menu menu--secondary">
                     <li class="menu__item"><a href="../public/our-cars.php" class="menu__link">Nuestros coches</a></li>
-                    <li class="menu__item"><a href="../public/how-it-works.php" class="menu__link">¿Cómo funciona?</a></li>
+                    <li class="menu__item"><a href="../public/how-it-works.php" class="menu__link">¿Cómo funciona?</a>
+                    </li>
                 </ul>
                 <div class="nav-secondary__actions">
-                    <?php if(isset($_SESSION['user_id'])): ?>
+                    <?php if (isset($_SESSION['user_id'])): ?>
                         <span class="user-welcome">
-                            Hola, <?php echo $_SESSION['nome']; ?>
                         </span>
-                        <a href="./logout.php" class="btn btn--primary">
-                            Cerrar sesión
-                        </a>
+                        <div class="account-menu">
+
+                            <button type="button" class="account-menu__button" id="accountButton">
+                                Mi cuenta
+                                <span class="account-menu__icon">▼</span>
+                            </button>
+
+                            <div class="account-menu__dropdown" id="accountDropdown">
+
+                                <a href="./profile.php" class="account-menu__link">
+                                    Perfil
+                                </a>
+
+                                <a href="./my-booking.php" class="account-menu__link">
+                                    Reservas
+                                </a>
+
+                                <a href="./my-cars.php" class="account-menu__link">
+                                    Coches
+                                </a>
+
+                                <a href="./logout.php" class="account-menu__link">
+                                    Cerrar sesión
+                                </a>
+
+                            </div>
+
+                        </div>
                     <?php else: ?>
                         <a href="./login.php" class="btn btn--primary">
                             Iniciar Sesión
@@ -50,17 +77,56 @@ if (!isset($_SESSION['rol']) || $_SESSION['rol'] !== 'admin') {
             <div class="nav-primary">
                 <ul class="menu menu--primary">
                     <li class="menu__item"><a href="../public/our-cars.php" class="menu__link">Nuestros coches</a></li>
-                    <li class="menu__item"><a href="../public/how-it-works.php" class="menu__link">¿Cómo funciona?</a></li>
+                    <li class="menu__item"><a href="../public/how-it-works.php" class="menu__link">¿Cómo funciona?</a>
+                    </li>
                 </ul>
                 <div class="nav-primary__actions">
-                    <a href="./login.php" class="btn btn--primary">Iniciar Sesión</a>
+                    <?php if (isset($_SESSION['user_id'])): ?>
+
+                        <div class="account-menu">
+
+                            <button type="button" class="account-menu__button" id="accountButtonMobile">
+                                Mi cuenta
+                                <span class="account-menu__icon">▼</span>
+                            </button>
+
+                            <div class="account-menu__dropdown" id="accountDropdownMobile">
+
+                                <a href="./profile.php" class="account-menu__link">
+                                    Perfil
+                                </a>
+
+                                <a href="./my-booking.php" class="account-menu__link">
+                                    Reservas
+                                </a>
+
+                                <a href="./my-cars.php" class="account-menu__link">
+                                    Coches
+                                </a>
+
+                                <a href="./logout.php" class="account-menu__link">
+                                    Cerrar sesión
+                                </a>
+
+                            </div>
+
+                        </div>
+
+                    <?php else: ?>
+
+                        <a href="./login.php" class="btn btn--primary">
+                            Iniciar Sesión
+                        </a>
+
+                    <?php endif; ?>
                     <a href="./rent-your-car.php" class="btn btn--secondary">Alquila tu coche</a>
                 </div>
             </div>
         </nav>
     </header>
+
     <main>
-                        <h1>Estás en zona admin</h1>
+
     </main>
     <footer class="footer">
 
@@ -96,8 +162,7 @@ if (!isset($_SESSION['rol']) || $_SESSION['rol'] !== 'admin') {
             </div>
         </div>
     </footer>
-
-
+    <script src="./js/main.js"></script>
 </body>
 
-</HTML>
+</html>

@@ -24,7 +24,16 @@
       background: url('../img/fondo_home.png') no-repeat right center / 100%;
     }
   }
-
+  @media (min-width: variables.$bp-xxl) {
+    &::before {
+      background: url('../img/fondo_home.png') no-repeat right center / 85%;
+    }
+  }
+  @media (min-width: variables.$bp-xxxl) {
+    &::before {
+      background: url('../img/fondo_home.png') no-repeat right center / 70%;
+    }
+  }
   &::after {
     content: "";
     position: absolute;
@@ -41,10 +50,16 @@
   }
 
   &__img {
-    height: 220px;
+    height: 250px;
     width: 100vw;
     object-fit: cover;
 
+    @media (min-width: variables.$bp-sm) {
+      height: 300px;
+    }
+    @media (min-width: variables.$bp-md) {
+      height: 350px;
+    }
     // 👉 ocultas la img en desktop
     @media (min-width: variables.$bp-lg) {
       display: none;
