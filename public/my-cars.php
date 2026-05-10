@@ -9,6 +9,21 @@ if (!isset($_SESSION['user_id'])) {
 
 // El resto del código de la página de admin va aquí...
 ?>
+<?php
+// Conexión a la base de datos
+require_once '../config/conexion.php';
+
+// Obtener el id del usuario logueado
+$id_usuario = $_SESSION['user_id'];
+
+// Consulta de los vehículos del usuario
+$sql = "SELECT * FROM vehiculos WHERE id_usuario = ?";
+$stmt = $conexion->prepare($sql);
+
+$stmt->execute([$id_usuario]);
+
+$resultado = $stmt->fetchAll(PDO::FETCH_ASSOC);
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -125,221 +140,80 @@ if (!isset($_SESSION['user_id'])) {
         </nav>
     </header>
 
-<main class="rent-car">
+    <main class="cars">
+        <?php if (count($resultado) > 0): ?>
+
+            <?php foreach ($resultado as $v): ?>
+                <div class="cars-container">
+
+                    <article class="car-card">
+                        <?php
+                        $estado = strtolower($v['estado']);
+                        ?>
+
+                        <div class="car-card__status car-card__status--<?= $estado ?>">
+
+                            <?php if ($estado === 'validado'): ?>
+                                Validado
+                            <?php elseif ($estado === 'pendente'): ?>
+                                Pendiente
+                            <?php else: ?>
+                                Revisión
+                            <?php endif; ?>
+
+                        </div>
+
+                        <div class="car-card__image-wrapper">
+                            <img src="../storage/<?= htmlspecialchars($v['foto']) ?>"
+                                alt="Vehículo <?= htmlspecialchars($v['matricula']) ?>" class="car-card__image">
+                        </div>
+
+                        <div class="car-card__content">
+                            <!-- Añadimos el símbolo € y formateamos el precio si es necesario -->
+                            <p class="car-card__price"><?= htmlspecialchars($v['precio_dia']) ?> €/día</p>
+
+                            <div class="car-card__details">
+                                <p class="car-card__detail"><span class="car-card__label">Marca:<br></span>
+                                    <?= htmlspecialchars($v['marca']) ?></p>
+                                <p class="car-card__detail"><span class="car-card__label">Modelo:<br></span>
+                                    <?= htmlspecialchars($v['modelo']) ?></p>
+                                <p class="car-card__detail"><span class="car-card__label">Combustible:<br></span>
+                                    <?= ucfirst($v['combustible']) ?></p>
+                                <p class="car-card__detail"><span class="car-card__label">Cambio:<br></span>
+                                    <?= ucfirst($v['tipo_cambio']) ?></p>
+                                <p class="car-card__detail"><span class="car-card__label">Kilometraje:<br></span>
+                                    <?= number_format($v['kilometraxe'], 0, ',', '.') ?> km</p>
+                                <p class="car-card__detail"><span class="car-card__label">Año:<br></span> <?= $v['año'] ?>
+                                </p>
+                            </div>
+
+                            <!-- ENLACE CON MATRÍCULA -->
+                            <button type="button" class="car-card__button open-edit-modal"
+                                data-matricula="<?= htmlspecialchars($v['matricula']) ?>"
+                                data-precio-dia="<?= htmlspecialchars($v['precio_dia']) ?>"
+                                data-precio-km="<?= htmlspecialchars($v['precio_km']) ?>">
+
+                                Editar
+                            </button>
+                            <button type="button" class="car-card__button car-card__button--delete open-delete-modal"
+                                data-matricula="<?= htmlspecialchars($v['matricula']) ?>">
+                                Eliminar
+                            </button>
+                        </div>
+                    </article>
+                </div>
+            <?php endforeach; ?>
+
+
+
+        <?php else: ?>
+
+            <p>No tienes vehículos registrados.</p>
+
+        <?php endif; ?>
+
+    </main>
 
-    <section class="rent-car__container">
-
-        <h1 class="rent-car__title">
-            Añadir vehículo
-        </h1>
-
-        <form
-            action="./add-vehicle.php"
-            method="POST"
-            enctype="multipart/form-data"
-            class="rent-car__form">
-
-            <div class="rent-car__group">
-
-                <label class="rent-car__label">
-                    Matrícula
-                </label>
-
-                <input
-                    type="text"
-                    name="matricula"
-                    maxlength="7"
-                    required
-                    class="rent-car__input">
-
-            </div>
-
-            <div class="rent-car__group">
-
-                <label class="rent-car__label">
-                    Marca
-                </label>
-
-                <input
-                    type="text"
-                    name="marca"
-                    required
-                    class="rent-car__input">
-
-            </div>
-
-            <div class="rent-car__group">
-
-                <label class="rent-car__label">
-                    Modelo
-                </label>
-
-                <input
-                    type="text"
-                    name="modelo"
-                    required
-                    class="rent-car__input">
-
-            </div>
-
-            <div class="rent-car__group">
-
-                <label class="rent-car__label">
-                    Combustible
-                </label>
-
-                <select
-                    name="combustible"
-                    required
-                    class="rent-car__input">
-
-                    <option value="">Selecciona</option>
-                    <option value="gasolina">Gasolina</option>
-                    <option value="diesel">Diésel</option>
-                    <option value="hibrido">Híbrido</option>
-                    <option value="electrico">Eléctrico</option>
-
-                </select>
-
-            </div>
-
-            <div class="rent-car__group">
-
-                <label class="rent-car__label">
-                    Kilometraje
-                </label>
-
-                <input
-                    type="number"
-                    name="kilometraxe"
-                    required
-                    class="rent-car__input">
-
-            </div>
-
-            <div class="rent-car__group">
-
-                <label class="rent-car__label">
-                    Tipo de cambio
-                </label>
-
-                <select
-                    name="tipo_cambio"
-                    required
-                    class="rent-car__input">
-
-                    <option value="">Selecciona</option>
-                    <option value="manual">Manual</option>
-                    <option value="automatico">Automático</option>
-
-                </select>
-
-            </div>
-
-            <div class="rent-car__group">
-
-                <label class="rent-car__label">
-                    Año
-                </label>
-
-                <input
-                    type="number"
-                    name="año"
-                    min="1950"
-                    max="<?= date('Y') ?>"
-                    required
-                    class="rent-car__input">
-
-            </div>
-
-            <div class="rent-car__group">
-
-                <label class="rent-car__label">
-                    Precio por día (€)
-                </label>
-
-                <input
-                    type="number"
-                    step="0.01"
-                    name="precio_dia"
-                    required
-                    class="rent-car__input">
-
-            </div>
-
-            <div class="rent-car__group">
-
-                <label class="rent-car__label">
-                    Precio por km (€)
-                </label>
-
-                <input
-                    type="number"
-                    step="0.01"
-                    name="precio_km"
-                    required
-                    class="rent-car__input">
-
-            </div>
-
-            <div class="rent-car__group">
-
-                <label class="rent-car__label">
-                    Dirección
-                </label>
-
-                <input
-                    type="text"
-                    name="direccion"
-                    required
-                    class="rent-car__input">
-
-            </div>
-
-            <div class="rent-car__group">
-
-                <label class="rent-car__label">
-                    Foto del vehículo
-                </label>
-
-                <input
-                    type="file"
-                    name="foto"
-                    accept="image/*"
-                    required
-                    class="rent-car__input">
-
-            </div>
-
-            <button
-                type="submit"
-                class="rent-car__button">
-
-                Añadir vehículo
-
-            </button>
-
-        </form>
-
-    </section>
-
-    <?php if (isset($_GET['success'])): ?>
-
-        <div class="success-popup success-popup--active">
-
-            <div class="success-popup__content">
-
-                <h2 class="success-popup__title">
-                    Vehículo añadido correctamente
-                </h2>
-
-            </div>
-
-        </div>
-
-    <?php endif; ?>
-
-</main>
     <footer class="footer">
 
         <div class="footer__follow">
@@ -374,8 +248,96 @@ if (!isset($_SESSION['user_id'])) {
             </div>
         </div>
     </footer>
+    <!-- Modal eliminar -->
+    <div class="modal" id="deleteModal">
+        <div class="modal__overlay"></div>
+
+        <div class="modal__content">
+            <h2 class="modal__title">Eliminar vehículo</h2>
+
+            <p class="modal__text">
+                ¿Estás seguro de que quieres eliminar este vehículo con matrícula
+                <span id="modalMatricula"></span>?
+            </p>
+
+            <div class="modal__actions">
+                <button class="modal__button modal__button--cancel" id="cancelDelete">
+                    Cancelar
+                </button>
+
+                <a href="#" class="modal__button modal__button--confirm" id="confirmDelete">
+                    Eliminar
+                </a>
+            </div>
+        </div>
+    </div>
+    <!-- Modal editar -->
+    <div class="modal" id="editModal">
+
+        <div class="modal__overlay"></div>
+
+        <div class="modal__content">
+
+            <h2 class="modal__title">
+                Editar precios
+            </h2>
+
+            <p class="modal__text">
+                Editando vehículo con matrícula
+                <span id="editModalMatricula"></span>
+            </p>
+
+            <form action="../public/update-vehicle.php" method="POST" class="modal-form">
+
+                <input type="hidden" name="matricula" id="editMatricula">
+
+                <div class="modal-form__group">
+
+                    <label class="modal-form__label">
+                        Precio por día (€)
+                    </label>
+
+                    <input type="number" step="0.01" name="precio_dia" id="editPrecioDia" class="modal-form__input"
+                        required>
+
+                </div>
+
+                <div class="modal-form__group">
+
+                    <label class="modal-form__label">
+                        Precio por km (€)
+                    </label>
+
+                    <input type="number" step="0.01" name="precio_km" id="editPrecioKm" class="modal-form__input"
+                        required>
+
+                </div>
+
+                <div class="modal__actions">
+
+                    <button type="button" class="modal__button modal__button--cancel" id="cancelEdit">
+
+                        Cancelar
+
+                    </button>
+
+                    <button type="submit" class="modal__button modal__button--confirm">
+
+                        Guardar
+
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+    </div>
     <script src="./js/main.js"></script>
-    <script src="./js/rent-your-car.js"></script>
 </body>
+<script src="./js/my-cars.js"></script>
 
 </html>

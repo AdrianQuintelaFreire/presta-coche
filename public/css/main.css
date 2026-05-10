@@ -749,6 +749,7 @@ main {
 }
 
 .search--our-cars {
+  margin-top: 20px;
   margin-left: 0px;
 }
 
@@ -758,6 +759,7 @@ main {
   justify-content: center;
   gap: 2rem;
   align-items: start;
+  margin-top: 20px;
 }
 @media (min-width: 768px) {
   .cars {
@@ -823,7 +825,6 @@ main {
   padding: 0.5rem;
   border: none;
   border-radius: 10px;
-  background-color: #3cab35;
   background-color: white;
   border: 2px solid #154fad;
   color: #154fad;
@@ -834,6 +835,16 @@ main {
 }
 .car-card__button:hover {
   background-color: #154fad;
+  color: white;
+}
+.car-card__button--delete {
+  margin-top: 10px;
+  background-color: white;
+  border: 2px solid #ad1a15;
+  color: #ad1515;
+}
+.car-card__button--delete:hover {
+  background-color: #ad1a15;
   color: white;
 }
 
@@ -969,4 +980,203 @@ main {
 }
 .login-form__link:hover, .register-form__link:hover {
   text-decoration: underline;
+}
+
+.modal {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: none;
+  justify-content: center;
+  align-items: center;
+}
+.modal--active {
+  display: flex;
+}
+.modal__overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 1;
+}
+.modal__content {
+  position: relative;
+  z-index: 2;
+  background-color: #fff;
+  padding: 2rem;
+  border-radius: 1rem;
+  width: 90%;
+  max-width: 400px;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  animation: modalFade 0.3s ease;
+}
+.modal__title {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+.modal__text {
+  margin-bottom: 2rem;
+  color: #555;
+}
+.modal__text span {
+  font-weight: 700;
+}
+.modal__actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+}
+.modal__button {
+  padding: 0.8rem 1.5rem;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  font-weight: 600;
+  text-decoration: none;
+  transition: 0.2s ease;
+}
+.modal__button--cancel {
+  background-color: #e5e5e5;
+  color: #333;
+}
+.modal__button--cancel:hover {
+  background-color: #d4d4d4;
+}
+.modal__button--confirm {
+  background-color: #dc2626;
+  color: white;
+}
+.modal__button--confirm:hover {
+  background-color: #b91c1c;
+}
+
+@keyframes modalFade {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.modal-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.modal-form__group {
+  display: flex;
+  flex-direction: column;
+}
+.modal-form__label {
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
+.modal-form__input {
+  padding: 0.8rem 1rem;
+  border: 1px solid #d1d5db;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+}
+.modal-form__input:focus {
+  outline: none;
+  border-color: #2563eb;
+}
+
+.car-card {
+  position: relative;
+}
+.car-card__status {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  padding: 0.5rem 1rem;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: white;
+  z-index: 5;
+}
+.car-card__status--validado {
+  background-color: #16a34a;
+}
+.car-card__status--pendente {
+  background-color: #eab308;
+}
+
+.rent-car {
+  padding: 4rem 1.5rem;
+}
+.rent-car__container {
+  max-width: 800px;
+  margin: 0 auto;
+  background-color: white;
+  padding: 2rem;
+  border-radius: 1rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+.rent-car__title {
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+.rent-car__form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+.rent-car__group {
+  display: flex;
+  flex-direction: column;
+}
+.rent-car__label {
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
+.rent-car__input {
+  padding: 1rem;
+  border: 1px solid #d1d5db;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+}
+.rent-car__input:focus {
+  outline: none;
+  border-color: #2563eb;
+}
+.rent-car__button {
+  padding: 1rem;
+  border: none;
+  border-radius: 0.75rem;
+  background-color: #2563eb;
+  color: white;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+.rent-car__button:hover {
+  background-color: #1d4ed8;
+}
+
+.success-popup {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 9999;
+}
+.success-popup__content {
+  background-color: white;
+  padding: 2rem 3rem;
+  border-radius: 1rem;
+  text-align: center;
+  animation: modalFade 0.3s ease;
+}
+.success-popup__title {
+  color: #16a34a;
+  font-size: 1.5rem;
 }/*# sourceMappingURL=main.css.map */
