@@ -141,9 +141,13 @@
     text-align: center;
   }
 
-  &__price {
+  &__price-day {
     font-size: 1.5rem;
     font-weight: 700;
+  }
+    &__price-km {
+    font-size: 1.2rem;
+    font-weight: 500;
     margin-bottom: 1.2rem;
   }
 

@@ -152,15 +152,13 @@
 }
 
 .account-menu__button {
-    padding: 0px 20px 20px 20px;
     font-size: x-large;
-    width: 150px;
+    padding: 0px 20px 20px 20px;
+    width: 200px;
     background-color: transparent;
     border: none;
 
     color: rgb(1, 1, 66);
-
-    font-size: 18px;
     font-weight: 700;
 
     cursor: pointer;
@@ -170,8 +168,14 @@
     justify-content: center;
     gap: 8px;
 
+    &:hover{
+        border-bottom: 2px solid rgb(41, 43, 66);
+    }
+
     @media (min-width: variables.$bp-lg) {
+        width: 150px;
         padding: 20px;
+        font-size: 16px;
     }
 }
 
@@ -183,16 +187,19 @@
 
     position: absolute;
 
-    top: calc(100% + 12px);
+    top: calc(100% + 14px);
     right: -25px;
 
     width: 200px;
 
     background-color: white;
 
-    border-radius: 10px;
+    border-radius: 0px 0px 10px 10px;
 
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    box-shadow:
+  -6px 8px 12px -6px rgba(0,0,0,0.15),
+   6px 8px 12px -6px rgba(0,0,0,0.15);
 
     overflow: hidden;
 

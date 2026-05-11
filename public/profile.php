@@ -2,39 +2,61 @@
 
 session_start();
 
-// Importamos la conexión que ya tienes configurada
-require_once __DIR__ . '/../config/conexion.php';
+// Si no está logueado
+if (!isset($_SESSION['user_id'])) {
 
-// Lógica de filtrado
-$tipo_cambio = $_GET['shift'] ?? '';
-$combustible = $_GET['fuel'] ?? '';
+    header("Location: /prestacoche/public/login.php");
+    exit();
 
-// Consulta base
-$sql = "SELECT * FROM vehiculos WHERE estado = 'validado'";
-$params = [];
-
-if (!empty($tipo_cambio)) {
-    $sql .= " AND tipo_cambio = :cambio";
-    $params[':cambio'] = $tipo_cambio;
 }
 
-if (!empty($combustible)) {
-    $sql .= " AND combustible = :fuel";
-    $params[':fuel'] = $combustible;
-}
+/*
+|--------------------------------------------------------------------------
+| Conexión BD
+|--------------------------------------------------------------------------
+*/
+
+require_once '../config/conexion.php';
+
+/*
+|--------------------------------------------------------------------------
+| Obtener usuario logueado
+|--------------------------------------------------------------------------
+*/
+
+$id_usuario = $_SESSION['user_id'];
+
+$sql = "SELECT * FROM usuarios WHERE id = ?";
 
 $stmt = $conexion->prepare($sql);
-$stmt->execute($params);
-$vehiculos = $stmt->fetchAll();
-?>
 
+$stmt->execute([$id_usuario]);
+
+$usuario = $stmt->fetch(PDO::FETCH_ASSOC);
+
+/*
+|--------------------------------------------------------------------------
+| Seguridad extra
+|--------------------------------------------------------------------------
+*/
+
+if (!$usuario) {
+
+    session_destroy();
+
+    header("Location: /prestacoche/public/login.php");
+    exit();
+
+}
+
+?>
 <!DOCTYPE html>
 <HTML lang="es">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PrestaAuto - Alquiler de Coches</title>
+    <title>PrestaAuto - Perfil de usuario</title>
     <link rel="stylesheet" href="./css/main.css">
 </head>
 
@@ -144,108 +166,140 @@ $vehiculos = $stmt->fetchAll();
             </div>
         </nav>
     </header>
-    <main class="our-cars">
-        <aside class="filter">
-            <input type="checkbox" id="filter-toggle" class="filter__toggle">
+    <main class="profile">
 
-            <label for="filter-toggle" class="button filter__button">
-                Filtros
-            </label>
+        <section class="profile__container">
 
-            <form action="" class="filter__form search search--our-cars">
-                <div class="search__group search__group--first">
-                    <label for="date-start" class="search__label">Fecha de inicio</label>
-                    <input type="date" id="date-start" class="search__input" required>
+            <h1 class="profile__title">
+                Mi perfil
+            </h1>
 
-                    <label for="date-end" class="search__label">Fecha de fin</label>
-                    <input type="date" id="date-end" class="search__input" required>
+            <form action="./update-profile.php" method="POST" enctype="multipart/form-data" class="profile__form">
+
+                <div class="profile__group">
+
+                    <label class="profile__label">
+                        Nombre
+                    </label>
+
+                    <input type="text" value="<?= htmlspecialchars($usuario['nome']) ?>" disabled
+                        class="profile__input profile__input--disabled">
+
                 </div>
 
-                <div class="search__group search__group--second">
-                    <label for="shift" class="search__label">Tipo de cambio</label>
-                    <select name="shift" id="shift" class="search__select" required>
-                        <option value="" disabled selected hidden>Seleccion una opción</option>
-                        <option value="manual">Manual</option>
-                        <option value="automatico">Automático</option>
-                    </select>
+                <div class="profile__group">
 
-                    <label for="fuel" class="search__label">Tipo de combustible</label>
-                    <select name="fuel" id="fuel" class="search__select" required>
-                        <option value="" disabled selected hidden>Seleccion una opción</option>
-                        <option value="gas">Gasolina</option>
-                        <option value="diesel">Diésel</option>
-                    </select>
+                    <label class="profile__label">
+                        Apellidos
+                    </label>
+
+                    <input type="text" value="<?= htmlspecialchars($usuario['apelidos']) ?>" disabled
+                        class="profile__input profile__input--disabled">
+
                 </div>
 
-                <div class="search__button">
-                    <button type="submit" class="button">Aplicar</button>
+                <div class="profile__group">
+
+                    <label class="profile__label">
+                        Email
+                    </label>
+
+                    <input type="email" value="<?= htmlspecialchars($usuario['email']) ?>" disabled
+                        class="profile__input profile__input--disabled">
+
                 </div>
+
+                <div class="profile__group">
+
+                    <label class="profile__label">
+                        DNI
+                    </label>
+
+                    <input type="text" value="<?= htmlspecialchars($usuario['DNI']) ?>" disabled
+                        class="profile__input profile__input--disabled">
+
+                </div>
+
+                <div class="profile__group">
+
+                    <label class="profile__label">
+                        Fecha de nacimiento
+                    </label>
+
+                    <input type="date" value="<?= htmlspecialchars($usuario['data_nacemento']) ?>" disabled
+                        class="profile__input profile__input--disabled">
+
+                </div>
+
+                <div class="profile__group">
+
+                    <label class="profile__label">
+                        Teléfono
+                    </label>
+
+                    <input type="text" name="telefono" value="<?= htmlspecialchars($usuario['telefono']) ?>" required
+                        class="profile__input">
+
+                </div>
+
+                <div class="profile__group">
+
+                    <label class="profile__label">
+                        Dirección
+                    </label>
+
+                    <input type="text" name="direccion" value="<?= htmlspecialchars($usuario['direccion']) ?>" required
+                        class="profile__input">
+
+                </div>
+
+                <div class="profile__group">
+
+                    <label class="profile__label">
+                        Nueva contraseña
+                    </label>
+
+                    <input type="password" name="contrasinal" placeholder="Introduce una nueva contraseña"
+                        class="profile__input">
+
+                </div>
+
+                <div class="profile__group">
+
+                    <label class="profile__label">
+                        Permiso de conducir
+                    </label>
+
+                    <input type="file" name="permiso_conducir" accept="image/*,.pdf" class="profile__input">
+
+                </div>
+
+                <button type="submit" class="profile__button">
+
+                    Guardar cambios
+
+                </button>
+
             </form>
-        </aside>
-        <section class="cars">
-            <!--
-       Ejemplo de car-card:
-        <article class="car-card">
-         <div class="car-card__image-wrapper">
-           <img src="./img/Fiat.jpg" alt="Foto del coche" class="car-card__image">
-         </div>
-     
-         <div class="car-card__content">
-           <p class="car-card__price">12.500 €</p>
-     
-           <div class="car-card__details">
-             <p class="car-card__detail"><span class="car-card__label">Marca:<br></span> Fiat</p>
-             <p class="car-card__detail"><span class="car-card__label">Modelo:<br></span> 500</p>
-             <p class="car-card__detail"><span class="car-card__label">Combustible:<br></span> Gasolina</p>
-             <p class="car-card__detail"><span class="car-card__label">Cambio:<br></span> Manual</p>
-             <p class="car-card__detail"><span class="car-card__label">Kilometraje:<br></span> 75.000 km</p>
-             <p class="car-card__detail"><span class="car-card__label">Año:<br></span> 2021</p>
-           </div>
-     
-           <button class="car-card__button">Ver detalles</button>
-         </div>
-       </article>
-        -->
-            <?php if ($vehiculos): ?>
-                <?php foreach ($vehiculos as $v): ?>
-                    <article class="car-card">
-                        <div class="car-card__image-wrapper">
-                            <img src="../storage/<?= htmlspecialchars($v['foto']) ?>"
-                                alt="Vehículo <?= htmlspecialchars($v['matricula']) ?>" class="car-card__image">
-                        </div>
 
-                        <div class="car-card__content">
-                            <!-- Añadimos el símbolo € y formateamos el precio si es necesario -->
-                            <p class="car-card__price-day"><?= htmlspecialchars($v['precio_dia']) ?> €/día</p>
-                            <p class="car-card__price-km"><?= htmlspecialchars($v['precio_km']) ?> €/km</p>
-
-                            <div class="car-card__details">
-                                <p class="car-card__detail"><span class="car-card__label">Marca:<br></span>
-                                    <?= htmlspecialchars($v['marca']) ?></p>
-                                <p class="car-card__detail"><span class="car-card__label">Modelo:<br></span>
-                                    <?= htmlspecialchars($v['modelo']) ?></p>
-                                <p class="car-card__detail"><span class="car-card__label">Combustible:<br></span>
-                                    <?= ucfirst($v['combustible']) ?></p>
-                                <p class="car-card__detail"><span class="car-card__label">Cambio:<br></span>
-                                    <?= ucfirst($v['tipo_cambio']) ?></p>
-                                <p class="car-card__detail"><span class="car-card__label">Kilometraje:<br></span>
-                                    <?= number_format($v['kilometraxe'], 0, ',', '.') ?> km</p>
-                                <p class="car-card__detail"><span class="car-card__label">Año:<br></span> <?= $v['año'] ?></p>
-                            </div>
-
-                            <!-- ENLACE CON MATRÍCULA -->
-                            <a href="../public/vehicle.php?matricula=<?= urlencode($v['matricula']) ?>"
-                                class="car-card__button">
-                                Ver detalles
-                            </a>
-                        </div>
-                    </article>
-                <?php endforeach; ?>
-            <?php else: ?>
-                <p style="grid-column: 1 / -1; text-align: center; padding: 2rem;">No se han encontrado vehículos que
-                    coincidan con tu búsqueda.</p>
-            <?php endif; ?>
         </section>
+
+        <?php if (isset($_GET['success'])): ?>
+
+            <div class="success-popup">
+
+                <div class="success-popup__content">
+
+                    <h2 class="success-popup__title">
+                        Perfil actualizado correctamente
+                    </h2>
+
+                </div>
+
+            </div>
+
+        <?php endif; ?>
+
     </main>
     <footer class="footer">
 
@@ -282,7 +336,7 @@ $vehiculos = $stmt->fetchAll();
         </div>
     </footer>
     <script src="./js/main.js"></script>
-    <script src="./js/our-cars.js"></script>
+    <script src="./js/profile.js"></script>
 </body>
 
 </HTML>

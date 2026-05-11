@@ -220,13 +220,12 @@ main {
 }
 
 .account-menu__button {
-  padding: 0px 20px 20px 20px;
   font-size: x-large;
-  width: 150px;
+  padding: 0px 20px 20px 20px;
+  width: 200px;
   background-color: transparent;
   border: none;
   color: rgb(1, 1, 66);
-  font-size: 18px;
   font-weight: 700;
   cursor: pointer;
   display: flex;
@@ -234,9 +233,14 @@ main {
   justify-content: center;
   gap: 8px;
 }
+.account-menu__button:hover {
+  border-bottom: 2px solid rgb(41, 43, 66);
+}
 @media (min-width: 1024px) {
   .account-menu__button {
+    width: 150px;
     padding: 20px;
+    font-size: 16px;
   }
 }
 
@@ -246,12 +250,13 @@ main {
 
 .account-menu__dropdown {
   position: absolute;
-  top: calc(100% + 12px);
+  top: calc(100% + 14px);
   right: -25px;
   width: 200px;
   background-color: white;
-  border-radius: 10px;
+  border-radius: 0px 0px 10px 10px;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  box-shadow: -6px 8px 12px -6px rgba(0, 0, 0, 0.15), 6px 8px 12px -6px rgba(0, 0, 0, 0.15);
   overflow: hidden;
   display: none;
   flex-direction: column;
@@ -350,7 +355,6 @@ main {
   border-bottom: 2px solid transparent;
 }
 .menu__item:hover {
-  color: rgb(41, 43, 66);
   border-bottom: 2px solid rgb(41, 43, 66);
 }
 .menu--primary {
@@ -800,9 +804,13 @@ main {
   padding: 1.5rem;
   text-align: center;
 }
-.car-card__price {
+.car-card__price-day {
   font-size: 1.5rem;
   font-weight: 700;
+}
+.car-card__price-km {
+  font-size: 1.2rem;
+  font-weight: 500;
   margin-bottom: 1.2rem;
 }
 .car-card__details {
@@ -1179,4 +1187,63 @@ main {
 .success-popup__title {
   color: #16a34a;
   font-size: 1.5rem;
+}
+
+.profile {
+  padding: 4rem 1.5rem;
+}
+.profile__container {
+  max-width: 800px;
+  margin: 0 auto;
+  background-color: white;
+  padding: 2rem;
+  border-radius: 1rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+.profile__title {
+  text-align: center;
+  margin-bottom: 2rem;
+  font-size: 2rem;
+}
+.profile__form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+.profile__group {
+  display: flex;
+  flex-direction: column;
+}
+.profile__label {
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
+.profile__input {
+  padding: 1rem;
+  border: 1px solid #d1d5db;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+}
+.profile__input:focus {
+  outline: none;
+  border-color: #2563eb;
+}
+.profile__input--disabled {
+  background-color: #f3f4f6;
+  color: #6b7280;
+  cursor: not-allowed;
+}
+.profile__button {
+  padding: 1rem;
+  border: none;
+  border-radius: 0.75rem;
+  background-color: #2563eb;
+  color: white;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+.profile__button:hover {
+  background-color: #1d4ed8;
 }/*# sourceMappingURL=main.css.map */

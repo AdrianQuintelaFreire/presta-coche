@@ -170,7 +170,8 @@ $resultado = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
                         <div class="car-card__content">
                             <!-- Añadimos el símbolo € y formateamos el precio si es necesario -->
-                            <p class="car-card__price"><?= htmlspecialchars($v['precio_dia']) ?> €/día</p>
+                            <p class="car-card__price-day"><?= htmlspecialchars($v['precio_dia']) ?> €/día</p>
+                            <p class="car-card__price-km"><?= htmlspecialchars($v['precio_km']) ?> €/km</p>
 
                             <div class="car-card__details">
                                 <p class="car-card__detail"><span class="car-card__label">Marca:<br></span>
