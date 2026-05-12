@@ -137,15 +137,21 @@ if (!$coche) {
             </div>
         </nav>
     </header>
-    <main>
+    <main class="main-vehicle">
         <h1>Detalles del vehículo</h1>
         
         <div class="vehicle-detail">
             <!-- Aquí ya tienes acceso a todo el array $coche -->
-            <p><strong>Matrícula:</strong> <?= htmlspecialchars($coche['matricula']) ?></p>
+            <img src="../storage/<?= htmlspecialchars($coche['foto']) ?>"/>
             <p><strong>Marca:</strong> <?= htmlspecialchars($coche['marca']) ?></p>
+            <p><strong>Combustible:</strong> <?= htmlspecialchars($coche['combustible']) ?></p>
+            <p><strong>Kilometraje:</strong> <?= htmlspecialchars($coche['kilometraxe']) ?></p>
+            <p><strong>Tipo de cambio:</strong> <?= htmlspecialchars($coche['tipo_cambio']) ?></p>
+
             <p><strong>Modelo:</strong> <?= htmlspecialchars($coche['modelo']) ?></p>
             <p><strong>Precio por día:</strong> <?= htmlspecialchars($coche['precio_dia']) ?> €</p>
+            <p><strong>Precio por km:</strong> <?= htmlspecialchars($coche['precio_km']) ?> €</p>
+            <p><strong>Dirección:</strong> <?= htmlspecialchars($coche['direccion']) ?> €</p>
             
             <!-- Puedes añadir más campos según tu base de datos -->
         </div>

@@ -1,5 +1,5 @@
 <?php
-
+/*
 session_start();
 
 // Importamos la conexión que ya tienes configurada
@@ -26,6 +26,49 @@ if (!empty($combustible)) {
 $stmt = $conexion->prepare($sql);
 $stmt->execute($params);
 $vehiculos = $stmt->fetchAll();
+*/
+
+session_start();
+
+// Importamos la conexión que ya tienes configurada
+require_once __DIR__ . '/../config/conexion.php';
+
+// Lógica de filtrado
+$tipo_cambio = $_GET['shift'] ?? '';
+$combustible = $_GET['fuel'] ?? '';
+// Nuevos parámetros de fecha
+$fecha_inicio = $_GET['start_date'] ?? '';
+$fecha_fin = $_GET['end_date'] ?? '';
+
+// Consulta base: Filtramos por estado y que NO esté en la subconsulta de reservas
+$sql = "SELECT * FROM vehiculos WHERE estado = 'validado'";
+$params = [];
+
+// Filtro de Disponibilidad (Solo si ambas fechas están presentes)
+if (!empty($fecha_inicio) && !empty($fecha_fin)) {
+    $sql .= " AND matricula NOT IN (
+                SELECT matricula 
+                FROM reservas 
+                WHERE (:f_inicio <= data_fin) AND (:f_fin >= data_inicio)
+            )";
+    $params[':f_inicio'] = $fecha_inicio;
+    $params[':f_fin'] = $fecha_fin;
+}
+
+if (!empty($tipo_cambio)) {
+    $sql .= " AND tipo_cambio = :cambio";
+    $params[':cambio'] = $tipo_cambio;
+}
+
+if (!empty($combustible)) {
+    $sql .= " AND combustible = :fuel";
+    $params[':fuel'] = $combustible;
+}
+
+$stmt = $conexion->prepare($sql);
+$stmt->execute($params);
+$vehiculos = $stmt->fetchAll();
+
 ?>
 
 <!DOCTYPE html>
