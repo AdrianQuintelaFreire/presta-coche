@@ -55,4 +55,11 @@ const accountButtonMobile = document.getElementById("accountButtonMobile");
 
     }
 
-})
+
+    flatpickr("#date-range", {
+        mode: "range",
+        minDate: "today",
+        dateFormat: "Y-m-d",
+        locale: "es"
+    });
+});

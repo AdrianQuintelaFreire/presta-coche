@@ -79,6 +79,7 @@ $vehiculos = $stmt->fetchAll();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PrestaAuto - Alquiler de Coches</title>
     <link rel="stylesheet" href="./css/main.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 </head>
 
 <body>
@@ -197,11 +198,18 @@ $vehiculos = $stmt->fetchAll();
 
             <form action="" class="filter__form search search--our-cars">
                 <div class="search__group search__group--first">
-                    <label for="date-start" class="search__label">Fecha de inicio</label>
-                    <input type="date" id="date-start" class="search__input" required>
+                    <label for="date-range" class="search__label">
+                        Fechas
+                    </label>
 
-                    <label for="date-end" class="search__label">Fecha de fin</label>
-                    <input type="date" id="date-end" class="search__input" required>
+                    <input
+                        type="text"
+                        id="date-range"
+                        name="date-range"
+                        class="search__input"
+                        placeholder="Selecciona fechas"
+                        required
+                    >
                 </div>
 
                 <div class="search__group search__group--second">
@@ -324,6 +332,8 @@ $vehiculos = $stmt->fetchAll();
             </div>
         </div>
     </footer>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="https://npmcdn.com/flatpickr/dist/l10n/es.js"></script>
     <script src="./js/main.js"></script>
     <script src="./js/our-cars.js"></script>
 </body>
