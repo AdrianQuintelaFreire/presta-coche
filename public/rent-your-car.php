@@ -308,6 +308,7 @@ if (!isset($_SESSION['user_id'])) {
                     accept="image/*"
                     required
                     class="rent-car__input">
+                
 
             </div>
 

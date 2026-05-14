@@ -5,4 +5,16 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('date-end').min = this.value;
     });
 
+    flatpickr("#date-range", {
+
+        mode: "range",
+
+        minDate: "today",
+
+        dateFormat: "Y-m-d",
+
+        locale: "es"
+
+    });
+
 })

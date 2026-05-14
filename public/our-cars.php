@@ -1,32 +1,4 @@
 <?php
-/*
-session_start();
-
-// Importamos la conexión que ya tienes configurada
-require_once __DIR__ . '/../config/conexion.php';
-
-// Lógica de filtrado
-$tipo_cambio = $_GET['shift'] ?? '';
-$combustible = $_GET['fuel'] ?? '';
-
-// Consulta base
-$sql = "SELECT * FROM vehiculos WHERE estado = 'validado'";
-$params = [];
-
-if (!empty($tipo_cambio)) {
-    $sql .= " AND tipo_cambio = :cambio";
-    $params[':cambio'] = $tipo_cambio;
-}
-
-if (!empty($combustible)) {
-    $sql .= " AND combustible = :fuel";
-    $params[':fuel'] = $combustible;
-}
-
-$stmt = $conexion->prepare($sql);
-$stmt->execute($params);
-$vehiculos = $stmt->fetchAll();
-*/
 
 session_start();
 
@@ -37,8 +9,23 @@ require_once __DIR__ . '/../config/conexion.php';
 $tipo_cambio = $_GET['shift'] ?? '';
 $combustible = $_GET['fuel'] ?? '';
 // Nuevos parámetros de fecha
-$fecha_inicio = $_GET['start_date'] ?? '';
-$fecha_fin = $_GET['end_date'] ?? '';
+$date_range = $_GET['date_range'] ?? '';
+
+$fecha_inicio = '';
+$fecha_fin = '';
+
+if (!empty($date_range)) {
+
+    $fechas = explode(" a ", $date_range);
+
+    if (count($fechas) === 2) {
+
+        $fecha_inicio = $fechas[0];
+        $fecha_fin = $fechas[1];
+
+    }
+
+}
 
 // Consulta base: Filtramos por estado y que NO esté en la subconsulta de reservas
 $sql = "SELECT * FROM vehiculos WHERE estado = 'validado'";
@@ -46,13 +33,26 @@ $params = [];
 
 // Filtro de Disponibilidad (Solo si ambas fechas están presentes)
 if (!empty($fecha_inicio) && !empty($fecha_fin)) {
-    $sql .= " AND matricula NOT IN (
-                SELECT matricula 
-                FROM reservas 
-                WHERE (:f_inicio <= data_fin) AND (:f_fin >= data_inicio)
-            )";
+
+    $sql .= " AND matricula IN (
+
+        SELECT matricula
+        FROM vehiculos_disponibilidad
+
+        WHERE fecha BETWEEN :f_inicio AND :f_fin
+        AND disponible = 1
+
+        GROUP BY matricula
+
+        HAVING COUNT(fecha) = DATEDIFF(:f_fin_diff, :f_inicio_diff) + 1
+
+    )";
+
     $params[':f_inicio'] = $fecha_inicio;
     $params[':f_fin'] = $fecha_fin;
+
+    $params[':f_inicio_diff'] = $fecha_inicio;
+    $params[':f_fin_diff'] = $fecha_fin;
 }
 
 if (!empty($tipo_cambio)) {
@@ -66,6 +66,9 @@ if (!empty($combustible)) {
 }
 
 $stmt = $conexion->prepare($sql);
+echo "<pre>";
+print_r($params);
+echo "</pre>";
 $stmt->execute($params);
 $vehiculos = $stmt->fetchAll();
 
@@ -202,28 +205,22 @@ $vehiculos = $stmt->fetchAll();
                         Fechas
                     </label>
 
-                    <input
-                        type="text"
-                        id="date-range"
-                        name="date-range"
-                        class="search__input"
-                        placeholder="Selecciona fechas"
-                        required
-                    >
+                    <input type="text" id="date-range" name="date_range" class="search__input"
+                        placeholder="Selecciona rango de fechas">
                 </div>
 
                 <div class="search__group search__group--second">
                     <label for="shift" class="search__label">Tipo de cambio</label>
-                    <select name="shift" id="shift" class="search__select" required>
-                        <option value="" disabled selected hidden>Seleccion una opción</option>
+                    <select name="shift" id="shift" class="search__select">
+                        <option value="">Cualquiera</option>
                         <option value="manual">Manual</option>
                         <option value="automatico">Automático</option>
                     </select>
 
                     <label for="fuel" class="search__label">Tipo de combustible</label>
-                    <select name="fuel" id="fuel" class="search__select" required>
-                        <option value="" disabled selected hidden>Seleccion una opción</option>
-                        <option value="gas">Gasolina</option>
+                    <select name="fuel" id="fuel" class="search__select">
+                        <option value="">Cualquiera</option>
+                        <option value="gasolina">Gasolina</option>
                         <option value="diesel">Diésel</option>
                     </select>
                 </div>

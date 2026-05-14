@@ -31,6 +31,7 @@ $resultado = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <meta charset="UTF-8">
     <title>Alquilar - PrestaCoche</title>
     <link rel="stylesheet" href="./css/main.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 </head>
 
 <body>
@@ -188,7 +189,29 @@ $resultado = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                 </p>
                             </div>
 
-                            <!-- ENLACE CON MATRÍCULA -->
+                            <?php
+
+                            $sqlFechas = "
+                                SELECT fecha
+                                FROM vehiculos_disponibilidad
+                                WHERE matricula = ?
+                                AND disponible = 1
+                                ";
+
+                            $stmtFechas = $conexion->prepare($sqlFechas);
+
+                            $stmtFechas->execute([$v['matricula']]);
+
+                            $fechasDisponibles = $stmtFechas->fetchAll(PDO::FETCH_COLUMN);
+
+                            ?>
+
+                            <button type="button"
+                                class="car-card__button car-card__button--availability open-availability-modal"
+                                data-matricula="<?= htmlspecialchars($v['matricula']) ?>"
+                                data-fechas='<?= json_encode($fechasDisponibles) ?>'>
+                                Disponibilidad
+                            </button>
                             <button type="button" class="car-card__button open-edit-modal"
                                 data-matricula="<?= htmlspecialchars($v['matricula']) ?>"
                                 data-precio-dia="<?= htmlspecialchars($v['precio_dia']) ?>"
@@ -335,10 +358,58 @@ $resultado = $stmt->fetchAll(PDO::FETCH_ASSOC);
         </div>
 
     </div>
+    <!-- Modal disponibilidad -->
+    <div class="modal" id="availabilityModal">
+
+        <div class="modal__overlay"></div>
+
+        <div class="modal__content">
+
+            <h2 class="modal__title">
+                Gestionar disponibilidad
+            </h2>
+
+            <p class="modal__text">
+                Vehículo:
+                <span id="availabilityMatricula"></span>
+            </p>
+
+            <form action="../public/update-availability.php" method="POST" class="modal-form">
+
+                <input type="hidden" name="matricula" id="availabilityInputMatricula">
+
+                <div class="modal-form__group">
+
+                    <label class="modal-form__label">
+                        Selecciona fechas disponibles
+                    </label>
+
+                    <input type="text" name="fechas" id="availabilityCalendar" class="modal-form__input"
+                        placeholder="Selecciona fechas" required>
+
+                </div>
+
+                <div class="modal__actions">
+
+                    <button type="button" class="modal__button modal__button--cancel" id="cancelAvailability">
+                        Cancelar
+                    </button>
+
+                    <button type="submit" class="modal__button modal__button--confirm">
+                        Guardar
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
 
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="https://npmcdn.com/flatpickr/dist/l10n/es.js"></script>
     <script src="./js/main.js"></script>
+    <script src="./js/my-cars.js"></script>
 </body>
-<script src="./js/my-cars.js"></script>
 
 </html>
