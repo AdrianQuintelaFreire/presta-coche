@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 18-05-2026 a las 19:36:45
+-- Tiempo de generación: 19-05-2026 a las 22:42:32
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -84,6 +84,7 @@ CREATE TABLE `vehiculos` (
   `id_usuario` int(11) NOT NULL,
   `marca` varchar(50) NOT NULL,
   `modelo` varchar(50) NOT NULL,
+  `tamano` enum('utilitario','mediano','grande') NOT NULL,
   `combustible` enum('gasolina','diesel','hibrido','electrico','glp') NOT NULL,
   `kilometraxe` int(11) NOT NULL,
   `tipo_cambio` enum('manual','automatico') NOT NULL,
@@ -99,15 +100,15 @@ CREATE TABLE `vehiculos` (
 -- Volcado de datos para la tabla `vehiculos`
 --
 
-INSERT INTO `vehiculos` (`matricula`, `id_usuario`, `marca`, `modelo`, `combustible`, `kilometraxe`, `tipo_cambio`, `estado`, `año`, `precio_dia`, `precio_km`, `direccion`, `foto`) VALUES
-('0010ACB', 22, 'Opel', 'Corsa', 'gasolina', 63500, 'manual', 'pendente', 2021, 50.00, 0.20, 'Vilar de Astrés, nº39', '1778741467_Calendario_FCT.png'),
-('1234ABC', 21, 'Fiat', '500', 'gasolina', 45200, 'manual', 'validado', 2021, 35.00, 0.20, 'Calle Mayor 12, Madrid', 'Fiat.jpg'),
-('2977CZV', 21, 'Audi', 'A4', 'diesel', 219998, 'manual', 'pendente', 2002, 25.00, 0.10, 'Vilar de Astrés, nº39', '1778433245_Calendario_FCT.png'),
-('3456JKL', 21, 'Audi', 'A4', 'diesel', 61000, 'automatico', 'validado', 2020, 60.00, 0.35, 'Gran Via 44, Vigo', 'Fiat.jpg'),
-('3913LTD', 21, 'Opel', 'Corsa', 'gasolina', 65000, 'manual', 'pendente', 2021, 50.00, 0.18, 'Vilar de Astrés, nº39', '1778432858_WhatsApp Image 2026-05-06 at 16.14.44 (1).jpeg'),
-('7890MNO', 21, 'Toyota', 'Corolla', 'gasolina', 33000, 'automatico', 'pendente', 2022, 50.00, 0.22, 'Calle Real 9, A Coruña', 'Fiat.jpg'),
-('9012GHI', 21, 'BMW', 'Serie 3', 'gasolina', 25000, 'automatico', 'pendente', 2023, 75.00, 0.35, 'Rua do Paseo 18, Ourense', 'Fiat.jpg'),
-('9473LWY', 21, 'Peugeot', '208', 'diesel', 45000, 'manual', 'pendente', 2021, 60.00, 0.15, 'Vilar de Astrés, nº39', '1778432994_descarga (1).jpg');
+INSERT INTO `vehiculos` (`matricula`, `id_usuario`, `marca`, `modelo`, `tamano`, `combustible`, `kilometraxe`, `tipo_cambio`, `estado`, `año`, `precio_dia`, `precio_km`, `direccion`, `foto`) VALUES
+('0010ACB', 22, 'Opel', 'Corsa', 'utilitario', 'gasolina', 63500, 'manual', 'pendente', 2021, 50.00, 0.20, 'Vilar de Astrés, nº39', '1778741467_Calendario_FCT.png'),
+('1234ABC', 21, 'Fiat', '500', 'utilitario', 'gasolina', 45200, 'manual', 'validado', 2021, 35.00, 0.20, 'Calle Mayor 12, Madrid', 'Fiat.jpg'),
+('2977CZV', 21, 'Audi', 'A4', 'utilitario', 'diesel', 219998, 'manual', 'pendente', 2002, 25.00, 0.10, 'Vilar de Astrés, nº39', '1778433245_Calendario_FCT.png'),
+('3456JKL', 21, 'Audi', 'A4', 'utilitario', 'diesel', 61000, 'automatico', 'validado', 2020, 60.00, 0.35, 'Gran Via 44, Vigo', 'Fiat.jpg'),
+('3913LTD', 21, 'Opel', 'Corsa', 'utilitario', 'gasolina', 65000, 'manual', 'pendente', 2021, 50.00, 0.18, 'Vilar de Astrés, nº39', '1778432858_WhatsApp Image 2026-05-06 at 16.14.44 (1).jpeg'),
+('7890MNO', 21, 'Toyota', 'Corolla', 'utilitario', 'gasolina', 33000, 'automatico', 'pendente', 2022, 50.00, 0.22, 'Calle Real 9, A Coruña', 'Fiat.jpg'),
+('9012GHI', 21, 'BMW', 'Serie 3', 'utilitario', 'gasolina', 25000, 'automatico', 'pendente', 2023, 75.00, 0.35, 'Rua do Paseo 18, Ourense', 'Fiat.jpg'),
+('9473LWY', 21, 'Peugeot', '208', 'utilitario', 'diesel', 45000, 'manual', 'pendente', 2021, 60.00, 0.15, 'Vilar de Astrés, nº39', '1778432994_descarga (1).jpg');
 
 -- --------------------------------------------------------
 
@@ -128,24 +129,21 @@ CREATE TABLE `vehiculos_disponibilidad` (
 --
 
 INSERT INTO `vehiculos_disponibilidad` (`id`, `matricula`, `fecha`, `disponible`, `precio_especial`) VALUES
-(18, '2977CZV', '2026-05-14', 1, NULL),
-(19, '2977CZV', '2026-05-19', 1, NULL),
-(20, '2977CZV', '2026-05-20', 1, NULL),
-(21, '2977CZV', '2026-05-21', 1, NULL),
-(22, '2977CZV', '2026-05-22', 1, NULL),
-(23, '2977CZV', '2026-05-15', 1, NULL),
-(24, '2977CZV', '2026-05-25', 1, NULL),
-(25, '2977CZV', '2026-05-26', 1, NULL),
-(26, '2977CZV', '2026-05-27', 1, NULL),
-(27, '2977CZV', '2026-05-28', 1, NULL),
-(28, '2977CZV', '2026-05-29', 1, NULL),
-(29, '2977CZV', '2026-05-18', 1, NULL),
-(30, '2977CZV', '2026-06-11', 1, NULL),
-(31, '2977CZV', '2026-06-17', 1, NULL),
-(32, '2977CZV', '2026-06-10', 1, NULL),
-(33, '3456JKL', '2026-05-15', 1, NULL),
-(35, '1234ABC', '2026-05-15', 1, NULL),
-(36, '1234ABC', '2026-05-14', 1, NULL);
+(39, '1234ABC', '2026-05-19', 1, NULL),
+(40, '1234ABC', '2026-05-20', 1, NULL),
+(41, '1234ABC', '2026-05-21', 1, NULL),
+(42, '1234ABC', '2026-05-22', 1, NULL),
+(43, '1234ABC', '2026-05-23', 1, NULL),
+(44, '1234ABC', '2026-05-24', 1, NULL),
+(45, '3456JKL', '2026-05-23', 1, NULL),
+(46, '3456JKL', '2026-05-24', 1, NULL),
+(47, '3456JKL', '2026-05-25', 1, NULL),
+(48, '3456JKL', '2026-05-26', 1, NULL),
+(49, '3456JKL', '2026-05-27', 1, NULL),
+(50, '3456JKL', '2026-05-28', 1, NULL),
+(51, '3456JKL', '2026-05-29', 1, NULL),
+(52, '3456JKL', '2026-05-30', 1, NULL),
+(53, '3456JKL', '2026-05-31', 1, NULL);
 
 --
 -- Índices para tablas volcadas
@@ -200,7 +198,7 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `vehiculos_disponibilidad`
 --
 ALTER TABLE `vehiculos_disponibilidad`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
 
 --
 -- Restricciones para tablas volcadas
