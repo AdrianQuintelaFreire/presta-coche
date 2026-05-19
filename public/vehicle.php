@@ -26,11 +26,13 @@ if (!$coche) {
 
 <!DOCTYPE html>
 <HTML lang="es">
+
 <head>
     <meta charset="UTF-8">
     <title>Detalles del <?= htmlspecialchars($coche['marca'] . " " . $coche['modelo']) ?></title>
     <link rel="stylesheet" href="./css/main.css">
 </head>
+
 <body>
     <header class="header">
         <nav class="nav">
@@ -137,28 +139,126 @@ if (!$coche) {
             </div>
         </nav>
     </header>
-    <main class="main-vehicle">
-        <h1>Detalles del vehículo</h1>
-        
-        <div class="vehicle-detail">
-            <!-- Aquí ya tienes acceso a todo el array $coche -->
-            <img src="../storage/<?= htmlspecialchars($coche['foto']) ?>"/>
-            <p><strong>Marca:</strong> <?= htmlspecialchars($coche['marca']) ?></p>
-            <p><strong>Combustible:</strong> <?= htmlspecialchars($coche['combustible']) ?></p>
-            <p><strong>Kilometraje:</strong> <?= htmlspecialchars($coche['kilometraxe']) ?></p>
-            <p><strong>Tipo de cambio:</strong> <?= htmlspecialchars($coche['tipo_cambio']) ?></p>
+<main class="vehicle">
 
-            <p><strong>Modelo:</strong> <?= htmlspecialchars($coche['modelo']) ?></p>
-            <p><strong>Precio por día:</strong> <?= htmlspecialchars($coche['precio_dia']) ?> €</p>
-            <p><strong>Precio por km:</strong> <?= htmlspecialchars($coche['precio_km']) ?> €</p>
-            <p><strong>Dirección:</strong> <?= htmlspecialchars($coche['direccion']) ?> €</p>
-            
-            <!-- Puedes añadir más campos según tu base de datos -->
-        </div>
-    
-        <a href="our-cars.php">Volver al catálogo</a>
-    </main>
-        <footer class="footer">
+    <div class="vehicle__container">
+
+        <section class="vehicle__content">
+
+            <!-- IZQUIERDA -->
+            <article class="vehicle-card">
+
+                <div class="vehicle-card__image-wrapper">
+                    <img
+                        src="../storage/<?= htmlspecialchars($coche['foto']) ?>"
+                        alt="<?= htmlspecialchars($coche['marca'] . ' ' . $coche['modelo']) ?>"
+                        class="vehicle-card__image">
+                </div>
+
+                <div class="vehicle-card__body">
+
+                    <div class="vehicle-card__header">
+
+                        <div>
+                            <h1 class="vehicle-card__title">
+                                <?= htmlspecialchars($coche['marca']) ?>
+                                <?= htmlspecialchars($coche['modelo']) ?>
+                            </h1>
+
+                            <p class="vehicle-card__subtitle">
+                                <?= ucfirst(htmlspecialchars($coche['combustible'])) ?>
+                                ·
+                                <?= ucfirst(htmlspecialchars($coche['tipo_cambio'])) ?>
+                            </p>
+                        </div>
+
+                        <div class="vehicle-card__pricing">
+                            <p class="vehicle-card__price-day">
+                                <?= htmlspecialchars($coche['precio_dia']) ?>€
+                                <span>/día</span>
+                            </p>
+
+                            <p class="vehicle-card__price-km">
+                                <?= htmlspecialchars($coche['precio_km']) ?>€/km
+                            </p>
+                        </div>
+
+                    </div>
+
+                    <div class="vehicle-card__details">
+
+                        <div class="vehicle-card__detail">
+                            <span class="vehicle-card__label">
+                                Kilometraje
+                            </span>
+
+                            <span class="vehicle-card__value">
+                                <?= number_format($coche['kilometraxe'], 0, ',', '.') ?> km
+                            </span>
+                        </div>
+
+                        <div class="vehicle-card__detail">
+                            <span class="vehicle-card__label">
+                                Combustible
+                            </span>
+
+                            <span class="vehicle-card__value">
+                                <?= ucfirst(htmlspecialchars($coche['combustible'])) ?>
+                            </span>
+                        </div>
+
+                        <div class="vehicle-card__detail">
+                            <span class="vehicle-card__label">
+                                Cambio
+                            </span>
+
+                            <span class="vehicle-card__value">
+                                <?= ucfirst(htmlspecialchars($coche['tipo_cambio'])) ?>
+                            </span>
+                        </div>
+
+                        <div class="vehicle-card__detail">
+                            <span class="vehicle-card__label">
+                                Dirección
+                            </span>
+
+                            <span class="vehicle-card__value">
+                                <?= htmlspecialchars($coche['direccion']) ?>
+                            </span>
+                        </div>
+
+                    </div>
+
+                    <button class="vehicle-card__button">
+                        Reservar vehículo
+                    </button>
+
+                </div>
+
+            </article>
+
+            <!-- DERECHA -->
+            <aside class="vehicle-map">
+
+                <h2 class="vehicle-map__title">
+                    Ubicación del vehículo
+                </h2>
+
+                <iframe
+                    class="vehicle-map__iframe"
+                    loading="lazy"
+                    allowfullscreen
+                    src="https://www.google.com/maps?q=<?= urlencode($coche['direccion']) ?>&output=embed">
+                </iframe>
+
+            </aside>
+
+        </section>
+
+    </div>
+
+</main>
+    <footer class="footer">
 
         <div class="footer__follow">
             <h2 class="footer__title">Síguenos</h2>
@@ -194,4 +294,5 @@ if (!$coche) {
     </footer>
     <script src="./js/main.js"></script>
 </body>
+
 </HTML>

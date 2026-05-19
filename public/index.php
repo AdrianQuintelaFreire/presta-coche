@@ -125,37 +125,34 @@ session_start();
         </h1>
         <p class="main-home__text">Comparte tu coche o alquila uno cerca de ti de forma fácil y segura.</p>
 
-        <form action="" class="search">
+        <form action="./our-cars.php" method="get" class="search">
             <div class="search__group search__group--first">
-            <label for="date-range" class="search__label">
-                Fechas
-            </label>
+                <label for="date-range" class="search__label">
+                    Fechas
+                </label>
 
-            <input
-                type="text"
-                id="date-range"
-                name="date-range"
-                class="search__input"
-                placeholder="Selecciona fechas"
-                required
-            >
-
+                <input type="text" id="date-range" name="date_range" class="search__input"
+                    placeholder="Selecciona fechas" value="<?= htmlspecialchars($_GET['date_range'] ?? '') ?>" required>
             </div>
 
             <div class="search__group search__group--second">
+                <label for="tamano" class="search__label">
+                    Tamaño del vehículo
+                </label>
+
+                <select name="tamano" id="tamano" class="search__select">
+                    <option value="">Cualquiera</option>
+                    <option value="utilitario">Utilitario</option>
+                    <option value="mediano">Mediano</option>
+                    <option value="grande">Grande</option>
+                </select>
                 <label for="shift" class="search__label">Tipo de cambio</label>
-                <select name="shift" id="shift" class="search__select" required>
-                    <option value="" disabled selected hidden>Seleccion una opción</option>
+                <select name="shift" id="shift" class="search__select">
+                    <option value="">Cualquiera</option>
                     <option value="manual">Manual</option>
                     <option value="automatico">Automático</option>
                 </select>
 
-                <label for="fuel" class="search__label">Tipo de combustible</label>
-                <select name="fuel" id="fuel" class="search__select" required>
-                    <option value="" disabled selected hidden>Seleccion una opción</option>
-                    <option value="gas">Gasolina</option>
-                    <option value="diesel">Diésel</option>
-                </select>
             </div>
             <div class="search__button">
                 <button type="submit" class="button">Comenzar a buscar</button>
@@ -200,4 +197,5 @@ session_start();
     <script src="https://npmcdn.com/flatpickr/dist/l10n/es.js"></script>
     <script src="./js/main.js"></script>
 </body>
+
 </HTML>

@@ -7,7 +7,9 @@ require_once __DIR__ . '/../config/conexion.php';
 
 // Lógica de filtrado
 $tipo_cambio = $_GET['shift'] ?? '';
-$combustible = $_GET['fuel'] ?? '';
+$tamano = $_GET['tamano'] ?? '';
+
+
 // Nuevos parámetros de fecha
 $date_range = $_GET['date_range'] ?? '';
 
@@ -19,19 +21,16 @@ if (!empty($date_range)) {
     $fechas = explode(" a ", $date_range);
 
     if (count($fechas) === 2) {
-
         $fecha_inicio = $fechas[0];
         $fecha_fin = $fechas[1];
-
     }
-
 }
 
-// Consulta base: Filtramos por estado y que NO esté en la subconsulta de reservas
+// Consulta base
 $sql = "SELECT * FROM vehiculos WHERE estado = 'validado'";
 $params = [];
 
-// Filtro de Disponibilidad (Solo si ambas fechas están presentes)
+// Filtro disponibilidad
 if (!empty($fecha_inicio) && !empty($fecha_fin)) {
 
     $sql .= " AND matricula IN (
@@ -44,13 +43,11 @@ if (!empty($fecha_inicio) && !empty($fecha_fin)) {
 
         GROUP BY matricula
 
-        HAVING COUNT(fecha) = DATEDIFF(:f_fin_diff, :f_inicio_diff) + 1
-
+        HAVING COUNT(*) = DATEDIFF(:f_fin_diff, :f_inicio_diff) + 1
     )";
 
     $params[':f_inicio'] = $fecha_inicio;
     $params[':f_fin'] = $fecha_fin;
-
     $params[':f_inicio_diff'] = $fecha_inicio;
     $params[':f_fin_diff'] = $fecha_fin;
 }
@@ -60,15 +57,12 @@ if (!empty($tipo_cambio)) {
     $params[':cambio'] = $tipo_cambio;
 }
 
-if (!empty($combustible)) {
-    $sql .= " AND combustible = :fuel";
-    $params[':fuel'] = $combustible;
+if (!empty($tamano)) {
+    $sql .= " AND tamano = :tamano";
+    $params[':tamano'] = $tamano;
 }
 
 $stmt = $conexion->prepare($sql);
-echo "<pre>";
-print_r($params);
-echo "</pre>";
 $stmt->execute($params);
 $vehiculos = $stmt->fetchAll();
 
@@ -199,34 +193,68 @@ $vehiculos = $stmt->fetchAll();
                 Filtros
             </label>
 
-            <form action="" class="filter__form search search--our-cars">
+            <form action="" method="get" class="filter__form search search--our-cars">
+
                 <div class="search__group search__group--first">
                     <label for="date-range" class="search__label">
                         Fechas
                     </label>
 
                     <input type="text" id="date-range" name="date_range" class="search__input"
-                        placeholder="Selecciona rango de fechas">
+                        placeholder="Selecciona rango de fechas" value="<?= htmlspecialchars($date_range) ?>">
                 </div>
 
                 <div class="search__group search__group--second">
-                    <label for="shift" class="search__label">Tipo de cambio</label>
-                    <select name="shift" id="shift" class="search__select">
-                        <option value="">Cualquiera</option>
-                        <option value="manual">Manual</option>
-                        <option value="automatico">Automático</option>
+
+                    <label for="tamano" class="search__label">
+                        Tamaño del vehículo
+                    </label>
+
+                    <select name="tamano" id="tamano" class="search__select">
+                        <option value="" <?= $tamano === '' ? 'selected' : '' ?>>
+                            Cualquiera
+                        </option>
+
+                        <option value="utilitario" <?= $tamano === 'utilitario' ? 'selected' : '' ?>>
+                            Utilitario
+                        </option>
+
+                        <option value="mediano" <?= $tamano === 'mediano' ? 'selected' : '' ?>>
+                            Mediano
+                        </option>
+
+                        <option value="grande" <?= $tamano === 'grande' ? 'selected' : '' ?>>
+                            Grande
+                        </option>
                     </select>
 
-                    <label for="fuel" class="search__label">Tipo de combustible</label>
-                    <select name="fuel" id="fuel" class="search__select">
-                        <option value="">Cualquiera</option>
-                        <option value="gasolina">Gasolina</option>
-                        <option value="diesel">Diésel</option>
+
+                    <label for="shift" class="search__label">
+                        Tipo de cambio
+                    </label>
+
+                    <select name="shift" id="shift" class="search__select">
+
+                        <option value="" <?= $tipo_cambio === '' ? 'selected' : '' ?>>
+                            Cualquiera
+                        </option>
+
+                        <option value="manual" <?= $tipo_cambio === 'manual' ? 'selected' : '' ?>>
+                            Manual
+                        </option>
+
+                        <option value="automatico" <?= $tipo_cambio === 'automatico' ? 'selected' : '' ?>>
+                            Automático
+                        </option>
                     </select>
+
+
                 </div>
 
                 <div class="search__button">
-                    <button type="submit" class="button">Aplicar</button>
+                    <button type="submit" class="button">
+                        Aplicar
+                    </button>
                 </div>
             </form>
         </aside>
