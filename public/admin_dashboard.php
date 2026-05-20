@@ -98,6 +98,18 @@ if (!isset($_SESSION['rol']) || $_SESSION['rol'] !== 'admin') {
     </footer>
 
 
-</body>
+<!--
+Hacer updates de consultas de usuarios no validados
+require 'conexion.php';
 
+$hoy = date('Y-m-d');
+
+$sql = "UPDATE usuarios
+        SET validado = 'no'
+        WHERE fecha_caducidad_dni < ?";
+
+$stmt = $conexion->prepare($sql);
+$stmt->execute([$hoy]);
+-->
+</body>
 </HTML>

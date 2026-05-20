@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 19-05-2026 a las 22:42:32
+-- Tiempo de generación: 20-05-2026 a las 19:56:00
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -57,10 +57,13 @@ CREATE TABLE `usuarios` (
   `email` varchar(100) NOT NULL,
   `contrasinal` varchar(255) NOT NULL,
   `DNI` varchar(9) NOT NULL,
+  `foto_dni` varchar(255) NOT NULL,
+  `fecha_caducidad_dni` date DEFAULT NULL,
   `telefono` varchar(15) NOT NULL,
   `data_nacemento` date NOT NULL,
   `direccion` varchar(255) NOT NULL,
   `permiso_conducir` varchar(255) NOT NULL,
+  `validado` enum('si','no') NOT NULL DEFAULT 'no',
   `rol` enum('admin','user') DEFAULT 'user'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -68,10 +71,14 @@ CREATE TABLE `usuarios` (
 -- Volcado de datos para la tabla `usuarios`
 --
 
-INSERT INTO `usuarios` (`id`, `nome`, `apelidos`, `email`, `contrasinal`, `DNI`, `telefono`, `data_nacemento`, `direccion`, `permiso_conducir`, `rol`) VALUES
-(20, 'María Teresa', 'Freire Pardo', 'a@a', '1', '45148222A', '680486941', '2026-05-21', 'Vilar de Astrés, nº39', 'WhatsApp Image 2026-05-06 at 16.14.36.jpeg', 'admin'),
-(21, 'María Teresa', 'Freire Pardo', 'b@b', 'b', '45148222b', '680486939', '2026-05-29', 'Vilar de Astrés, nº39', 'WhatsApp Image 2026-05-06 at 16.14.36.jpeg', 'user'),
-(22, 'María Teresa', 'Freire Pardo', 'c@c', '3', '45148222c', '680486941', '2026-05-22', 'Vilar de Astrés, nº39', 'descarga.jpg', 'user');
+INSERT INTO `usuarios` (`id`, `nome`, `apelidos`, `email`, `contrasinal`, `DNI`, `foto_dni`, `fecha_caducidad_dni`, `telefono`, `data_nacemento`, `direccion`, `permiso_conducir`, `validado`, `rol`) VALUES
+(20, 'María Teresa', 'Freire Pardo', 'a@a', '1', '45148222A', '', NULL, '680486941', '2026-05-21', 'Vilar de Astrés, nº39', 'WhatsApp Image 2026-05-06 at 16.14.36.jpeg', 'no', 'admin'),
+(21, 'María Teresa', 'Freire Pardo', 'b@b', 'b', '45148222b', '', NULL, '680486939', '2026-05-29', 'Vilar de Astrés, nº39', 'WhatsApp Image 2026-05-06 at 16.14.36.jpeg', 'no', 'user'),
+(22, 'María Teresa', 'Freire Pardo', 'c@c', '3', '45148222c', '', NULL, '680486941', '2026-05-22', 'Vilar de Astrés, nº39', 'descarga.jpg', 'no', 'user'),
+(23, 'María Teresa', 'Freire Pardo', 'd@d', 'd', 'descarga.', '', NULL, '680486941', '2026-05-14', 'Vilar de Astrés, nº39', 'Calendario_FCT.png', 'no', 'user'),
+(24, 'María Teresa', 'Freire Pardo', 'e@e', 'e', '234', 'dni_6a0de64546e4d9.91943077_logo_prestacoche.png', NULL, '680486941', '2026-05-07', 'Vilar de Astrés, nº39', 'license_6a0de645470612.57678508_logo_instagram.png', 'no', 'user'),
+(25, 'María Teresa', 'Freire Pardo', 'f@f', 'f', '12345678f', '12345678f_410_dni.png', NULL, '680486941', '2026-05-13', 'Vilar de Astrés, nº39', '12345678f_935_carnet.png', 'no', 'user'),
+(27, 'María Teresa', 'Freire Pardo', 'abc@abc', 'abc', '12345abc', '12345abc_841_dni.png', '2026-05-07', '680486941', '2026-05-21', 'Vilar de Astrés, nº39', '12345abc_754_carnet.png', 'no', 'user');
 
 -- --------------------------------------------------------
 
@@ -121,14 +128,14 @@ CREATE TABLE `vehiculos_disponibilidad` (
   `matricula` varchar(7) NOT NULL,
   `fecha` date NOT NULL,
   `disponible` tinyint(1) DEFAULT 1,
-  `precio_especial` decimal(10,2) DEFAULT NULL
+  `user_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `vehiculos_disponibilidad`
 --
 
-INSERT INTO `vehiculos_disponibilidad` (`id`, `matricula`, `fecha`, `disponible`, `precio_especial`) VALUES
+INSERT INTO `vehiculos_disponibilidad` (`id`, `matricula`, `fecha`, `disponible`, `user_id`) VALUES
 (39, '1234ABC', '2026-05-19', 1, NULL),
 (40, '1234ABC', '2026-05-20', 1, NULL),
 (41, '1234ABC', '2026-05-21', 1, NULL),
@@ -176,7 +183,8 @@ ALTER TABLE `vehiculos`
 --
 ALTER TABLE `vehiculos_disponibilidad`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `matricula` (`matricula`,`fecha`);
+  ADD UNIQUE KEY `matricula` (`matricula`,`fecha`),
+  ADD KEY `fk_vehiculos_usuario` (`user_id`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
@@ -192,7 +200,7 @@ ALTER TABLE `reservas`
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT de la tabla `vehiculos_disponibilidad`
@@ -220,6 +228,7 @@ ALTER TABLE `vehiculos`
 -- Filtros para la tabla `vehiculos_disponibilidad`
 --
 ALTER TABLE `vehiculos_disponibilidad`
+  ADD CONSTRAINT `fk_vehiculos_usuario` FOREIGN KEY (`user_id`) REFERENCES `usuarios` (`id`) ON DELETE SET NULL,
   ADD CONSTRAINT `vehiculos_disponibilidad_ibfk_1` FOREIGN KEY (`matricula`) REFERENCES `vehiculos` (`matricula`) ON DELETE CASCADE;
 COMMIT;
 
