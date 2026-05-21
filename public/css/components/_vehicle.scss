@@ -113,6 +113,31 @@
         font-size: 1rem;
         font-weight: 700;
         cursor: pointer;
+        transition: all .25s ease;
+    }
+
+    &__button--reserve {
+        background: linear-gradient(135deg, #111, #2a2a2a);
+        color: white;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, .12);
+
+        &:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 14px 30px rgba(0, 0, 0, .18);
+        }
+    }
+
+    &__button--pending {
+        background: #f3f4f6;
+        color: #444;
+        border: 1px solid #dcdcdc;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, .06);
+
+        &:hover {
+            transform: translateY(-1px);
+            background: #ebedf0;
+            box-shadow: 0 8px 18px rgba(0, 0, 0, .08);
+        }
     }
 }
 
@@ -191,4 +216,126 @@
             height: 680px;
         }
     }
+}
+
+.validation-popup {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+
+    display: none;
+    justify-content: center;
+    align-items: center;
+
+    &--active {
+        display: flex;
+    }
+
+    &__overlay {
+        position: absolute;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.5);
+    }
+
+    &__content {
+        position: relative;
+        z-index: 2;
+        background: white;
+        padding: 2rem;
+        border-radius: 1.5rem;
+        max-width: 420px;
+        width: 90%;
+        text-align: center;
+    }
+
+    &__button {
+        width: 100%;
+        border: none;
+        border-radius: 1rem;
+        padding: 1rem;
+        margin-top: 1.5rem;
+
+        background: #e5e7eb;
+        color: #333;
+        font-weight: 700;
+        cursor: pointer;
+        transition: all .2s ease;
+
+        &:hover {
+            background: #d9dde3;
+            transform: translateY(-1px);
+        }
+    }
+}
+
+.vehicle__back-button {
+    display: inline-block;
+    margin-bottom: 1.5rem;
+    padding: 0.6rem 1rem;
+    border-radius: 0.8rem;
+    background: #f3f4f6;
+    color: #111;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all .2s ease;
+    border: 1px solid #e5e7eb;
+
+    &:hover {
+        background: #e5e7eb;
+        transform: translateY(-2px);
+    }
+}
+
+.reservation-popup {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+}
+
+.reservation-popup__box {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.reservation-popup__actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+    justify-content: center;
+}
+
+.btn-ok {
+    padding: 0.6rem 1rem;
+    border: none;
+    border-radius: 0.6rem;
+    background: #e5e7eb;
+    font-weight: 600;
+    cursor: pointer;
+    transition: .2s;
+}
+
+.btn-ok:hover {
+    background: #d1d5db;
+    transform: translateY(-1px);
+}
+
+.btn-go {
+    padding: 0.6rem 1rem;
+    border-radius: 0.6rem;
+    background: #111;
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+    transition: .2s;
+}
+
+.btn-go:hover {
+    background: #333;
+    transform: translateY(-1px);
 }

@@ -29,7 +29,7 @@
         max-width: 400px;
 
         text-align: center;
-        box-shadow: 0 10px 30px rgba(0,0,0,.2);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, .2);
 
         animation: modalFade .3s ease;
     }
@@ -42,6 +42,7 @@
     &__text {
         margin-bottom: 2rem;
         color: #555;
+
         span {
             font-weight: 700;
         }
@@ -127,6 +128,15 @@
 
     position: relative;
 
+    &__button--availability {
+        margin-bottom: 10px;
+        color: #16a34a;
+        border-color: #16a34a;
+        &:hover{
+            background-color: #16a34a;
+        }
+    }
+
     &__status {
 
         position: absolute;
@@ -151,5 +161,6 @@
         &--pendente {
             background-color: #eab308;
         }
+
     }
 }

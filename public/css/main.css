@@ -544,10 +544,10 @@ main {
   max-width: 400px;
   width: 90%;
   margin: 20px auto;
-  padding: 2rem;
   display: flex;
   flex-direction: column;
   margin: 10px auto 10px auto;
+  gap: 1.25rem;
 }
 @media (min-width: 1024px) {
   .search {
@@ -563,13 +563,15 @@ main {
   border: 1px solid #e5e7eb;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05), 0 0 0 1px rgba(255, 255, 255, 0.5) inset;
   backdrop-filter: blur(6px);
-  padding: 15px;
+  padding: 2rem;
   display: flex;
   flex-direction: column;
 }
 .search__label {
+  margin-top: 10px;
   color: #0c2e64;
   font-weight: 500;
+  text-align: center;
 }
 .search__caption {
   font-size: 1.5rem;
@@ -586,11 +588,13 @@ main {
   border-radius: 10px;
   border: 1px solid #ccc;
   flex: 1;
-  padding: 0.75rem 1rem;
+  padding: 1rem 1rem;
+  font-size: 1rem;
   border: 1px solid #e5e7eb;
   font-size: 0.95rem;
   background: #f9fafb;
   transition: all 0.2s ease;
+  text-align: center;
 }
 .search__input:focus, .search__select:focus {
   outline: none;
@@ -611,6 +615,8 @@ main {
   font-weight: 500;
   cursor: pointer;
   transition: all 0.25s ease;
+  width: 100%;
+  padding: 1rem;
 }
 .search__btn:hover {
   transform: translateY(-2px);
@@ -854,6 +860,19 @@ main {
 .car-card__button--delete:hover {
   background-color: #ad1a15;
   color: white;
+}
+
+.no-dates-message {
+  text-align: center;
+  padding: 3rem 1rem;
+  background: #f8f9fb;
+  border-radius: 1rem;
+  margin-top: 2rem;
+}
+
+.no-dates-message h2 {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
 }
 
 .body-login {
@@ -1104,6 +1123,14 @@ main {
 
 .car-card {
   position: relative;
+}
+.car-card__button--availability {
+  margin-bottom: 10px;
+  color: #16a34a;
+  border-color: #16a34a;
+}
+.car-card__button--availability:hover {
+  background-color: #16a34a;
 }
 .car-card__status {
   position: absolute;
@@ -1356,6 +1383,27 @@ main {
   font-size: 1rem;
   font-weight: 700;
   cursor: pointer;
+  transition: all 0.25s ease;
+}
+.vehicle-card__button--reserve {
+  background: linear-gradient(135deg, #111, #2a2a2a);
+  color: white;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+}
+.vehicle-card__button--reserve:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.18);
+}
+.vehicle-card__button--pending {
+  background: #f3f4f6;
+  color: #444;
+  border: 1px solid #dcdcdc;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+}
+.vehicle-card__button--pending:hover {
+  transform: translateY(-1px);
+  background: #ebedf0;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.08);
 }
 
 /* MAPA */
@@ -1413,4 +1461,117 @@ main {
   .vehicle-map__iframe {
     height: 680px;
   }
+}
+.validation-popup {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: none;
+  justify-content: center;
+  align-items: center;
+}
+.validation-popup--active {
+  display: flex;
+}
+.validation-popup__overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+}
+.validation-popup__content {
+  position: relative;
+  z-index: 2;
+  background: white;
+  padding: 2rem;
+  border-radius: 1.5rem;
+  max-width: 420px;
+  width: 90%;
+  text-align: center;
+}
+.validation-popup__button {
+  width: 100%;
+  border: none;
+  border-radius: 1rem;
+  padding: 1rem;
+  margin-top: 1.5rem;
+  background: #e5e7eb;
+  color: #333;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.validation-popup__button:hover {
+  background: #d9dde3;
+  transform: translateY(-1px);
+}
+
+.vehicle__back-button {
+  display: inline-block;
+  margin-bottom: 1.5rem;
+  padding: 0.6rem 1rem;
+  border-radius: 0.8rem;
+  background: #f3f4f6;
+  color: #111;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  border: 1px solid #e5e7eb;
+}
+.vehicle__back-button:hover {
+  background: #e5e7eb;
+  transform: translateY(-2px);
+}
+
+.reservation-popup {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.reservation-popup__box {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.reservation-popup__actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+  justify-content: center;
+}
+
+.btn-ok {
+  padding: 0.6rem 1rem;
+  border: none;
+  border-radius: 0.6rem;
+  background: #e5e7eb;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.btn-ok:hover {
+  background: #d1d5db;
+  transform: translateY(-1px);
+}
+
+.btn-go {
+  padding: 0.6rem 1rem;
+  border-radius: 0.6rem;
+  background: #111;
+  color: white;
+  text-decoration: none;
+  font-weight: 600;
+  transition: 0.2s;
+}
+
+.btn-go:hover {
+  background: #333;
+  transform: translateY(-1px);
 }/*# sourceMappingURL=main.css.map */

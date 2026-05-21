@@ -5,7 +5,7 @@
   position: relative;
   overflow: hidden;
 
-  & > * {
+  &>* {
     position: relative;
     z-index: 2;
   }
@@ -24,26 +24,27 @@
       background: url('../img/fondo_home.png') no-repeat right center / 100%;
     }
   }
+
   @media (min-width: variables.$bp-xxl) {
     &::before {
       background: url('../img/fondo_home.png') no-repeat right center / 85%;
     }
   }
+
   @media (min-width: variables.$bp-xxxl) {
     &::before {
       background: url('../img/fondo_home.png') no-repeat right center / 70%;
     }
   }
+
   &::after {
     content: "";
     position: absolute;
     inset: 0;
 
-    background: linear-gradient(
-      to left,
-      rgba(255, 255, 255, 0) 40%,
-      rgba(255, 255, 255, 1) 60%
-    );
+    background: linear-gradient(to left,
+        rgba(255, 255, 255, 0) 40%,
+        rgba(255, 255, 255, 1) 60%);
 
     z-index: 1;
     pointer-events: none;
@@ -57,9 +58,11 @@
     @media (min-width: variables.$bp-sm) {
       height: 300px;
     }
+
     @media (min-width: variables.$bp-md) {
       height: 350px;
     }
+
     // 👉 ocultas la img en desktop
     @media (min-width: variables.$bp-lg) {
       display: none;
@@ -70,9 +73,10 @@
     margin: 20px 20px 10px 20px;
     text-align: center;
     font-size: 30px;
-    font-weight:bolder;
+    font-weight: bolder;
     line-height: 1.8rem;
     color: rgb(41, 43, 66);
+
     @media (min-width: variables.$bp-lg) {
       width: 400px;
       width: fit-content;
@@ -82,10 +86,11 @@
     }
   }
 
-  &__text{
+  &__text {
     margin: 0px 20px 0px 20px;
     text-align: center;
     color: rgb(41, 43, 66);
+
     @media (min-width: variables.$bp-lg) {
       width: 400px;
       margin: 20px 0px 20px 200px;
@@ -98,16 +103,17 @@
   max-width: 400px;
   width: 90%;
   margin: 20px auto;
-  padding: 2rem;
   display: flex;
   flex-direction: column;
   margin: 10px auto 10px auto;
-      @media (min-width: variables.$bp-lg) {
-        width: 100%;
-        padding: 0px;
-        margin: 0px;
-        margin-left: 200px;
-    }
+  gap: 1.25rem;
+
+  @media (min-width: variables.$bp-lg) {
+    width: 100%;
+    padding: 0px;
+    margin: 0px;
+    margin-left: 200px;
+  }
 
   background: #ffffff;
   border-radius: 16px;
@@ -116,18 +122,19 @@
   border: 1px solid #e5e7eb;
 
   // efecto difuminado elegante
-  box-shadow: 
-    0 10px 25px rgba(0, 0, 0, 0.05),
-    0 0 0 1px rgba(255, 255, 255, 0.5) inset;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05),
+  0 0 0 1px rgba(255, 255, 255, 0.5) inset;
 
   backdrop-filter: blur(6px); // opcional (glass effect)
-  padding: 15px;
+  padding: 2rem;
   display: flex;
   flex-direction: column;
 
-  &__label{
+  &__label {
+    margin-top: 10px;
     color: #0c2e64;
     font-weight: 500;
+    text-align: center;
   }
 
   &__caption {
@@ -148,11 +155,13 @@
     border-radius: 10px;
     border: 1px solid #ccc;
     flex: 1;
-    padding: 0.75rem 1rem;
+    padding: 1rem 1rem;
+    font-size: 1rem;
     border: 1px solid #e5e7eb;
     font-size: 0.95rem;
     background: #f9fafb;
     transition: all 0.2s ease;
+    text-align: center;
 
     &:focus {
       outline: none;
@@ -176,6 +185,8 @@
     font-weight: 500;
     cursor: pointer;
     transition: all 0.25s ease;
+    width: 100%;
+    padding: 1rem;
 
     &:hover {
       transform: translateY(-2px);

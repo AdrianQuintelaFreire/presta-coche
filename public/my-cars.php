@@ -165,7 +165,7 @@ $resultado = $stmt->fetchAll(PDO::FETCH_ASSOC);
                         </div>
 
                         <div class="car-card__image-wrapper">
-                            <img src="../storage/<?= htmlspecialchars($v['foto']) ?>"
+                            <img src="../storage/car/<?= htmlspecialchars($v['foto']) ?>"
                                 alt="Vehículo <?= htmlspecialchars($v['matricula']) ?>" class="car-card__image">
                         </div>
 

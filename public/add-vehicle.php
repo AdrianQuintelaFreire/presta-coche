@@ -14,6 +14,7 @@ $id_usuario = $_SESSION['user_id'];
 $matricula = $_POST['matricula'];
 $marca = $_POST['marca'];
 $modelo = $_POST['modelo'];
+$potencia = $_POST['potencia'];
 $combustible = $_POST['combustible'];
 $kilometraxe = $_POST['kilometraxe'];
 $tipo_cambio = $_POST['tipo_cambio'];
@@ -32,10 +33,20 @@ $estado = 'pendente';
 
 $foto = $_FILES['foto'];
 
-$nombreFoto = time() . "_" . basename($foto['name']);
+// Número aleatorio entre 0 y 1000
+$numeroAleatorio = rand(0, 1000);
 
-$rutaDestino = "../storage/" . $nombreFoto;
+// Obtener extensión del archivo (jpg, png, jpeg...)
+$extension = pathinfo($foto['name'], PATHINFO_EXTENSION);
 
+// Nombre final:
+// matricula_numeroaleatorio_coche.ext
+$nombreFoto = $matricula . "_" . $numeroAleatorio . "_coche." . $extension;
+
+// Carpeta destino
+$rutaDestino = "../storage/car/" . $nombreFoto;
+
+// Mover archivo
 move_uploaded_file($foto['tmp_name'], $rutaDestino);
 
 /*
@@ -49,6 +60,7 @@ $sql = "INSERT INTO vehiculos (
             id_usuario,
             marca,
             modelo,
+            potencia,
             combustible,
             kilometraxe,
             tipo_cambio,
@@ -59,7 +71,7 @@ $sql = "INSERT INTO vehiculos (
             direccion,
             foto
         ) VALUES (
-            ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
+            ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
         )";
 
 $stmt = $conexion->prepare($sql);
@@ -69,6 +81,7 @@ $stmt->execute([
     $id_usuario,
     $marca,
     $modelo,
+    $potencia,
     $combustible,
     $kilometraxe,
     $tipo_cambio,
