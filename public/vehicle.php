@@ -60,6 +60,14 @@ if (isset($_SESSION['user_id'])) {
     }
 }
 
+$esMiVehiculo = false;
+
+if (isset($_SESSION['user_id'])) {
+    $esMiVehiculo = (
+        (int) $coche['id_usuario'] === (int) $_SESSION['user_id']
+    );
+}
+
 // 4. Si el coche no existe en la base de datos
 if (!$coche) {
     die("Lo sentimos, el vehículo con matrícula " . htmlspecialchars($matricula) . " no existe o no está disponible.");
@@ -288,16 +296,30 @@ $backUrl = './our-cars.php?' . http_build_query($backParams);
 
                         </div>
 
-                        <?php if ($usuarioValidado): ?>
+                        <?php if ($esMiVehiculo): ?>
+
+                            <button class="vehicle-card__button vehicle-card__button--own" disabled>
+
+                                Este vehículo es tuyo
+
+                            </button>
+
+                        <?php elseif ($usuarioValidado): ?>
 
                             <form id="reserveForm">
+
                                 <input type="hidden" name="matricula" value="<?= htmlspecialchars($matricula) ?>">
+
                                 <input type="hidden" name="fecha_inicio" value="<?= htmlspecialchars($fecha_inicio) ?>">
+
                                 <input type="hidden" name="fecha_fin" value="<?= htmlspecialchars($fecha_fin) ?>">
 
                                 <button type="submit" class="vehicle-card__button vehicle-card__button--reserve">
+
                                     Reservar vehículo
+
                                 </button>
+
                             </form>
 
                         <?php else: ?>

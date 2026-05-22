@@ -139,6 +139,22 @@
             box-shadow: 0 8px 18px rgba(0, 0, 0, .08);
         }
     }
+
+    &__button--own {
+
+        background: #fef3c7;
+        color: #92400e;
+
+        border: 1px solid #fcd34d;
+
+        box-shadow: 0 4px 12px rgba(0, 0, 0, .06);
+
+        cursor: not-allowed;
+
+        &:hover {
+            transform: none;
+        }
+    }
 }
 
 /* MAPA */
@@ -289,7 +305,7 @@
 .reservation-popup {
     position: fixed;
     inset: 0;
-    background: rgba(0,0,0,0.5);
+    background: rgba(0, 0, 0, 0.5);
     display: flex;
     align-items: center;
     justify-content: center;

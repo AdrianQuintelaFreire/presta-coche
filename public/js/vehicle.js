@@ -67,8 +67,8 @@ document.addEventListener('DOMContentLoaded', () => {
             <p>${message}</p>
 
             <div class="reservation-popup__actions">
-                <button type="button" class="btn-ok">Aceptar</button>
-                <a href="./reserves.php" class="btn-go">Ir a reservas</a>
+                <button type="button" class="btn-ok">Aceeptar</button>
+                <a href="./my-booking.php" class="btn-go">Ir a reservas</a>
             </div>
         </div>
     `;
