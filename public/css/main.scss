@@ -20,4 +20,11 @@
 @use "components/profile";
 @use "components/vehicle";
 @use "components/my-booking";
+@use "components/admin";
+@use "components/admin-validate-cars";
+@use "components/car-validate";
+@use "components/admin-validate-users";
+@use "components/user-validate";
+@use "components/admin-manage-users";
+@use "components/admin-manage-cars";
 

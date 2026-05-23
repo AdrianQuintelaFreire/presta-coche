@@ -14,7 +14,9 @@ class AuthController
         $nome = $_POST['nome'];
         $apelidos = $_POST['apelidos'];
         $email = $_POST['email'];
-        $contrasinal = $_POST['contrasinal'];
+        $contrasinal_plano = $_POST['contrasinal'];
+        // HASH
+        $contrasinal = password_hash($contrasinal_plano, PASSWORD_DEFAULT);
         $dni = $_POST['dni'];
         $telefono = $_POST['telefono'];
         $direccion = $_POST['direccion'];
@@ -106,7 +108,7 @@ class AuthController
 
         $user = $stmt->fetch();
 
-        if ($user && $password === $user['contrasinal']) {
+        if ($user && password_verify($password, $user['contrasinal'])) {
 
             $_SESSION['user_id'] = $user['id'];
             $_SESSION['rol'] = $user['rol'];
@@ -114,7 +116,7 @@ class AuthController
             $_SESSION['email'] = $user['email'];
 
             if ($_SESSION['rol'] === 'admin') {
-                header("Location: /prestacoche/public/admin_dashboard.php");
+                header("Location: /prestacoche/public/admin.php");
             } else {
                 header("Location: /prestacoche/public/index.php");
             }

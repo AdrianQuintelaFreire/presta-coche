@@ -61,3 +61,11 @@
     }
 
 }
+
+.footer-admin{
+    background-color: rgb(41, 43, 66);
+    &__copyright{
+        color: white;
+        text-align: center;
+    }
+}

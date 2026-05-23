@@ -126,6 +126,9 @@
 .nav-secondary {
     display: none;
 
+    &__admin{
+        font-size: 20px;
+    }
     @media (min-width: variables.$bp-lg) {
         display: flex;
         @include mixins.flex(row, center, center, 25px);
