@@ -1,6 +1,6 @@
 <?php
 
-require_once '../config/conexion.php';
+require_once __DIR__ . '/../config/conexion.php';
 
 $matricula = $_POST['matricula'];
 
@@ -34,6 +34,6 @@ foreach ($fechas as $fecha) {
 
 }
 
-header("Location: ./my-cars.php");
+header("Location: /prestacoche/pages/my-cars.php");
 exit;
 ?>

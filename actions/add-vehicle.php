@@ -2,10 +2,10 @@
 
 session_start();
 
-require_once '../config/conexion.php';
+require_once __DIR__ . '/../config/conexion.php';
 
 if (!isset($_SESSION['user_id'])) {
-    header("Location: login.php");
+    header("Location: /prestacoche/public/login.php");
     exit();
 }
 
@@ -93,5 +93,5 @@ $stmt->execute([
     $nombreFoto
 ]);
 
-header("Location: rent-your-car.php?success=1");
+header("Location: /prestacoche/public/rent-your-car.php?success=1");
 exit();

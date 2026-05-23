@@ -2,10 +2,10 @@
 
 session_start();
 
-require_once '../config/conexion.php';
+require_once __DIR__ . '/../config/conexion.php';
 
 if (!isset($_SESSION['user_id'])) {
-    header("Location: ./login.php");
+    header("Location: /prestacoche/public/login.php");
     exit();
 }
 
@@ -15,7 +15,7 @@ $matricula = $_GET['matricula'] ?? null;
 $fecha = $_GET['fecha'] ?? null;
 
 if (!$matricula || !$fecha) {
-    header("Location: ./my-booking.php");
+    header("Location: /prestacoche/pages/my-booking.php");
     exit();
 }
 
@@ -42,5 +42,5 @@ $stmt->execute([
     $id_usuario
 ]);
 
-header("Location: ./my-booking.php");
+header("Location: /prestacoche/pages/my-booking.php");
 exit();

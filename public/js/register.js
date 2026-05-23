@@ -1,11 +1,10 @@
 document.addEventListener("DOMContentLoaded", () => {
     const form = document.querySelector(".register-form__form");
 
+    if (!form) return;
+
     form.addEventListener("submit", function (e) {
 
-        // =========================
-        // INPUTS
-        // =========================
         const dni = document.getElementById("dni").value.trim();
         const telefono = document.getElementById("telefono").value.trim();
         const nacimiento = document.getElementById("data_nacemento").value;
@@ -15,10 +14,8 @@ document.addEventListener("DOMContentLoaded", () => {
         const fileLicense = document.getElementById("permiso_conducir").files[0];
 
         const hoy = new Date();
+        hoy.setHours(0, 0, 0, 0);
 
-        // =========================
-        // CONFIRMAR CONTRASEÑA
-        // =========================
         const password = document.getElementById("contrasinal").value;
         const confirmPassword = document.getElementById("contrasinal_confirm").value;
 
@@ -28,9 +25,6 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
 
-        // =========================
-        // DNI VALIDATION
-        // =========================
         const dniRegex = /^[0-9]{8}[A-Z]$/;
         if (!dniRegex.test(dni)) {
             alert("DNI inválido. Formato correcto: 12345678X");
@@ -38,9 +32,6 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
 
-        // =========================
-        // TELÉFONO (España básico)
-        // =========================
         const telRegex = /^[0-9]{9}$/;
         if (!telRegex.test(telefono)) {
             alert("Teléfono inválido. Debe tener 9 dígitos.");
@@ -48,9 +39,6 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
 
-        // =========================
-        // EDAD (mínimo 18 años)
-        // =========================
         const fechaNac = new Date(nacimiento);
         let edad = hoy.getFullYear() - fechaNac.getFullYear();
         const m = hoy.getMonth() - fechaNac.getMonth();
@@ -65,10 +53,8 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
 
-        // =========================
-        // CADUCIDAD DNI
-        // =========================
         const fechaCad = new Date(caducidad);
+        fechaCad.setHours(0, 0, 0, 0);
 
         if (fechaCad < hoy) {
             alert("El DNI está caducado.");
@@ -76,9 +62,6 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
 
-        // =========================
-        // ARCHIVOS
-        // =========================
         if (!fileDni || !fileLicense) {
             alert("Debes subir todas las imágenes.");
             e.preventDefault();
@@ -98,6 +81,5 @@ document.addEventListener("DOMContentLoaded", () => {
             e.preventDefault();
             return;
         }
-
     });
 });

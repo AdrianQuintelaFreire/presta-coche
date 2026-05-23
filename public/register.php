@@ -111,7 +111,7 @@
             </div>
         </section>
     </main>
-    <script src="./js/register.js"></script>
+    <script src="/prestacoche/public/js/register.js"></script>
 </body>
 
 </HTML>
