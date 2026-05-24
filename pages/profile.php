@@ -205,6 +205,7 @@ require __DIR__ . '/../includes/header.php';
                 <h2 class="success-popup__title">
                     Perfil actualizado correctamente
                 </h2>
+                <strong>Tu cuenta tendrá que ser validada.</sttrong>
 
             </div>
 

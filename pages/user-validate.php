@@ -191,9 +191,7 @@ if (!$usuario) {
                         DNI / NIE
                     </h2>
 
-                    <img
-                        src="/prestacoche/storage/id/<?= htmlspecialchars($usuario['foto_dni']) ?>"
-                        alt="Foto DNI"
+                    <img src="/prestacoche/storage/id/<?= htmlspecialchars($usuario['foto_dni']) ?>" alt="Foto DNI"
                         class="user-validate__image">
 
                 </article>
@@ -204,10 +202,8 @@ if (!$usuario) {
                         Permiso de conducir
                     </h2>
 
-                    <img
-                        src="/prestacoche/storage/license/<?= htmlspecialchars($usuario['permiso_conducir']) ?>"
-                        alt="Permiso conducir"
-                        class="user-validate__image">
+                    <img src="/prestacoche/storage/license/<?= htmlspecialchars($usuario['permiso_conducir']) ?>"
+                        alt="Permiso conducir" class="user-validate__image">
 
                 </article>
 
@@ -215,16 +211,14 @@ if (!$usuario) {
 
             <div class="user-validate__actions">
 
-                <a
-                    href="/prestacoche/actions/validate-user.php?id=<?= urlencode($usuario['id']) ?>"
+                <a href="/prestacoche/actions/validate-user.php?id=<?= urlencode($usuario['id']) ?>"
                     class="user-validate__button user-validate__button--success">
 
                     Validar usuario
 
                 </a>
 
-                <a
-                    href="/prestacoche/actions/delete-user.php?id=<?= urlencode($usuario['id']) ?>"
+                <a href="/prestacoche/actions/delete-user.php?id=<?= urlencode($usuario['id']) ?>"
                     class="user-validate__button user-validate__button--danger">
 
                     Eliminar usuario
@@ -243,4 +237,5 @@ if (!$usuario) {
 
 <script src="/prestacoche/public/js/main.js"></script>
 </body>
+
 </HTML>

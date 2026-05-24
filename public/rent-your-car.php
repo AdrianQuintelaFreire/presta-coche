@@ -17,7 +17,8 @@ require __DIR__ . '/../includes/header.php';
             Añadir vehículo
         </h1>
 
-        <form action="/prestacoche/actions/add-vehicle.php" method="POST" enctype="multipart/form-data" class="rent-car__form">
+        <form action="/prestacoche/actions/add-vehicle.php" method="POST" enctype="multipart/form-data"
+            class="rent-car__form">
 
             <div class="rent-car__group">
 
@@ -57,6 +58,22 @@ require __DIR__ . '/../includes/header.php';
                 <input type="number" name="potencia" min="1" required class="rent-car__input">
 
             </div>
+            <div class="rent-car__group">
+
+                <label class="rent-car__label">
+                    Tamaño del vehículo
+                </label>
+
+                <select name="tamano" required class="rent-car__input">
+
+                    <option value="">Selecciona</option>
+                    <option value="utilitario">Utilitario</option>
+                    <option value="mediano">Mediano</option>
+                    <option value="grande">Grande</option>
+
+                </select>
+
+            </div>
 
             <div class="rent-car__group">
 
@@ -79,7 +96,7 @@ require __DIR__ . '/../includes/header.php';
             <div class="rent-car__group">
 
                 <label class="rent-car__label">
-                    Kilometraje
+                    Kilometraje aproximado
                 </label>
 
                 <input type="number" name="kilometraxe" required class="rent-car__input">
@@ -135,7 +152,7 @@ require __DIR__ . '/../includes/header.php';
             <div class="rent-car__group">
 
                 <label class="rent-car__label">
-                    Dirección
+                    Dirección de recogida aproximada
                 </label>
 
                 <input type="text" name="direccion" required class="rent-car__input">
@@ -172,6 +189,7 @@ require __DIR__ . '/../includes/header.php';
                 <h2 class="success-popup__title">
                     Vehículo añadido correctamente
                 </h2>
+
 
             </div>
 

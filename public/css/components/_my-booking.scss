@@ -96,16 +96,17 @@
         font-weight: 700;
         color: #111;
     }
-    &__phone {
-    color: #2563eb;
-    font-weight: 600;
-    text-decoration: none;
-    word-break: break-word;
 
-    &:hover {
-        text-decoration: underline;
+    &__phone {
+        color: #2563eb;
+        font-weight: 600;
+        text-decoration: none;
+        word-break: break-word;
+
+        &:hover {
+            text-decoration: underline;
+        }
     }
-}
 }
 
 .booking-dates {
@@ -163,7 +164,7 @@
             padding: 1.2rem;
         }
     }
-    
+
 }
 
 /* DESKTOP */

@@ -49,8 +49,7 @@
 
     <div class="admin-sidebar__footer">
 
-        <a href="/prestacoche/actions/logout.php"
-            class="admin-sidebar__logout">
+        <a href="/prestacoche/actions/logout.php" class="admin-sidebar__logout">
             Cerrar sesión
         </a>
 

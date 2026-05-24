@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const accountButton = document.getElementById("accountButton");
     const accountDropdown = document.getElementById("accountDropdown");
 
-    if(accountButton) {
+    if (accountButton) {
 
         accountButton.addEventListener("click", function (e) {
 
@@ -27,10 +27,10 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
     }
-const accountButtonMobile = document.getElementById("accountButtonMobile");
+    const accountButtonMobile = document.getElementById("accountButtonMobile");
     const accountDropdownMobile = document.getElementById("accountDropdownMobile");
 
-    if(accountButtonMobile) {
+    if (accountButtonMobile) {
 
         accountButtonMobile.addEventListener("click", function (e) {
 

@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 modalMatricula.textContent = matricula;
 
                 confirmDelete.href =
-                    `../public/delete-vehicle.php?matricula=${encodeURIComponent(matricula)}`;
+                    `/prestacoche/actions/delete-vehicle.php?matricula=${encodeURIComponent(matricula)}`;
 
                 deleteModal.classList.add('modal--active');
 
@@ -163,43 +163,43 @@ document.addEventListener('DOMContentLoaded', () => {
 
         let availabilityPicker = null;
 
-openAvailabilityButtons.forEach(button => {
+        openAvailabilityButtons.forEach(button => {
 
-    button.addEventListener("click", () => {
+            button.addEventListener("click", () => {
 
-        const matricula = button.dataset.matricula;
+                const matricula = button.dataset.matricula;
 
-        const fechas = JSON.parse(button.dataset.fechas || "[]");
+                const fechas = JSON.parse(button.dataset.fechas || "[]");
 
-        availabilityMatricula.textContent = matricula;
+                availabilityMatricula.textContent = matricula;
 
-        availabilityInputMatricula.value = matricula;
+                availabilityInputMatricula.value = matricula;
 
-        availabilityModal.classList.add("modal--active");
+                availabilityModal.classList.add("modal--active");
 
-        // Destruir calendario anterior
-        if (availabilityPicker) {
-            availabilityPicker.destroy();
-        }
+                // Destruir calendario anterior
+                if (availabilityPicker) {
+                    availabilityPicker.destroy();
+                }
 
-        // Crear nuevo calendario
-        availabilityPicker = flatpickr("#availabilityCalendar", {
+                // Crear nuevo calendario
+                availabilityPicker = flatpickr("#availabilityCalendar", {
 
-            mode: "multiple",
+                    mode: "multiple",
 
-            minDate: "today",
+                    minDate: "today",
 
-            dateFormat: "Y-m-d",
+                    dateFormat: "Y-m-d",
 
-            locale: "es",
+                    locale: "es",
 
-            defaultDate: fechas
+                    defaultDate: fechas
+
+                });
+
+            });
 
         });
-
-    });
-
-});
 
     }
 

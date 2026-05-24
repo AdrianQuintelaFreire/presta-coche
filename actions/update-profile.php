@@ -55,7 +55,10 @@ if ($contrasinal_nova !== '' || $contrasinal_confirm !== '') {
     }
 
     // AQUÍ decides si usas hash o no (recomendado)
-    $contrasinal = $contrasinal_nova;
+    $contrasinal = password_hash(
+    $contrasinal_nova,
+    PASSWORD_DEFAULT
+);
 }
 
 /*
@@ -151,7 +154,8 @@ $sql = "UPDATE usuarios SET
             direccion = ?,
             contrasinal = ?,
             foto_dni = ?,
-            permiso_conducir = ?
+            permiso_conducir = ?,
+            validado = ?
         WHERE id = ?";
 
 $stmt = $conexion->prepare($sql);
@@ -162,6 +166,7 @@ $stmt->execute([
     $contrasinal,
     $foto_dni,
     $permiso_conducir,
+    'no',
     $id_usuario
 ]);
 

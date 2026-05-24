@@ -22,10 +22,14 @@
             <div class="nav-primary">
                 <ul class="menu menu--primary">
                     <li class="menu__item"><a href="/prestacoche/public/admin.php" class="menu__link">Manual</a></li>
-                    <li class="menu__item"><a href="/prestacoche/pages/admin_validate-users.php" class="menu__link">Validar usuarios</a>
-                    <li class="menu__item"><a href="/prestacoche/pages/admin_validate-cars.php" class="menu__link">Validar vehículos</a>
-                    <li class="menu__item"><a href="/prestacoche/pages/admin_manage-users.php" class="menu__link">Gestionar usuarios</a>
-                    <li class="menu__item"><a href="/prestacoche/pages/admin_manage-cars.php" class="menu__link">Gestionar vehículos</a>
+                    <li class="menu__item"><a href="/prestacoche/pages/admin_validate-users.php"
+                            class="menu__link">Validar usuarios</a>
+                    <li class="menu__item"><a href="/prestacoche/pages/admin_validate-cars.php"
+                            class="menu__link">Validar vehículos</a>
+                    <li class="menu__item"><a href="/prestacoche/pages/admin_manage-users.php"
+                            class="menu__link">Gestionar usuarios</a>
+                    <li class="menu__item"><a href="/prestacoche/pages/admin_manage-cars.php"
+                            class="menu__link">Gestionar vehículos</a>
                 </ul>
                 <div class="nav-primary__actions">
                     <a href="/prestacoche/actions/logout.php" class="btn btn--secondary">Cerrar sesión</a>

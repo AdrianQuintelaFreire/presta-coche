@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         </span>
 
                         <a
-                            href="../public/delete-booking-date.php?matricula=${matricula}&fecha=${fecha}"
+                            href="/prestacoche/actions/delete-booking-date.php?matricula=${matricula}&fecha=${fecha}"
                             class="booking-modal-item__delete">
 
                             ✕

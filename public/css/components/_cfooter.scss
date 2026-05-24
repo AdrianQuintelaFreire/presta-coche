@@ -1,28 +1,31 @@
 @use '../base/variables';
 @use '../base/mixins';
 
-.footer{
+.footer {
     background-color: rgb(41, 43, 66);
     color: white;
     padding: 1rem 0 1rem 0;
     display: grid;
-    grid-template-areas: 
+    grid-template-areas:
         "menus"
         "social"
     ;
+
     @media (min-width: variables.$bp-lg) {
-        grid-template-areas: 
-        "menus social"
-        "bottom bottom"
-    ;
+        grid-template-areas:
+            "menus social"
+            "bottom bottom"
+        ;
     }
-    &__follow{
+
+    &__follow {
         border-top: 1px solid rgb(146, 146, 177);
         grid-area: social;
         display: flex;
         flex-direction: column;
         flex-wrap: wrap;
         @include mixins.center(both);
+
         @media (min-width: variables.$bp-lg) {
             padding-left: 20px;
             border-top: 0px;
@@ -30,7 +33,8 @@
             align-items: start;
         }
     }
-    &__top{
+
+    &__top {
         grid-area: top;
         display: flex;
         flex-direction: row;
@@ -38,21 +42,25 @@
         @include mixins.center(both);
         justify-content: space-around;
     }
-    &__logo{
+
+    &__logo {
         width: 60px;
         height: auto;
     }
-    &__social{
+
+    &__social {
         display: flex;
         justify-content: start;
         align-items: center;
         gap: 1rem;
-        &-icon{
+
+        &-icon {
             width: 40px;
             height: auto;
         }
     }
-    &__menus{
+
+    &__menus {
         display: flex;
         flex-direction: row;
         flex-wrap: wrap;
@@ -62,9 +70,10 @@
 
 }
 
-.footer-admin{
+.footer-admin {
     background-color: rgb(41, 43, 66);
-    &__copyright{
+
+    &__copyright {
         color: white;
         text-align: center;
     }

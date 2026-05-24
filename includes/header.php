@@ -21,8 +21,10 @@
             </label>
             <div class="nav-secondary">
                 <ul class="menu menu--secondary">
-                    <li class="menu__item"><a href="/prestacoche/public/our-cars.php" class="menu__link">Nuestros coches</a></li>
-                    <li class="menu__item"><a href="/prestacoche/public/how-it-works.php" class="menu__link">¿Cómo funciona?</a>
+                    <li class="menu__item"><a href="/prestacoche/public/our-cars.php" class="menu__link">Nuestros
+                            coches</a></li>
+                    <li class="menu__item"><a href="/prestacoche/public/how-it-works.php" class="menu__link">¿Cómo
+                            funciona?</a>
                     </li>
                 </ul>
                 <div class="nav-secondary__actions">
@@ -67,8 +69,10 @@
             </div>
             <div class="nav-primary">
                 <ul class="menu menu--primary">
-                    <li class="menu__item"><a href="/prestacoche/public/our-cars.php" class="menu__link">Nuestros coches</a></li>
-                    <li class="menu__item"><a href="/prestacoche/public/how-it-works.php" class="menu__link">¿Cómo funciona?</a>
+                    <li class="menu__item"><a href="/prestacoche/public/our-cars.php" class="menu__link">Nuestros
+                            coches</a></li>
+                    <li class="menu__item"><a href="/prestacoche/public/how-it-works.php" class="menu__link">¿Cómo
+                            funciona?</a>
                     </li>
                 </ul>
                 <div class="nav-primary__actions">

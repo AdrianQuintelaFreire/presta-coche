@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const formData = new FormData(form);
 
             try {
-                const res = await fetch("./reserve.php", {
+                const res = await fetch("/prestacoche/actions/reserve.php", {
                     method: "POST",
                     body: formData
                 });
@@ -68,7 +68,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             <div class="reservation-popup__actions">
                 <button type="button" class="btn-ok">Aceeptar</button>
-                <a href="./my-booking.php" class="btn-go">Ir a reservas</a>
+                <a href="/prestacoche/pages/my-booking.php" class="btn-go">Ir a reservas</a>
             </div>
         </div>
     `;
@@ -78,6 +78,8 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         document.body.appendChild(popup);
+
+        
     }
 
 });

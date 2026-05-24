@@ -15,6 +15,7 @@ $matricula = $_POST['matricula'];
 $marca = $_POST['marca'];
 $modelo = $_POST['modelo'];
 $potencia = $_POST['potencia'];
+$tamano = $_POST['tamano'];
 $combustible = $_POST['combustible'];
 $kilometraxe = $_POST['kilometraxe'];
 $tipo_cambio = $_POST['tipo_cambio'];
@@ -44,7 +45,7 @@ $extension = pathinfo($foto['name'], PATHINFO_EXTENSION);
 $nombreFoto = $matricula . "_" . $numeroAleatorio . "_coche." . $extension;
 
 // Carpeta destino
-$rutaDestino = "../storage/car/" . $nombreFoto;
+$rutaDestino = __DIR__ . "/../storage/cars/" . $nombreFoto;
 
 // Mover archivo
 move_uploaded_file($foto['tmp_name'], $rutaDestino);
@@ -61,6 +62,7 @@ $sql = "INSERT INTO vehiculos (
             marca,
             modelo,
             potencia,
+            tamano,
             combustible,
             kilometraxe,
             tipo_cambio,
@@ -71,7 +73,7 @@ $sql = "INSERT INTO vehiculos (
             direccion,
             foto
         ) VALUES (
-            ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
+            ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
         )";
 
 $stmt = $conexion->prepare($sql);
@@ -82,6 +84,7 @@ $stmt->execute([
     $marca,
     $modelo,
     $potencia,
+    $tamano,
     $combustible,
     $kilometraxe,
     $tipo_cambio,

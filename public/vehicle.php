@@ -60,6 +60,8 @@ if (isset($_SESSION['user_id'])) {
     }
 }
 
+$usuarioLogueado = isset($_SESSION['user_id']);
+
 $esMiVehiculo = false;
 
 if (isset($_SESSION['user_id'])) {
@@ -89,190 +91,198 @@ $title = 'Detalles del coche';
 require __DIR__ . '/../includes/header.php';
 ?>
 
-    <main class="vehicle">
+<main class="vehicle">
 
-        <div class="vehicle__container">
+    <div class="vehicle__container">
 
-            <a href="<?= htmlspecialchars($backUrl) ?>" class="vehicle__back-button">
-                ← Volver
-            </a>
-            <section class="vehicle__content">
+        <a href="<?= htmlspecialchars($backUrl) ?>" class="vehicle__back-button">
+            ← Volver
+        </a>
+        <section class="vehicle__content">
 
 
-                <!-- IZQUIERDA -->
-                <article class="vehicle-card">
+            <!-- IZQUIERDA -->
+            <article class="vehicle-card">
 
-                    <div class="vehicle-card__image-wrapper">
-                        <img src="../storage/car/<?= htmlspecialchars($coche['foto']) ?>"
-                            alt="<?= htmlspecialchars($coche['marca'] . ' ' . $coche['modelo']) ?>"
-                            class="vehicle-card__image">
-                    </div>
+                <div class="vehicle-card__image-wrapper">
+                    <img src="/prestacoche/storage/cars/<?= htmlspecialchars($coche['foto']) ?>"
+                        alt="<?= htmlspecialchars($coche['marca'] . ' ' . $coche['modelo']) ?>"
+                        class="vehicle-card__image">
+                </div>
 
-                    <div class="vehicle-card__body">
+                <div class="vehicle-card__body">
 
-                        <div class="vehicle-card__header">
+                    <div class="vehicle-card__header">
 
-                            <div>
-                                <h1 class="vehicle-card__title">
-                                    <?= htmlspecialchars($coche['marca']) ?>
-                                    <?= htmlspecialchars($coche['modelo']) ?>
-                                </h1>
+                        <div>
+                            <h1 class="vehicle-card__title">
+                                <?= htmlspecialchars($coche['marca']) ?>
+                                <?= htmlspecialchars($coche['modelo']) ?>
+                            </h1>
 
-                                <p class="vehicle-card__subtitle">
-                                    <?= ucfirst(htmlspecialchars($coche['combustible'])) ?>
-                                    ·
-                                    <?= ucfirst(htmlspecialchars($coche['tipo_cambio'])) ?>
-                                </p>
-                            </div>
-
-                            <div class="vehicle-card__pricing">
-                                <p class="vehicle-card__price-day">
-                                    <?= htmlspecialchars($coche['precio_dia']) ?>€
-                                    <span>/día</span>
-                                </p>
-
-                                <p class="vehicle-card__price-km">
-                                    <?= htmlspecialchars($coche['precio_km']) ?>€/km
-                                </p>
-                            </div>
-
+                            <p class="vehicle-card__subtitle">
+                                <?= ucfirst(htmlspecialchars($coche['combustible'])) ?>
+                                ·
+                                <?= ucfirst(htmlspecialchars($coche['tipo_cambio'])) ?>
+                            </p>
                         </div>
 
-                        <div class="vehicle-card__details">
+                        <div class="vehicle-card__pricing">
+                            <p class="vehicle-card__price-day">
+                                <?= htmlspecialchars($coche['precio_dia']) ?>€
+                                <span>/día</span>
+                            </p>
 
-                            <div class="vehicle-card__detail">
-                                <span class="vehicle-card__label">
-                                    Kilometraje
-                                </span>
-
-                                <span class="vehicle-card__value">
-                                    <?= number_format($coche['kilometraxe'], 0, ',', '.') ?> km
-                                </span>
-                            </div>
-
-                            <div class="vehicle-card__detail">
-                                <span class="vehicle-card__label">
-                                    Combustible
-                                </span>
-
-                                <span class="vehicle-card__value">
-                                    <?= ucfirst(htmlspecialchars($coche['combustible'])) ?>
-                                </span>
-                            </div>
-
-                            <div class="vehicle-card__detail">
-                                <span class="vehicle-card__label">
-                                    Cambio
-                                </span>
-
-                                <span class="vehicle-card__value">
-                                    <?= ucfirst(htmlspecialchars($coche['tipo_cambio'])) ?>
-                                </span>
-                            </div>
-
-                            <div class="vehicle-card__detail">
-                                <span class="vehicle-card__label">
-                                    Dirección
-                                </span>
-
-                                <span class="vehicle-card__value">
-                                    <?= htmlspecialchars($coche['direccion']) ?>
-                                </span>
-                            </div>
-
+                            <p class="vehicle-card__price-km">
+                                <?= htmlspecialchars($coche['precio_km']) ?>€/km
+                            </p>
                         </div>
-
-                        <?php if ($esMiVehiculo): ?>
-
-                            <button class="vehicle-card__button vehicle-card__button--own" disabled>
-
-                                Este vehículo es tuyo
-
-                            </button>
-
-                        <?php elseif ($usuarioValidado): ?>
-
-                            <form id="reserveForm">
-
-                                <input type="hidden" name="matricula" value="<?= htmlspecialchars($matricula) ?>">
-
-                                <input type="hidden" name="fecha_inicio" value="<?= htmlspecialchars($fecha_inicio) ?>">
-
-                                <input type="hidden" name="fecha_fin" value="<?= htmlspecialchars($fecha_fin) ?>">
-
-                                <button type="submit" class="vehicle-card__button vehicle-card__button--reserve">
-
-                                    Reservar vehículo
-
-                                </button>
-
-                            </form>
-
-                        <?php else: ?>
-
-                            <button class="vehicle-card__button vehicle-card__button--pending" id="pendingValidationButton">
-
-                                Cuenta pendiente de validación
-
-                            </button>
-
-                        <?php endif; ?>
 
                     </div>
 
-                </article>
+                    <div class="vehicle-card__details">
 
-                <!-- DERECHA -->
-                <aside class="vehicle-map">
+                        <div class="vehicle-card__detail">
+                            <span class="vehicle-card__label">
+                                Kilometraje
+                            </span>
 
-                    <h2 class="vehicle-map__title">
-                        Ubicación del vehículo
-                    </h2>
+                            <span class="vehicle-card__value">
+                                <?= number_format($coche['kilometraxe'], 0, ',', '.') ?> km
+                            </span>
+                        </div>
 
-                    <iframe class="vehicle-map__iframe" loading="lazy" allowfullscreen
-                        src="https://www.google.com/maps?q=<?= urlencode($coche['direccion']) ?>&output=embed">
-                    </iframe>
+                        <div class="vehicle-card__detail">
+                            <span class="vehicle-card__label">
+                                Combustible
+                            </span>
 
-                </aside>
+                            <span class="vehicle-card__value">
+                                <?= ucfirst(htmlspecialchars($coche['combustible'])) ?>
+                            </span>
+                        </div>
 
-            </section>
+                        <div class="vehicle-card__detail">
+                            <span class="vehicle-card__label">
+                                Cambio
+                            </span>
 
-        </div>
+                            <span class="vehicle-card__value">
+                                <?= ucfirst(htmlspecialchars($coche['tipo_cambio'])) ?>
+                            </span>
+                        </div>
 
-    </main>
-    <div class="validation-popup" id="validationPopup">
+                        <div class="vehicle-card__detail">
+                            <span class="vehicle-card__label">
+                                Dirección
+                            </span>
 
-        <div class="validation-popup__overlay"></div>
+                            <span class="vehicle-card__value">
+                                <?= htmlspecialchars($coche['direccion']) ?>
+                            </span>
+                        </div>
 
-        <div class="validation-popup__content">
+                    </div>
 
-            <div class="validation-popup__icon">
-                ⏳
-            </div>
+                    <?php if ($esMiVehiculo): ?>
 
-            <h2 class="validation-popup__title">
-                Cuenta pendiente de validación
-            </h2>
+                        <button class="vehicle-card__button vehicle-card__button--own" disabled>
 
-            <p class="validation-popup__text">
-                Tu cuenta todavía no ha sido validada por un administrador.
-                Cuando la validación esté completada podrás reservar vehículos.
-            </p>
+                            Este vehículo es tuyo
 
-            <button class="vehicle-card__button vehicle-card__button--reserve" id="closeValidationPopup">
+                        </button>
 
-                Entendido
+                    <?php elseif ($usuarioValidado): ?>
 
-            </button>
+                        <form id="reserveForm">
 
-        </div>
+                            <input type="hidden" name="matricula" value="<?= htmlspecialchars($matricula) ?>">
+
+                            <input type="hidden" name="fecha_inicio" value="<?= htmlspecialchars($fecha_inicio) ?>">
+
+                            <input type="hidden" name="fecha_fin" value="<?= htmlspecialchars($fecha_fin) ?>">
+
+                            <button type="submit" class="vehicle-card__button vehicle-card__button--reserve">
+
+                                Reservar vehículo
+
+                            </button>
+
+                        </form>
+
+                    <?php elseif ($usuarioLogueado): ?>
+
+                        <button class="vehicle-card__button vehicle-card__button--pending" id="pendingValidationButton">
+
+                            Cuenta pendiente de validación
+
+                        </button>
+
+                    <?php else: ?>
+
+                        <button class="vehicle-card__button vehicle-card__button--pending">
+
+                            Inicia sesión para reservar
+
+                        </button>
+
+                    <?php endif; ?>
+
+                </div>
+
+            </article>
+
+            <!-- DERECHA -->
+            <aside class="vehicle-map">
+
+                <h2 class="vehicle-map__title">
+                    Ubicación del vehículo
+                </h2>
+
+                <iframe class="vehicle-map__iframe" loading="lazy" allowfullscreen
+                    src="https://www.google.com/maps?q=<?= urlencode($coche['direccion']) ?>&output=embed">
+                </iframe>
+
+            </aside>
+
+        </section>
 
     </div>
+
+</main>
+<div class="validation-popup" id="validationPopup">
+
+    <div class="validation-popup__overlay"></div>
+
+    <div class="validation-popup__content">
+
+        <div class="validation-popup__icon">
+            ⏳
+        </div>
+
+        <h2 class="validation-popup__title">
+            Cuenta pendiente de validación
+        </h2>
+
+        <p class="validation-popup__text">
+            Tu cuenta todavía no ha sido validada por un administrador.
+            Cuando la validación esté completada podrás reservar vehículos.
+        </p>
+
+        <button class="vehicle-card__button vehicle-card__button--reserve" id="closeValidationPopup">
+
+            Entendido
+
+        </button>
+
+    </div>
+
+</div>
 <?php require __DIR__ . '/../includes/footer.php'; ?>
-    <script src="/prestacoche/public/js/vehicle.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-    <script src="https://npmcdn.com/flatpickr/dist/l10n/es.js"></script>
-    <script src="/prestacoche/public/js/main.js"></script>
+<script src="/prestacoche/public/js/vehicle.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script src="https://npmcdn.com/flatpickr/dist/l10n/es.js"></script>
+<script src="/prestacoche/public/js/main.js"></script>
 </body>
 
 </HTML>

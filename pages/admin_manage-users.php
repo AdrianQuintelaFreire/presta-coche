@@ -63,7 +63,7 @@ if (strlen($busqueda) >= 2) {
             <?php if ($busqueda === ''): ?>
 
                 <p class="admin-results__empty">
-                    Escribe algo para buscar usuarios.
+                    Escribe algo para buscar usuarios <strong>validados</strong>.
                 </p>
 
             <?php elseif (empty($usuarios)): ?>

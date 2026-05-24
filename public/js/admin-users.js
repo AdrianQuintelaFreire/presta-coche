@@ -53,10 +53,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
                 body: `id=${userId}`
             })
-            .then(res => res.text())
-            .then(() => {
-                window.location.reload();
-            });
+                .then(res => res.text())
+                .then(() => {
+                    window.location.reload();
+                });
 
         });
     }

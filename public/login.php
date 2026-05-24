@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <HTML lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inicio de sesión - PrestaCoche</title>
     <link rel="stylesheet" href="./css/main.css">
 </head>
+
 <body class="body-login">
 
     <main class="login-container">
@@ -19,9 +21,10 @@
                 <div class="login-form__field">
                     <input type="email" name="email" class="login-form__input" placeholder="Correo" required>
                 </div>
-                
+
                 <div class="login-form__field">
-                    <input type="password" name="contrasinal" class="login-form__input" placeholder="Contraseña" required>
+                    <input type="password" name="contrasinal" class="login-form__input" placeholder="Contraseña"
+                        required>
                 </div>
 
                 <button type="submit" class="login-form__button">Iniciar sesión</button>
@@ -34,4 +37,5 @@
     </main>
 
 </body>
+
 </HTML>

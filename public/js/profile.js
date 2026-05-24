@@ -2,53 +2,88 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const form = document.getElementById('profile-form');
 
-    if (!form) return; // 🔥 EVITA QUE ROMPA TODO
+    if (!form) return;
 
-    const password = document.getElementById('contrasinal');
-    const confirmPassword = document.getElementById('contrasinal_confirm');
+    const password =
+        document.getElementById('contrasinal');
+
+    const confirmPassword =
+        document.getElementById('contrasinal_confirm');
 
     form.addEventListener('submit', (e) => {
 
-    const pass = password.value.trim();
-    const confirm = confirmPassword.value.trim();
+        const pass = password.value.trim();
+        const confirm =
+            confirmPassword.value.trim();
 
-    if (pass === '' && confirm === '') return;
+        if (pass === '' && confirm === '') return;
 
-    if (pass === '' || confirm === '') {
-        e.preventDefault();
-        showPasswordPopup("empty");
-        return;
-    }
+        if (pass === '' || confirm === '') {
+            e.preventDefault();
+            showPasswordPopup();
+            return;
+        }
 
-    if (pass !== confirm) {
-        e.preventDefault();
-        showPasswordPopup("mismatch");
-        return;
-    }
-});
+        if (pass !== confirm) {
+            e.preventDefault();
+            showPasswordPopup();
+            return;
+        }
+    });
 
     function showPasswordPopup() {
-  
 
-        const popup = document.createElement('div');
+        const popup =
+            document.createElement('div');
+
         popup.className = 'popup popup--error';
 
         popup.innerHTML = `
             <div class="popup__content">
                 <span class="popup__icon">⚠</span>
-                <h2 class="popup__title">Las contraseñas no coinciden</h2>
+                <h2 class="popup__title">
+                    Las contraseñas no coinciden
+                </h2>
                 <p class="popup__text">
-                    Asegúrate de escribir la misma contraseña en ambos campos.
+                    Asegúrate de escribir la misma contraseña
+                    en ambos campos.
                 </p>
-                <button class="popup__button">Entendido</button>
+                <button class="popup__button">
+                    Entendido
+                </button>
             </div>
         `;
 
         document.body.appendChild(popup);
 
-        popup.querySelector('.popup__button').addEventListener('click', () => {
-            popup.remove();
-        });
+        popup.querySelector('.popup__button')
+            .addEventListener('click', () => {
+                popup.remove();
+            });
+    }
+
+    // SUCCESS POPUP
+    const successPopup =
+        document.querySelector('.success-popup');
+
+    if (successPopup) {
+
+        setTimeout(() => {
+
+            successPopup.style.transition =
+                'opacity .3s ease';
+
+            successPopup.style.opacity = '0';
+
+            setTimeout(() => {
+
+                const destino = '/prestacoche/public/index.php';
+
+                window.location.href = destino;
+
+            }, 300);
+
+        }, 2000);
     }
 
 });

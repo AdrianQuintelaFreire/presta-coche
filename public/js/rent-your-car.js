@@ -6,16 +6,17 @@ document.addEventListener('DOMContentLoaded', () => {
         setTimeout(() => {
 
             successPopup.style.opacity = '0';
-
             successPopup.style.transition = 'opacity .3s ease';
 
             setTimeout(() => {
 
-                window.location.href = './my-cars.php';
+                const destino = '/prestacoche/pages/my-cars.php';
 
-            }, 300);
+                window.location.href = destino;
+
+            }, 2000);
 
         }, 2000);
 
     }
-})
+});

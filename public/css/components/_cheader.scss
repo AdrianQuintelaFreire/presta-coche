@@ -20,6 +20,7 @@
 
     &--primary {
         border: grey 2px solid;
+
         &:hover {
             background-color: #154fad;
             border: #154fad 2px solid;
@@ -37,11 +38,12 @@
             transform: translateY(-2px);
         }
     }
-    
+
 
     @media (min-width: variables.$bp-lg) {
         width: fit-content;
     }
+
     @media (min-width: variables.$bp-xl) {
         width: 200px;
     }
@@ -51,9 +53,10 @@
     transition: all 0.3s ease;
     text-align: center;
 
-    &__item{
+    &__item {
         border-bottom: 2px solid transparent;
     }
+
     &__item:hover {
         border-bottom: 2px solid rgb(41, 43, 66);
     }

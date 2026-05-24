@@ -27,6 +27,7 @@
 
   &__button {
     cursor: pointer;
+
     &:focus {
       outline: none;
     }
@@ -56,18 +57,18 @@
     }
   }
 
-  &__toggle:checked ~ &__form {
+  &__toggle:checked~&__form {
     max-height: 500px;
     opacity: 1;
     transform: translateY(0);
   }
 
-  &__toggle:checked + &__button.button {
+  &__toggle:checked+&__button.button {
     background-color: transparent;
     color: #154fad;
   }
 
-  &__toggle:not(:checked) + &__button.button {
+  &__toggle:not(:checked)+&__button.button {
     background-color: #154fad;
     color: variables.$white;
   }
@@ -81,7 +82,7 @@
   }
 }
 
-.search--our-cars{
+.search--our-cars {
   margin-top: 20px;
   margin-left: 0px;
 }
@@ -102,18 +103,18 @@
     grid-template-columns: repeat(3, 300px);
   }
 
-    @media (min-width: variables.$bp-xxxl) {
+  @media (min-width: variables.$bp-xxxl) {
     grid-template-columns: repeat(4, 300px);
   }
 }
 
 .car-card {
-  
+
   // borde suave tipo input
   border: 1px solid #e5e7eb;
 
   // efecto difuminado elegante
-  box-shadow: 
+  box-shadow:
     0 10px 25px rgba(0, 0, 0, 0.05),
     0 0 0 1px rgba(255, 255, 255, 0.5) inset;
 
@@ -124,7 +125,7 @@
 
   &__image-wrapper {
     height: 220px;
-    
+
     overflow: hidden;
   }
 
@@ -144,7 +145,8 @@
     font-size: 1.5rem;
     font-weight: 700;
   }
-    &__price-km {
+
+  &__price-km {
     font-size: 1.2rem;
     font-weight: 500;
     margin-bottom: 1.2rem;
@@ -186,11 +188,12 @@
       color: white;
     }
 
-    &--delete{
+    &--delete {
       margin-top: 10px;
       background-color: white;
       border: 2px solid #ad1a15;
       color: #ad1515;
+
       &:hover {
         background-color: #ad1a15;
         color: white;
@@ -199,15 +202,15 @@
   }
 }
 
-.no-dates-message{
-    text-align:center;
-    padding:3rem 1rem;
-    background:#f8f9fb;
-    border-radius:1rem;
-    margin-top:2rem;
+.no-dates-message {
+  text-align: center;
+  padding: 3rem 1rem;
+  background: #f8f9fb;
+  border-radius: 1rem;
+  margin-top: 2rem;
 }
 
-.no-dates-message h2{
-    font-size:1.5rem;
-    margin-bottom:.5rem;
+.no-dates-message h2 {
+  font-size: 1.5rem;
+  margin-bottom: .5rem;
 }

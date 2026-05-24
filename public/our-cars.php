@@ -103,61 +103,60 @@ $title = 'Nuestros coches';
 require __DIR__ . '/../includes/header.php';
 ?>
 
-    <main class="our-cars">
+<main class="our-cars">
 
-        <aside class="filter">
+    <aside class="filter">
 
-            <form action="" method="get" class="filter__form search search--our-cars">
+        <form action="" method="get" class="filter__form search search--our-cars">
 
-                <!-- FECHAS -->
-                <div class="search__group search__group--first">
-                    <label for="date-range" class="search__label">Fechas de alquiler</label>
-                    <input type="text" id="date-range" name="date_range" class="search__input"
-                        placeholder="Selecciona fechas" value="<?= htmlspecialchars($date_range) ?>">
-                </div>
-
-                <!-- TAMANO -->
-                <div class="search__group search__group--second">
-
-                    <label for="tamano" class="search__label">Tamaño del vehículo</label>
-                    <select name="tamano" id="tamano" class="search__select">
-                        <option value="" <?= $tamano === '' ? 'selected' : '' ?>>Cualquiera</option>
-                        <option value="utilitario" <?= $tamano === 'utilitario' ? 'selected' : '' ?>>Utilitario</option>
-                        <option value="mediano" <?= $tamano === 'mediano' ? 'selected' : '' ?>>Mediano</option>
-                        <option value="grande" <?= $tamano === 'grande' ? 'selected' : '' ?>>Grande</option>
-                    </select>
-
-                </div>
-
-                <!-- 🔥 NUEVO: PRECIO MAXIMO -->
-                <div class="search__group">
-                    <label for="max_precio" class="search__label">
-                        Precio máximo por día:
-                        <span id="precioValue"><?= htmlspecialchars($max_precio ?: $precio_max) ?></span> €
-                    </label>
-
-                    <input type="range" id="max_precio" name="max_precio" min="<?= $precio_min ?>"
-                        max="<?= $precio_max ?>" step="1" value="<?= htmlspecialchars($max_precio ?: $precio_max) ?>"
-                        oninput="document.getElementById('precioValue').textContent = this.value"
-                        class="search__range" />
-                </div>
-
-                <div class="search__button">
-                    <button type="submit" class="button">Aplicar</button>
-                </div>
-
-            </form>
-        </aside>
-        <?php if ($sin_fechas): ?>
-
-            <div class="no-dates-message">
-                <h2>¿Cuándo quieres conducir? 🚗</h2>
-                <p>
-                    Selecciona las fechas de recogida y devolución para ver los vehículos disponibles.
-                </p>
+            <!-- FECHAS -->
+            <div class="search__group search__group--first">
+                <label for="date-range" class="search__label">Fechas de alquiler</label>
+                <input type="text" id="date-range" name="date_range" class="search__input"
+                    placeholder="Selecciona fechas" value="<?= htmlspecialchars($date_range) ?>">
             </div>
 
-        <?php else: ?>
+            <!-- TAMANO -->
+            <div class="search__group search__group--second">
+
+                <label for="tamano" class="search__label">Tamaño del vehículo</label>
+                <select name="tamano" id="tamano" class="search__select">
+                    <option value="" <?= $tamano === '' ? 'selected' : '' ?>>Cualquiera</option>
+                    <option value="utilitario" <?= $tamano === 'utilitario' ? 'selected' : '' ?>>Utilitario</option>
+                    <option value="mediano" <?= $tamano === 'mediano' ? 'selected' : '' ?>>Mediano</option>
+                    <option value="grande" <?= $tamano === 'grande' ? 'selected' : '' ?>>Grande</option>
+                </select>
+
+            </div>
+
+            <!-- 🔥 NUEVO: PRECIO MAXIMO -->
+            <div class="search__group">
+                <label for="max_precio" class="search__label">
+                    Precio máximo por día:
+                    <span id="precioValue"><?= htmlspecialchars($max_precio ?: $precio_max) ?></span> €
+                </label>
+
+                <input type="range" id="max_precio" name="max_precio" min="<?= $precio_min ?>" max="<?= $precio_max ?>"
+                    step="1" value="<?= htmlspecialchars($max_precio ?: $precio_max) ?>"
+                    oninput="document.getElementById('precioValue').textContent = this.value" class="search__range" />
+            </div>
+
+            <div class="search__button">
+                <button type="submit" class="button">Aplicar</button>
+            </div>
+
+        </form>
+    </aside>
+    <?php if ($sin_fechas): ?>
+
+        <div class="no-dates-message">
+            <h2>¿Cuándo quieres conducir? 🚗</h2>
+            <p>
+                Selecciona las fechas de recogida y devolución para ver los vehículos disponibles.
+            </p>
+        </div>
+
+    <?php else: ?>
 
         <section class="cars">
 
@@ -166,7 +165,7 @@ require __DIR__ . '/../includes/header.php';
                     <article class="car-card">
 
                         <div class="car-card__image-wrapper">
-                            <img src="../storage/car/<?= htmlspecialchars($v['foto']) ?>" class="car-card__image">
+                            <img src="/prestacoche/storage/cars/<?= htmlspecialchars($v['foto']) ?>" class="car-card__image">
                         </div>
 
                         <div class="car-card__content">
@@ -202,15 +201,15 @@ require __DIR__ . '/../includes/header.php';
             <?php endif; ?>
 
         </section>
-        <?php endif; ?>
+    <?php endif; ?>
 
-    </main>
-    <?php require __DIR__ . '/../includes/footer.php'; ?>
-    <script src="/prestacoche/public/js/flatpickr.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-    <script src="https://npmcdn.com/flatpickr/dist/l10n/es.js"></script>
-    <script src="/prestacoche/public/js/main.js"></script>
-    
+</main>
+<?php require __DIR__ . '/../includes/footer.php'; ?>
+<script src="/prestacoche/public/js/flatpickr.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script src="https://npmcdn.com/flatpickr/dist/l10n/es.js"></script>
+<script src="/prestacoche/public/js/main.js"></script>
+
 </body>
 
 </HTML>
