@@ -770,8 +770,7 @@ main {
 }
 
 .search--our-cars {
-  margin-top: 20px;
-  margin-left: 0px;
+  margin: 20px auto 0 auto;
 }
 
 .cars {
